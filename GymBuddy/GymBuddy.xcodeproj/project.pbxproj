@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B5CBCCA268173B2005036EC /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCC9268173B2005036EC /* TabBarController.swift */; };
+		3B5CBCCC268173F3005036EC /* InitialProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCCB268173F3005036EC /* InitialProfileViewController.swift */; };
+		3B5CBCCE26817424005036EC /* FriendsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCCD26817424005036EC /* FriendsListTableViewController.swift */; };
+		3B5CBCD0268174AF005036EC /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCCF268174AF005036EC /* ProgressViewController.swift */; };
+		3B5CBCD2268174D9005036EC /* AddGoalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCD1268174D9005036EC /* AddGoalViewController.swift */; };
+		3B5CBCD426817508005036EC /* EventsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCD326817508005036EC /* EventsListTableViewController.swift */; };
+		3B5CBCD62681756A005036EC /* MessagesListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCD52681756A005036EC /* MessagesListTableViewController.swift */; };
+		3B5CBCD8268186E2005036EC /* UIView Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCD7268186E1005036EC /* UIView Extension.swift */; };
 		3B5EFD222680EFED00F83E50 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B5EFD212680EFED00F83E50 /* Colors.xcassets */; };
 		3B5EFD252680F95F00F83E50 /* SF-Pro-Rounded-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3B5EFD242680F95F00F83E50 /* SF-Pro-Rounded-Regular.otf */; };
 		3B5EFD272680F97800F83E50 /* SF-Pro-Rounded-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3B5EFD262680F97800F83E50 /* SF-Pro-Rounded-Semibold.otf */; };
@@ -32,6 +40,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B5CBCC9268173B2005036EC /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		3B5CBCCB268173F3005036EC /* InitialProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialProfileViewController.swift; sourceTree = "<group>"; };
+		3B5CBCCD26817424005036EC /* FriendsListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListTableViewController.swift; sourceTree = "<group>"; };
+		3B5CBCCF268174AF005036EC /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
+		3B5CBCD1268174D9005036EC /* AddGoalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddGoalViewController.swift; sourceTree = "<group>"; };
+		3B5CBCD326817508005036EC /* EventsListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListTableViewController.swift; sourceTree = "<group>"; };
+		3B5CBCD52681756A005036EC /* MessagesListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesListTableViewController.swift; sourceTree = "<group>"; };
+		3B5CBCD7268186E1005036EC /* UIView Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView Extension.swift"; sourceTree = "<group>"; };
 		3B5EFD212680EFED00F83E50 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		3B5EFD242680F95F00F83E50 /* SF-Pro-Rounded-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Rounded-Regular.otf"; sourceTree = "<group>"; };
 		3B5EFD262680F97800F83E50 /* SF-Pro-Rounded-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Rounded-Semibold.otf"; sourceTree = "<group>"; };
@@ -71,6 +87,46 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B5CBCC42681730D005036EC /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				3B5EFD2E26811B5800F83E50 /* HomeViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		3B5CBCC526817315005036EC /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+				3B5CBCCF268174AF005036EC /* ProgressViewController.swift */,
+			);
+			path = Progress;
+			sourceTree = "<group>";
+		};
+		3B5CBCC62681732F005036EC /* AddGoal */ = {
+			isa = PBXGroup;
+			children = (
+				3B5CBCD1268174D9005036EC /* AddGoalViewController.swift */,
+			);
+			path = AddGoal;
+			sourceTree = "<group>";
+		};
+		3B5CBCC726817334005036EC /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				3B5CBCD326817508005036EC /* EventsListTableViewController.swift */,
+			);
+			path = Events;
+			sourceTree = "<group>";
+		};
+		3B5CBCC826817337005036EC /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				3B5CBCD52681756A005036EC /* MessagesListTableViewController.swift */,
+			);
+			path = Messages;
+			sourceTree = "<group>";
+		};
 		3B5EFD232680F8D500F83E50 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -85,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				3B5EFD2B2680FA1E00F83E50 /* StyleGuide */,
+				3B5CBCD7268186E1005036EC /* UIView Extension.swift */,
 			);
 			path = "Helper and Extension";
 			sourceTree = "<group>";
@@ -172,7 +229,14 @@
 		714A744626791CBD005F46F2 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3B5EFD2E26811B5800F83E50 /* HomeViewController.swift */,
+				3B5CBCC9268173B2005036EC /* TabBarController.swift */,
+				3B5CBCCB268173F3005036EC /* InitialProfileViewController.swift */,
+				3B5CBCCD26817424005036EC /* FriendsListTableViewController.swift */,
+				3B5CBCC42681730D005036EC /* Home */,
+				3B5CBCC526817315005036EC /* Progress */,
+				3B5CBCC62681732F005036EC /* AddGoal */,
+				3B5CBCC726817334005036EC /* Events */,
+				3B5CBCC826817337005036EC /* Messages */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -295,11 +359,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3B5CBCCA268173B2005036EC /* TabBarController.swift in Sources */,
+				3B5CBCD426817508005036EC /* EventsListTableViewController.swift in Sources */,
 				3B5EFD2D2680FA5600F83E50 /* StyleGuide.swift in Sources */,
 				714A744D26791D0E005F46F2 /* PlaceholderModelController.swift in Sources */,
+				3B5CBCD0268174AF005036EC /* ProgressViewController.swift in Sources */,
+				3B5CBCD62681756A005036EC /* MessagesListTableViewController.swift in Sources */,
+				3B5CBCD8268186E2005036EC /* UIView Extension.swift in Sources */,
+				3B5CBCCC268173F3005036EC /* InitialProfileViewController.swift in Sources */,
 				714A744B26791D01005F46F2 /* PlaceholderModel.swift in Sources */,
 				714A744F26791D18005F46F2 /* PlaceholderCustomView.swift in Sources */,
 				714A742B26791C3A005F46F2 /* AppDelegate.swift in Sources */,
+				3B5CBCCE26817424005036EC /* FriendsListTableViewController.swift in Sources */,
+				3B5CBCD2268174D9005036EC /* AddGoalViewController.swift in Sources */,
 				3B5EFD2F26811B5800F83E50 /* HomeViewController.swift in Sources */,
 				714A742D26791C3A005F46F2 /* SceneDelegate.swift in Sources */,
 			);
