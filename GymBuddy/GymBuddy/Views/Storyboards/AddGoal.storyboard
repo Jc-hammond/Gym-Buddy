@@ -23,15 +23,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iaz-qF-7MZ">
-                                <rect key="frame" x="178" y="86" width="42" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vjy-20-jUk">
+                                <rect key="frame" x="83" y="244" width="248" height="40"/>
+                                <state key="normal" title="Button" image="icons8-chevron_down_filled-40">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AvJ-FM-1OQ">
-                                <rect key="frame" x="39" y="276" width="42" height="21"/>
+                                <rect key="frame" x="39" y="316" width="42" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -40,18 +39,27 @@
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Vjy-20-jUk" firstAttribute="top" secondItem="vDu-zF-Fre" secondAttribute="top" constant="200" id="Atq-4d-Yy5"/>
+                            <constraint firstItem="Vjy-20-jUk" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.6" id="REX-ku-Ke3"/>
+                            <constraint firstItem="Vjy-20-jUk" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="tDg-7v-ZjM"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Add Goal" image="icons8-ingredients_list-40" selectedImage="icons8-ingredients_list_filled-40" id="KPx-5f-wG0">
                         <inset key="imageInsets" minX="0.0" minY="4" maxX="0.0" maxY="4"/>
                     </tabBarItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="exerciseButton" destination="Vjy-20-jUk" id="Hu2-s4-g2N"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="129" y="115"/>
+            <point key="canvasLocation" x="128.98550724637681" y="114.50892857142857"/>
         </scene>
     </scenes>
     <resources>
+        <image name="icons8-chevron_down_filled-40" width="40" height="40"/>
         <image name="icons8-ingredients_list-40" width="40" height="40"/>
         <image name="icons8-ingredients_list_filled-40" width="40" height="40"/>
         <systemColor name="systemBackgroundColor">

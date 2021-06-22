@@ -44,4 +44,6 @@ extension UIImage {
     static let search = UIImage(named: "icons8-search_filled-40")
     static let person = UIImage(named: "icons8-person_male-40")
     static let newMessage = UIImage(named: "new_message-40")
+    static let circleButton = UIImage(named: "circleButton-40")
+    static let circleButtonFilled = UIImage(named: "circleButton_filled-40")
 }
