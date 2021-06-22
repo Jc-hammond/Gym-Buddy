@@ -8,11 +8,19 @@
 import UIKit
 
 class AddGoalViewController: UIViewController {
-
+    //MARK: - Outlets
+    @IBOutlet weak var exerciseButton: UIButton!
+    
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        updateViews()
+    }
+    
+    fileprivate func updateViews() {
+        exerciseButton.addCornerRadius()
+        exerciseButton.setInsets(forContentPadding: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10), imageTitlePadding: 10)
     }
     
 
