@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -14,7 +15,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2vt-R9-tYC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-761" y="521"/>
+            <point key="canvasLocation" x="-722" y="521"/>
         </scene>
         <!--Progress-->
         <scene sceneID="463-YQ-KYC">
@@ -24,7 +25,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J9V-d2-FMn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-583" y="521"/>
+            <point key="canvasLocation" x="-566" y="521"/>
         </scene>
         <!--AddGoal-->
         <scene sceneID="Mru-Ke-lxR">
@@ -44,7 +45,7 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f54-tP-qGF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-212" y="521"/>
+            <point key="canvasLocation" x="-221" y="521"/>
         </scene>
         <!--Messages-->
         <scene sceneID="JYJ-oc-fWV">
@@ -54,16 +55,17 @@
                 </viewControllerPlaceholder>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CzO-tG-ajK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-15" y="521"/>
+            <point key="canvasLocation" x="-51" y="521"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="JUO-cb-NwW">
             <objects>
-                <tabBarController id="Nzo-zv-6Km" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Ub5-OH-hPg">
+                <tabBarController id="Nzo-zv-6Km" customClass="TabBarController" customModule="GymBuddy" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleAspectFit" insetsLayoutMarginsFromSafeArea="NO" id="Ub5-OH-hPg">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="barTintColor" name="custom dark green"/>
+                        <color key="selectedImageTintColor" name="custom light green"/>
                     </tabBar>
                     <connections>
                         <segue destination="CiU-jg-qvi" kind="relationship" relationship="viewControllers" id="FbF-Kk-cfM"/>
@@ -78,4 +80,12 @@
             <point key="canvasLocation" x="-390" y="100"/>
         </scene>
     </scenes>
+    <resources>
+        <namedColor name="custom dark green">
+            <color red="0.16862745098039217" green="0.17254901960784313" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="custom light green">
+            <color red="0.49019607843137253" green="0.88627450980392153" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
