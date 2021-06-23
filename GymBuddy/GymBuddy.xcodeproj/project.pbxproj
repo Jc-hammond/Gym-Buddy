@@ -19,6 +19,11 @@
 		3B5CBCDE2681A530005036EC /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCDD2681A530005036EC /* MessagesViewController.swift */; };
 		3B5CBCE02681A86B005036EC /* UILabel Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCDF2681A86B005036EC /* UILabel Extension.swift */; };
 		3B5CBCE22681AD6D005036EC /* UIButton Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCE12681AD6D005036EC /* UIButton Extension.swift */; };
+		3B5CBCE5268319A7005036EC /* EventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCE4268319A6005036EC /* EventsTableViewCell.swift */; };
+		3B5CBCED26835DE7005036EC /* EventCreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCEC26835DE7005036EC /* EventCreateViewController.swift */; };
+		3B5CBCEF26835DF2005036EC /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCEE26835DF2005036EC /* EventDetailViewController.swift */; };
+		3B5CBCF126835FF4005036EC /* UITextField Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCF026835FF4005036EC /* UITextField Extension.swift */; };
+		3B5CBCF3268369C1005036EC /* InviteeTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCF2268369C1005036EC /* InviteeTableViewCell.swift */; };
 		3B5EFD222680EFED00F83E50 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B5EFD212680EFED00F83E50 /* Colors.xcassets */; };
 		3B5EFD252680F95F00F83E50 /* SF-Pro-Rounded-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3B5EFD242680F95F00F83E50 /* SF-Pro-Rounded-Regular.otf */; };
 		3B5EFD272680F97800F83E50 /* SF-Pro-Rounded-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 3B5EFD262680F97800F83E50 /* SF-Pro-Rounded-Semibold.otf */; };
@@ -55,6 +60,11 @@
 		3B5CBCDD2681A530005036EC /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		3B5CBCDF2681A86B005036EC /* UILabel Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel Extension.swift"; sourceTree = "<group>"; };
 		3B5CBCE12681AD6D005036EC /* UIButton Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton Extension.swift"; sourceTree = "<group>"; };
+		3B5CBCE4268319A6005036EC /* EventsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTableViewCell.swift; sourceTree = "<group>"; };
+		3B5CBCEC26835DE7005036EC /* EventCreateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCreateViewController.swift; sourceTree = "<group>"; };
+		3B5CBCEE26835DF2005036EC /* EventDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
+		3B5CBCF026835FF4005036EC /* UITextField Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField Extension.swift"; sourceTree = "<group>"; };
+		3B5CBCF2268369C1005036EC /* InviteeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteeTableViewCell.swift; sourceTree = "<group>"; };
 		3B5EFD212680EFED00F83E50 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		3B5EFD242680F95F00F83E50 /* SF-Pro-Rounded-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Rounded-Regular.otf"; sourceTree = "<group>"; };
 		3B5EFD262680F97800F83E50 /* SF-Pro-Rounded-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Rounded-Semibold.otf"; sourceTree = "<group>"; };
@@ -121,6 +131,8 @@
 			isa = PBXGroup;
 			children = (
 				3B5CBCD326817508005036EC /* EventsListTableViewController.swift */,
+				3B5CBCEC26835DE7005036EC /* EventCreateViewController.swift */,
+				3B5CBCEE26835DF2005036EC /* EventDetailViewController.swift */,
 			);
 			path = Events;
 			sourceTree = "<group>";
@@ -151,6 +163,7 @@
 				3B5CBCDF2681A86B005036EC /* UILabel Extension.swift */,
 				3B5CBCDB26819F51005036EC /* StringConstants.swift */,
 				3B5CBCE12681AD6D005036EC /* UIButton Extension.swift */,
+				3B5CBCF026835FF4005036EC /* UITextField Extension.swift */,
 			);
 			path = "Helper and Extension";
 			sourceTree = "<group>";
@@ -270,6 +283,8 @@
 			isa = PBXGroup;
 			children = (
 				3B5CBCD926819ED7005036EC /* MessagesTableViewCell.swift */,
+				3B5CBCE4268319A6005036EC /* EventsTableViewCell.swift */,
+				3B5CBCF2268369C1005036EC /* InviteeTableViewCell.swift */,
 			);
 			path = "Custom Views";
 			sourceTree = "<group>";
@@ -371,16 +386,21 @@
 				3B5CBCCA268173B2005036EC /* TabBarController.swift in Sources */,
 				3B5CBCD426817508005036EC /* EventsListTableViewController.swift in Sources */,
 				3B5EFD2D2680FA5600F83E50 /* StyleGuide.swift in Sources */,
+				3B5CBCED26835DE7005036EC /* EventCreateViewController.swift in Sources */,
 				3B5CBCDE2681A530005036EC /* MessagesViewController.swift in Sources */,
 				714A744D26791D0E005F46F2 /* PlaceholderModelController.swift in Sources */,
 				3B5CBCDC26819F51005036EC /* StringConstants.swift in Sources */,
 				3B5CBCE22681AD6D005036EC /* UIButton Extension.swift in Sources */,
 				3B5CBCD0268174AF005036EC /* ProgressViewController.swift in Sources */,
+				3B5CBCF3268369C1005036EC /* InviteeTableViewCell.swift in Sources */,
 				3B5CBCD8268186E2005036EC /* UIView Extension.swift in Sources */,
 				3B5CBCE02681A86B005036EC /* UILabel Extension.swift in Sources */,
 				3B5CBCDA26819ED7005036EC /* MessagesTableViewCell.swift in Sources */,
+				3B5CBCF126835FF4005036EC /* UITextField Extension.swift in Sources */,
+				3B5CBCEF26835DF2005036EC /* EventDetailViewController.swift in Sources */,
 				3B5CBCCC268173F3005036EC /* InitialProfileViewController.swift in Sources */,
 				714A744B26791D01005F46F2 /* PlaceholderModel.swift in Sources */,
+				3B5CBCE5268319A7005036EC /* EventsTableViewCell.swift in Sources */,
 				714A742B26791C3A005F46F2 /* AppDelegate.swift in Sources */,
 				3B5CBCCE26817424005036EC /* FriendsListTableViewController.swift in Sources */,
 				3B5CBCD2268174D9005036EC /* AddGoalViewController.swift in Sources */,
