@@ -10,20 +10,21 @@ import UIKit
 extension UIButton {
     
     func setInsets(
-        forContentPadding contentPadding: UIEdgeInsets,
-        imageTitlePadding: CGFloat
+        forImagePadding imagePadding: CGFloat,
+        equalWidthConstant: CGFloat,
+        titlePadding: CGFloat
     ) {
-        self.contentEdgeInsets = UIEdgeInsets(
-            top: contentPadding.top,
-            left: contentPadding.left,
-            bottom: contentPadding.bottom,
-            right: contentPadding.right - imageTitlePadding
-        )
+        self.imageEdgeInsets = UIEdgeInsets(
+            top: imagePadding,
+            left: self.frame.width * equalWidthConstant,
+            bottom: imagePadding,
+            right: imagePadding)
+        
         self.titleEdgeInsets = UIEdgeInsets(
             top: 0,
-            left: -imageTitlePadding,
+            left: -titlePadding,
             bottom: 0,
-            right: imageTitlePadding
+            right: 0
         )
     }
     
