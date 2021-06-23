@@ -46,4 +46,7 @@ extension UIImage {
     static let newMessage = UIImage(named: "new_message-40")
     static let circleButton = UIImage(named: "circleButton-40")
     static let circleButtonFilled = UIImage(named: "circleButton_filled-40")
+    static let rsvp = UIImage(named: "rsvp")
+    static let addEmoji = UIImage(named: "addEmoji")
+    static let editButton = UIImage(named: "editButton")
 }
