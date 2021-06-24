@@ -49,5 +49,4 @@ extension MessagesViewController: UITableViewDelegate, UITableViewDataSource {
         return view.frame.height / 10
     }
     
-    
 }//End of extension

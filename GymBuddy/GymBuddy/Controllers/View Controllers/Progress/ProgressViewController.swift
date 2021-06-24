@@ -8,7 +8,11 @@
 import UIKit
 
 class ProgressViewController: UIViewController {
-
+    //MARK: - Outlets
+    @IBOutlet weak var progressCollectionView: UICollectionView!
+    
+    
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,4 +30,5 @@ class ProgressViewController: UIViewController {
     }
     */
 
-}
+}//End of class
+
