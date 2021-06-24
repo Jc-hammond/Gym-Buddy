@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B058A9A2683EE0B0047FF61 /* CellRegisterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B058A992683EE0B0047FF61 /* CellRegisterable.swift */; };
+		3B058A9D2683EE580047FF61 /* ProgressCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B058A9B2683EE580047FF61 /* ProgressCollectionViewCell.swift */; };
+		3B058A9E2683EE580047FF61 /* ProgressCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B058A9C2683EE580047FF61 /* ProgressCollectionViewCell.xib */; };
+		3B058AA12683EF470047FF61 /* HeaderCollectionReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B058A9F2683EF470047FF61 /* HeaderCollectionReusableView.swift */; };
+		3B058AA22683EF470047FF61 /* HeaderCollectionReusableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B058AA02683EF470047FF61 /* HeaderCollectionReusableView.xib */; };
+		3B058AA42683EFA40047FF61 /* ProgressDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B058AA32683EFA40047FF61 /* ProgressDataSource.swift */; };
+		3B058AA72683FA060047FF61 /* ExerciseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B058AA52683FA060047FF61 /* ExerciseCollectionViewCell.swift */; };
+		3B058AA82683FA060047FF61 /* ExerciseCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B058AA62683FA060047FF61 /* ExerciseCollectionViewCell.xib */; };
+		3B058AAA2684F9580047FF61 /* UIImage Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B058AA92684F9580047FF61 /* UIImage Extension.swift */; };
 		3B5CBCCA268173B2005036EC /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCC9268173B2005036EC /* TabBarController.swift */; };
 		3B5CBCCC268173F3005036EC /* InitialProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCCB268173F3005036EC /* InitialProfileViewController.swift */; };
 		3B5CBCCE26817424005036EC /* FriendsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCCD26817424005036EC /* FriendsListTableViewController.swift */; };
@@ -48,6 +57,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B058A992683EE0B0047FF61 /* CellRegisterable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellRegisterable.swift; sourceTree = "<group>"; };
+		3B058A9B2683EE580047FF61 /* ProgressCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCollectionViewCell.swift; sourceTree = "<group>"; };
+		3B058A9C2683EE580047FF61 /* ProgressCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgressCollectionViewCell.xib; sourceTree = "<group>"; };
+		3B058A9F2683EF470047FF61 /* HeaderCollectionReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCollectionReusableView.swift; sourceTree = "<group>"; };
+		3B058AA02683EF470047FF61 /* HeaderCollectionReusableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderCollectionReusableView.xib; sourceTree = "<group>"; };
+		3B058AA32683EFA40047FF61 /* ProgressDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressDataSource.swift; sourceTree = "<group>"; };
+		3B058AA52683FA060047FF61 /* ExerciseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCollectionViewCell.swift; sourceTree = "<group>"; };
+		3B058AA62683FA060047FF61 /* ExerciseCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseCollectionViewCell.xib; sourceTree = "<group>"; };
+		3B058AA92684F9580047FF61 /* UIImage Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage Extension.swift"; sourceTree = "<group>"; };
 		3B5CBCC9268173B2005036EC /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		3B5CBCCB268173F3005036EC /* InitialProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialProfileViewController.swift; sourceTree = "<group>"; };
 		3B5CBCCD26817424005036EC /* FriendsListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListTableViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +121,50 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B058A952683EBB00047FF61 /* Custom Views */ = {
+			isa = PBXGroup;
+			children = (
+				3B058A972683EDB20047FF61 /* CollectionView Cells */,
+				3B058A962683ED9C0047FF61 /* TableView Cells */,
+			);
+			path = "Custom Views";
+			sourceTree = "<group>";
+		};
+		3B058A962683ED9C0047FF61 /* TableView Cells */ = {
+			isa = PBXGroup;
+			children = (
+				3B5CBCD926819ED7005036EC /* MessagesTableViewCell.swift */,
+				3B5CBCE4268319A6005036EC /* EventsTableViewCell.swift */,
+				3B5CBCF2268369C1005036EC /* InviteeTableViewCell.swift */,
+			);
+			path = "TableView Cells";
+			sourceTree = "<group>";
+		};
+		3B058A972683EDB20047FF61 /* CollectionView Cells */ = {
+			isa = PBXGroup;
+			children = (
+				3B058A9B2683EE580047FF61 /* ProgressCollectionViewCell.swift */,
+				3B058A9C2683EE580047FF61 /* ProgressCollectionViewCell.xib */,
+				3B058AA52683FA060047FF61 /* ExerciseCollectionViewCell.swift */,
+				3B058AA62683FA060047FF61 /* ExerciseCollectionViewCell.xib */,
+				3B058A9F2683EF470047FF61 /* HeaderCollectionReusableView.swift */,
+				3B058AA02683EF470047FF61 /* HeaderCollectionReusableView.xib */,
+			);
+			path = "CollectionView Cells";
+			sourceTree = "<group>";
+		};
+		3B058A982683EDEC0047FF61 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				3B5CBCD7268186E1005036EC /* UIView Extension.swift */,
+				3B5CBCDF2681A86B005036EC /* UILabel Extension.swift */,
+				3B5CBCE12681AD6D005036EC /* UIButton Extension.swift */,
+				3B5CBCF026835FF4005036EC /* UITextField Extension.swift */,
+				3B058AA92684F9580047FF61 /* UIImage Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		3B5CBCC42681730D005036EC /* Home */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				3B5CBCCF268174AF005036EC /* ProgressViewController.swift */,
+				3B058AA32683EFA40047FF61 /* ProgressDataSource.swift */,
 			);
 			path = Progress;
 			sourceTree = "<group>";
@@ -158,12 +221,10 @@
 		3B5EFD2A2680FA1200F83E50 /* Helper and Extension */ = {
 			isa = PBXGroup;
 			children = (
-				3B5EFD2B2680FA1E00F83E50 /* StyleGuide */,
-				3B5CBCD7268186E1005036EC /* UIView Extension.swift */,
-				3B5CBCDF2681A86B005036EC /* UILabel Extension.swift */,
 				3B5CBCDB26819F51005036EC /* StringConstants.swift */,
-				3B5CBCE12681AD6D005036EC /* UIButton Extension.swift */,
-				3B5CBCF026835FF4005036EC /* UITextField Extension.swift */,
+				3B058A992683EE0B0047FF61 /* CellRegisterable.swift */,
+				3B058A982683EDEC0047FF61 /* Extensions */,
+				3B5EFD2B2680FA1E00F83E50 /* StyleGuide */,
 			);
 			path = "Helper and Extension";
 			sourceTree = "<group>";
@@ -234,7 +295,7 @@
 		714A744426791CAD005F46F2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				714A744826791CC9005F46F2 /* Custom Views */,
+				3B058A952683EBB00047FF61 /* Custom Views */,
 				714A744726791CC5005F46F2 /* Storyboards */,
 			);
 			path = Views;
@@ -277,16 +338,6 @@
 				714A743526791C3D005F46F2 /* LaunchScreen.storyboard */,
 			);
 			path = Storyboards;
-			sourceTree = "<group>";
-		};
-		714A744826791CC9005F46F2 /* Custom Views */ = {
-			isa = PBXGroup;
-			children = (
-				3B5CBCD926819ED7005036EC /* MessagesTableViewCell.swift */,
-				3B5CBCE4268319A6005036EC /* EventsTableViewCell.swift */,
-				3B5CBCF2268369C1005036EC /* InviteeTableViewCell.swift */,
-			);
-			path = "Custom Views";
 			sourceTree = "<group>";
 		};
 		714A744926791CD5005F46F2 /* Resources */ = {
@@ -361,17 +412,20 @@
 			files = (
 				714A743726791C3D005F46F2 /* LaunchScreen.storyboard in Resources */,
 				3B5EFD272680F97800F83E50 /* SF-Pro-Rounded-Semibold.otf in Resources */,
+				3B058A9E2683EE580047FF61 /* ProgressCollectionViewCell.xib in Resources */,
 				3B5EFD252680F95F00F83E50 /* SF-Pro-Rounded-Regular.otf in Resources */,
 				3B5EFD222680EFED00F83E50 /* Colors.xcassets in Resources */,
 				3B5EFD3726811D9400F83E50 /* Events.storyboard in Resources */,
 				714A743426791C3D005F46F2 /* Assets.xcassets in Resources */,
 				3B5EFD3B26811E4E00F83E50 /* InitialProfile.storyboard in Resources */,
+				3B058AA22683EF470047FF61 /* HeaderCollectionReusableView.xib in Resources */,
 				3B5EFD3926811D9E00F83E50 /* Messages.storyboard in Resources */,
 				3B5EFD3D26811E7000F83E50 /* Friends.storyboard in Resources */,
 				3B5EFD3526811D8600F83E50 /* AddGoal.storyboard in Resources */,
 				3B5EFD292680F98200F83E50 /* SF-Pro-Rounded-Ultralight.otf in Resources */,
 				3B5EFD3326811D7C00F83E50 /* Progress.storyboard in Resources */,
 				714A743226791C3A005F46F2 /* Main.storyboard in Resources */,
+				3B058AA82683FA060047FF61 /* ExerciseCollectionViewCell.xib in Resources */,
 				3B5EFD3126811D5F00F83E50 /* Home.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -389,6 +443,7 @@
 				3B5CBCED26835DE7005036EC /* EventCreateViewController.swift in Sources */,
 				3B5CBCDE2681A530005036EC /* MessagesViewController.swift in Sources */,
 				714A744D26791D0E005F46F2 /* PlaceholderModelController.swift in Sources */,
+				3B058A9D2683EE580047FF61 /* ProgressCollectionViewCell.swift in Sources */,
 				3B5CBCDC26819F51005036EC /* StringConstants.swift in Sources */,
 				3B5CBCE22681AD6D005036EC /* UIButton Extension.swift in Sources */,
 				3B5CBCD0268174AF005036EC /* ProgressViewController.swift in Sources */,
@@ -396,11 +451,16 @@
 				3B5CBCD8268186E2005036EC /* UIView Extension.swift in Sources */,
 				3B5CBCE02681A86B005036EC /* UILabel Extension.swift in Sources */,
 				3B5CBCDA26819ED7005036EC /* MessagesTableViewCell.swift in Sources */,
+				3B058AA42683EFA40047FF61 /* ProgressDataSource.swift in Sources */,
 				3B5CBCF126835FF4005036EC /* UITextField Extension.swift in Sources */,
+				3B058AA72683FA060047FF61 /* ExerciseCollectionViewCell.swift in Sources */,
 				3B5CBCEF26835DF2005036EC /* EventDetailViewController.swift in Sources */,
 				3B5CBCCC268173F3005036EC /* InitialProfileViewController.swift in Sources */,
 				714A744B26791D01005F46F2 /* PlaceholderModel.swift in Sources */,
+				3B058AA12683EF470047FF61 /* HeaderCollectionReusableView.swift in Sources */,
 				3B5CBCE5268319A7005036EC /* EventsTableViewCell.swift in Sources */,
+				3B058A9A2683EE0B0047FF61 /* CellRegisterable.swift in Sources */,
+				3B058AAA2684F9580047FF61 /* UIImage Extension.swift in Sources */,
 				714A742B26791C3A005F46F2 /* AppDelegate.swift in Sources */,
 				3B5CBCCE26817424005036EC /* FriendsListTableViewController.swift in Sources */,
 				3B5CBCD2268174D9005036EC /* AddGoalViewController.swift in Sources */,
