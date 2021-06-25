@@ -7,11 +7,19 @@
 
 import UIKit
 
-class HeaderCollectionReusableView: UICollectionReusableView {
-
+class HeaderCollectionReusableView: UICollectionReusableView, CellRegisterable {
+    //MARK: - Outlet
+    @IBOutlet weak var headerLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        updateViews()
     }
     
-}
+    fileprivate func updateViews() {
+        headerLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 20)
+        headerLabel.underline()
+    }
+    
+}//End of class
