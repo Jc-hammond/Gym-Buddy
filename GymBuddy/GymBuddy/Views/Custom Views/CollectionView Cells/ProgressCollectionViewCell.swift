@@ -6,19 +6,24 @@
 //
 
 import UIKit
+import Charts
 
-class ProgressCollectionViewCell: UICollectionViewCell {
+class ProgressCollectionViewCell: UICollectionViewCell, CellRegisterable {
     //MARK: - Outlets
     @IBOutlet weak var view: UIView!
     
     //MARK: - Properties
-    //JCHUN - need a landing pad to for CollectionView Item Type...
+    //JCHUN - need a general landing pad to for CollectionView Item Type...
+    
+    var currentProgress: CGFloat = 0.9 {
+        didSet {
+            didProgressUpdate()
+        }
+    }
     
     private let label: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
-        //JCHUN - assgin overall % completion
-        label.text = ""
         label.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 20)
         
         return label
@@ -31,7 +36,7 @@ class ProgressCollectionViewCell: UICollectionViewCell {
     }
     
     fileprivate func addCustomObjects() {
-        //JCHUN - if Item Type isprogressRing call progressRing(), if it is weightHistroy call weightHistroy
+        //JCHUN - if Item Type isprogressRing call progressRing(), if it is weightHistroy call weightHistoryLineGraph
     }
     
     fileprivate func progressRing() {
@@ -39,13 +44,16 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         view.addSubview(label)
         label.center = view.center
         
+        //start angle of each circle
+        let startAngle = -CGFloat.pi / 2
+        
         // Draw a circle
         let center = view.center
         
         //create my track layer
         let trackLayer = CAShapeLayer()
         
-        let circularPath = UIBezierPath(arcCenter: center, radius: 100, startAngle: -CGFloat.pi / 2, endAngle: 2 * CGFloat.pi, clockwise: true)
+        let circularPath = UIBezierPath(arcCenter: center, radius: 100, startAngle: startAngle, endAngle: 2 * CGFloat.pi, clockwise: true)
         trackLayer.path = circularPath.cgPath
         
         trackLayer.strokeColor = UIColor.lightGray.cgColor
@@ -59,7 +67,7 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         //create progress layer
         let shapeLayer = CAShapeLayer()
 
-        let progressPath = UIBezierPath(arcCenter: center, radius: 100, startAngle: -CGFloat.pi / 2, endAngle: CGFloat.pi, clockwise: true)
+        let progressPath = UIBezierPath(arcCenter: center, radius: 100, startAngle: startAngle, endAngle: startAngle + (2 * CGFloat.pi * currentProgress), clockwise: true)
         shapeLayer.path = progressPath.cgPath
         
         shapeLayer.strokeColor = UIColor.customLightGreen?.cgColor
@@ -83,7 +91,37 @@ class ProgressCollectionViewCell: UICollectionViewCell {
         
     }//end of func
     
+    fileprivate func didProgressUpdate() {
+        label.text = "\(Int(currentProgress * 100))%"
+    }
     
+    fileprivate func weightHistoryLineGraph() {
+        let lineChart = LineChartView()
+        
+        //set frame
+        lineChart.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        lineChart.center = self.view.center
+        
+        //add to view
+        view.addSubview(lineChart)
+        
+        //add data
+        //JCHUN - need actual data
+        var entries = [ChartDataEntry]()
+        
+        for x in 0..<10 {
+            entries.append(ChartDataEntry(x: Double(x), y: Double(x)))
+        }
+        
+        let set = LineChartDataSet(entries: entries)
+        set.colors = ChartColorTemplates.pastel()
+        let data = LineChartData(dataSet: set)
+        lineChart.data = data
+    }
+    
+    override func prepareForReuse() {
+        view = nil
+    }
 
 }//End of class
 
