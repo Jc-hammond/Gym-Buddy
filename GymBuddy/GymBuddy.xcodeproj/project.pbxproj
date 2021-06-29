@@ -64,12 +64,17 @@
 		714A743426791C3D005F46F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 714A743326791C3D005F46F2 /* Assets.xcassets */; };
 		714A743726791C3D005F46F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 714A743526791C3D005F46F2 /* LaunchScreen.storyboard */; };
 		714A744126791C4E005F46F2 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 714A744026791C4E005F46F2 /* CloudKit.framework */; };
-		714A744B26791D01005F46F2 /* PlaceholderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714A744A26791D01005F46F2 /* PlaceholderModel.swift */; };
-		714A744D26791D0E005F46F2 /* PlaceholderModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714A744C26791D0E005F46F2 /* PlaceholderModelController.swift */; };
 		71E8A4AB268B790D00478729 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4AA268B790D00478729 /* User.swift */; };
 		71E8A4AD268B7BFC00478729 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4AC268B7BFC00478729 /* Friend.swift */; };
 		71E8A4AF268B7C0E00478729 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4AE268B7C0E00478729 /* Event.swift */; };
 		71E8A4B3268B7C8200478729 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4B2268B7C8200478729 /* Workout.swift */; };
+		71E8A4B5268BAEA400478729 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4B4268BAEA400478729 /* UserController.swift */; };
+		71E8A4B7268BAEAE00478729 /* FriendController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4B6268BAEAE00478729 /* FriendController.swift */; };
+		71E8A4B9268BAEC000478729 /* EventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4B8268BAEC000478729 /* EventController.swift */; };
+		71E8A4BB268BAECA00478729 /* WorkoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4BA268BAECA00478729 /* WorkoutController.swift */; };
+		71E8A4BD268BB23500478729 /* UIDate Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4BC268BB23500478729 /* UIDate Extension.swift */; };
+		71E8A4BF268BB4BB00478729 /* UserError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4BE268BB4BB00478729 /* UserError.swift */; };
+		71E8A4C1268BBEAA00478729 /* EventError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4C0268BBEAA00478729 /* EventError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -133,12 +138,17 @@
 		714A743826791C3D005F46F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		714A743E26791C4A005F46F2 /* GymBuddy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GymBuddy.entitlements; sourceTree = "<group>"; };
 		714A744026791C4E005F46F2 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
-		714A744A26791D01005F46F2 /* PlaceholderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderModel.swift; sourceTree = "<group>"; };
-		714A744C26791D0E005F46F2 /* PlaceholderModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderModelController.swift; sourceTree = "<group>"; };
 		71E8A4AA268B790D00478729 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		71E8A4AC268B7BFC00478729 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
 		71E8A4AE268B7C0E00478729 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		71E8A4B2268B7C8200478729 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		71E8A4B4268BAEA400478729 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
+		71E8A4B6268BAEAE00478729 /* FriendController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendController.swift; sourceTree = "<group>"; };
+		71E8A4B8268BAEC000478729 /* EventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventController.swift; sourceTree = "<group>"; };
+		71E8A4BA268BAECA00478729 /* WorkoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutController.swift; sourceTree = "<group>"; };
+		71E8A4BC268BB23500478729 /* UIDate Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDate Extension.swift"; sourceTree = "<group>"; };
+		71E8A4BE268BB4BB00478729 /* UserError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserError.swift; sourceTree = "<group>"; };
+		71E8A4C0268BBEAA00478729 /* EventError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventError.swift; sourceTree = "<group>"; };
 		9F94FE8403AEE91FA1E68F9B /* Pods-GymBuddy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddy.release.xcconfig"; path = "Target Support Files/Pods-GymBuddy/Pods-GymBuddy.release.xcconfig"; sourceTree = "<group>"; };
 		A15BC835BD15ED1FB9CB9341 /* Pods-GymBuddy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddy.debug.xcconfig"; path = "Target Support Files/Pods-GymBuddy/Pods-GymBuddy.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -199,6 +209,7 @@
 				3B5CBCE12681AD6D005036EC /* UIButton Extension.swift */,
 				3B5CBCF026835FF4005036EC /* UITextField Extension.swift */,
 				3B058AA92684F9580047FF61 /* UIImage Extension.swift */,
+				71E8A4BC268BB23500478729 /* UIDate Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -342,11 +353,12 @@
 		714A744226791CA1005F46F2 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				714A744A26791D01005F46F2 /* PlaceholderModel.swift */,
 				71E8A4AA268B790D00478729 /* User.swift */,
 				71E8A4AC268B7BFC00478729 /* Friend.swift */,
 				71E8A4AE268B7C0E00478729 /* Event.swift */,
 				71E8A4B2268B7C8200478729 /* Workout.swift */,
+				71E8A4BE268BB4BB00478729 /* UserError.swift */,
+				71E8A4C0268BBEAA00478729 /* EventError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -372,7 +384,10 @@
 		714A744526791CB6005F46F2 /* Model Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				714A744C26791D0E005F46F2 /* PlaceholderModelController.swift */,
+				71E8A4B4268BAEA400478729 /* UserController.swift */,
+				71E8A4B6268BAEAE00478729 /* FriendController.swift */,
+				71E8A4B8268BAEC000478729 /* EventController.swift */,
+				71E8A4BA268BAECA00478729 /* WorkoutController.swift */,
 			);
 			path = "Model Controllers";
 			sourceTree = "<group>";
@@ -565,11 +580,11 @@
 				3B5CBCD426817508005036EC /* EventsListTableViewController.swift in Sources */,
 				71E8A4B3268B7C8200478729 /* Workout.swift in Sources */,
 				3B727F7E268B4CB300395029 /* ConversationViewController.swift in Sources */,
+				71E8A4B7268BAEAE00478729 /* FriendController.swift in Sources */,
 				3B5EFD2D2680FA5600F83E50 /* StyleGuide.swift in Sources */,
 				3B727F6F268B189500395029 /* HomeDataSource.swift in Sources */,
 				3B5CBCED26835DE7005036EC /* EventCreateViewController.swift in Sources */,
 				3B5CBCDE2681A530005036EC /* MessagesViewController.swift in Sources */,
-				714A744D26791D0E005F46F2 /* PlaceholderModelController.swift in Sources */,
 				3B058A9D2683EE580047FF61 /* ProgressCollectionViewCell.swift in Sources */,
 				3B727F79268B1B4500395029 /* PersonalBestCollectionViewCell.swift in Sources */,
 				3B5CBCDC26819F51005036EC /* StringConstants.swift in Sources */,
@@ -579,9 +594,12 @@
 				3B5CBCD8268186E2005036EC /* UIView Extension.swift in Sources */,
 				3B727F6D268AF93E00395029 /* ProgressDetailViewController.swift in Sources */,
 				3B5CBCE02681A86B005036EC /* UILabel Extension.swift in Sources */,
+				71E8A4BB268BAECA00478729 /* WorkoutController.swift in Sources */,
+				71E8A4B5268BAEA400478729 /* UserController.swift in Sources */,
 				3B5CBCDA26819ED7005036EC /* MessagesTableViewCell.swift in Sources */,
 				71E8A4AB268B790D00478729 /* User.swift in Sources */,
 				3B727F80268B4ED500395029 /* FriendTableViewCell.swift in Sources */,
+				71E8A4BF268BB4BB00478729 /* UserError.swift in Sources */,
 				3B058AA42683EFA40047FF61 /* ProgressDataSource.swift in Sources */,
 				3B727F6A268A357600395029 /* WeightHistoryCollectionViewCell.swift in Sources */,
 				3B5CBCF126835FF4005036EC /* UITextField Extension.swift in Sources */,
@@ -590,12 +608,14 @@
 				71E8A4AD268B7BFC00478729 /* Friend.swift in Sources */,
 				3B5CBCEF26835DF2005036EC /* EventDetailViewController.swift in Sources */,
 				3B5CBCCC268173F3005036EC /* InitialProfileViewController.swift in Sources */,
-				714A744B26791D01005F46F2 /* PlaceholderModel.swift in Sources */,
 				3B058AA12683EF470047FF61 /* HeaderCollectionReusableView.swift in Sources */,
 				3B727F75268B1B3300395029 /* FriendCollectionViewCell.swift in Sources */,
+				71E8A4B9268BAEC000478729 /* EventController.swift in Sources */,
+				71E8A4BD268BB23500478729 /* UIDate Extension.swift in Sources */,
 				3B5CBCE5268319A7005036EC /* EventsTableViewCell.swift in Sources */,
 				3B058A9A2683EE0B0047FF61 /* CellRegisterable.swift in Sources */,
 				3B058AAA2684F9580047FF61 /* UIImage Extension.swift in Sources */,
+				71E8A4C1268BBEAA00478729 /* EventError.swift in Sources */,
 				714A742B26791C3A005F46F2 /* AppDelegate.swift in Sources */,
 				3B5CBCCE26817424005036EC /* FriendsListTableViewController.swift in Sources */,
 				3B5CBCD2268174D9005036EC /* AddGoalViewController.swift in Sources */,

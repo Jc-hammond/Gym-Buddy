@@ -39,8 +39,8 @@ class ProgressDataSource: UICollectionViewDiffableDataSource<Section, Item> {
     let mockWorkoutData: [Workout] = {
         var mockData = [Workout]()
         
-        let running = Workout(title: "Running", goal: 3, completionDate: nil, current: 2, unit: "mi")
-        let strengthTraining = Workout(title: "Strength Training", goal: 5, completionDate: nil, current: 4, unit: "hour")
+        let running = Workout(title: "Running", goal: 3, completionDate: nil, current: 2, unit: "mi", userRef: nil)
+        let strengthTraining = Workout(title: "Strength Training", goal: 5, completionDate: nil, current: 4, unit: "hour", userRef: nil)
         
         mockData = [running, strengthTraining]
         
@@ -50,8 +50,8 @@ class ProgressDataSource: UICollectionViewDiffableDataSource<Section, Item> {
     let mockCompletedWorkoutData: [Workout] = {
         var mockData = [Workout]()
         
-        let running = Workout(title: "Running", goal: 3, completionDate: "6/25/21", current: 3, unit: "mi")
-        let strengthTraining = Workout(title: "Strength Training", goal: 5, completionDate: "6/25/21", current: 5, unit: "hour")
+        let running = Workout(title: "Running", goal: 3, completionDate: "6/25/21", current: 3, unit: "mi", userRef: nil)
+        let strengthTraining = Workout(title: "Strength Training", goal: 5, completionDate: "6/25/21", current: 5, unit: "hour", userRef: nil)
         
         mockData = [running, strengthTraining]
         
