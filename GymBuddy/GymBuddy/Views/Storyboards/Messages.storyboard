@@ -104,6 +104,7 @@
                                             <outlet property="newMessageImageView" destination="JMO-UC-LQb" id="rRu-w8-X9E"/>
                                             <outlet property="profileImageView" destination="MqK-yL-Yen" id="hRT-uI-LER"/>
                                             <outlet property="timestampLabel" destination="BTP-Rp-Yyb" id="6vB-qw-3an"/>
+                                            <segue destination="n03-2L-w8y" kind="show" id="J1v-2O-Hd7"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -125,6 +126,9 @@
                         <barButtonItem key="rightBarButtonItem" title="Item" image="icons8-add_to_chat_filled-40" id="tqK-HT-Dja">
                             <inset key="imageInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="-4"/>
                             <color key="tintColor" name="custom light green"/>
+                            <connections>
+                                <action selector="newConversationButtonTapped:" destination="yRt-Cg-jvx" id="RiV-j1-BPf"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -134,6 +138,22 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TyD-MO-ISE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="938" y="130"/>
+        </scene>
+        <!--(Name)-->
+        <scene sceneID="h4u-HV-uba">
+            <objects>
+                <viewController id="n03-2L-w8y" customClass="ConversationViewController" customModule="GymBuddy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MFq-qg-HnN">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Ywg-UD-voy"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="(Name)" id="JCy-wA-mb2"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fqs-Uc-eBf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1804" y="130"/>
         </scene>
         <!--Messages-->
         <scene sceneID="MIe-iM-Ih8">
@@ -158,7 +178,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g1A-Gf-rXa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="162.31884057971016" y="129.91071428571428"/>
+            <point key="canvasLocation" x="210" y="130"/>
         </scene>
     </scenes>
     <resources>

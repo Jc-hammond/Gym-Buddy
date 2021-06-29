@@ -89,7 +89,7 @@ class ProgressDetailViewController: UIViewController {
         saveButton.titleLabel?.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 20)
         
         // progressView
-        progressView.addCornerRadius(radius: 1, width: 1, color: .customLightGreen)
+        progressView.addCornerRadius(radius: 4, width: 1, color: .customLightGreen)
         
         Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { timer in
 
