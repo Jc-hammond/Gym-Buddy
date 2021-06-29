@@ -33,11 +33,10 @@ class User {
     var friends: [Friend]?
     var friendRefs: [CKRecord.Reference]?
     var workouts: [Workout]?
-    var events: [Event]?
     var recordID: CKRecord.ID
     var appleUserRef: CKRecord.Reference
     
-    init(fullName: String, currentWeights: [Int]?, currentDates: [Date]?, targetWeight: Int, friends: [Friend]?, friendRefs: [CKRecord.Reference]?, workouts: [Workout]?, events: [Event]?, recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString), appleUserRef: CKRecord.Reference) {
+    init(fullName: String, currentWeights: [Int]?, currentDates: [Date]?, targetWeight: Int, friends: [Friend]?, friendRefs: [CKRecord.Reference]?, workouts: [Workout]?, recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString), appleUserRef: CKRecord.Reference) {
         
         self.fullName = fullName
         self.currentWeights = currentWeights
@@ -46,7 +45,6 @@ class User {
         self.friends = friends
         self.friendRefs = friendRefs
         self.workouts = workouts
-        self.events = events
         self.recordID = recordID
         self.appleUserRef = appleUserRef
     }
@@ -66,7 +64,7 @@ extension User {
         let friendRefs = ckRecord[UserStrings.friendRefsKey] as? [CKRecord.Reference]
         
         
-        self.init(fullName: fullName, currentWeights: currentWeights, currentDates: currentDates, targetWeight: targetWeight, friends: nil, friendRefs: friendRefs, workouts: nil, events: nil, recordID: ckRecord.recordID, appleUserRef: appleUserRef)
+        self.init(fullName: fullName, currentWeights: currentWeights, currentDates: currentDates, targetWeight: targetWeight, friends: nil, friendRefs: friendRefs, workouts: nil, recordID: ckRecord.recordID, appleUserRef: appleUserRef)
     }
 }
 
