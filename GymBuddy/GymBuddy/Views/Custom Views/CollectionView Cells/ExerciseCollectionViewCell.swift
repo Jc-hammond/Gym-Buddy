@@ -28,9 +28,8 @@ class ExerciseCollectionViewCell: UICollectionViewCell, CellRegisterable {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        //adjust progressView thickness
         progressView.transform = progressView.transform.scaledBy(x: 1, y: 3)
-        updateViews()
+        //updateViews()
     }
     
     fileprivate func updateViews() {
@@ -39,12 +38,15 @@ class ExerciseCollectionViewCell: UICollectionViewCell, CellRegisterable {
         containerView.addCornerRadius()
         titleLabel.font = UIFont(name: FontNames.sfRoundedReg, size: 20)
         titleLabel.textColor = .customDarkGreen
+        titleLabel.text = workout.title
         completionDatelabel.font = UIFont(name: FontNames.sfRoundedReg, size: 12)
         completionDatelabel.textColor = .gray
+        completionDatelabel.text = workout.completionDate == nil ? "" : "completed \(workout.completionDate!)"
         goalUnitLabel.font = UIFont(name: FontNames.sfRoundedReg, size: 16)
         goalUnitLabel.textColor = .gray
+        goalUnitLabel.text = "\(workout.goal) \(workout.unit)"
         
-        let progress = Float(workout.current / workout.goal)
+        let progress = Float(workout.current) / Float(workout.goal)
         setProgress(with: progress)
     }
     
@@ -53,20 +55,15 @@ class ExerciseCollectionViewCell: UICollectionViewCell, CellRegisterable {
 
         progressView.addCornerRadius(radius: 4, width: 1, color: .customLightGreen)
         
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: false) { timer in
-            
-//            guard let progress = self.progress else {
-//                timer.invalidate()
-//                return
-//            }
-            
+        Timer.scheduledTimer(withTimeInterval: 0.0, repeats: false) { timer in
+                        
             self.progressView.progressImage = gradientImage
             self.progressView.setProgress(progress, animated: true)
         }
     }
     
     override func prepareForReuse() {
-        self.prepareForReuse()
+        super.prepareForReuse()
         progressView.progress = 0
         titleLabel.text = nil
         completionDatelabel.text = nil

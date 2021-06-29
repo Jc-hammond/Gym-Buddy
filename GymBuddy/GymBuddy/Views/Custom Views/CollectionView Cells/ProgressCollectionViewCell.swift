@@ -9,18 +9,17 @@ import UIKit
 import Charts
 
 class ProgressCollectionViewCell: UICollectionViewCell, CellRegisterable {
-    //MARK: - Outlets
-    @IBOutlet weak var view: UIView!
     
     //MARK: - Properties
-    //JCHUN - need a general landing pad to for CollectionView Item Type...
-    
-    var currentProgress: CGFloat = 0.9 {
+    lazy var currentProgress: CGFloat? = 0.0 {
         didSet {
-            didProgressUpdate()
+            Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
+                self.progressRing()
+            }
         }
     }
     
+        
     private let label: UILabel = {
         let label = UILabel()
         label.textAlignment = .center
@@ -28,29 +27,27 @@ class ProgressCollectionViewCell: UICollectionViewCell, CellRegisterable {
         
         return label
     }()
-    
-    //MARK: - Lifecycle
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
-    
-    fileprivate func addCustomObjects() {
-        //JCHUN - if Item Type isprogressRing call progressRing(), if it is weightHistroy call weightHistoryLineGraph
-    }
-    
-    fileprivate func progressRing() {
+                
+    //MARK: - Functions
+    func progressRing() {
+        guard let currentProgress = currentProgress else { return }
+        contentView.backgroundColor = .clear
+        
         label.sizeToFit()
-        view.addSubview(label)
-        label.center = view.center
+        contentView.addSubview(label)
+        label.center = contentView.center
+        label.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 20)
+        label.textColor = .customDarkGreen
+        
+        label.text = "\(Int(currentProgress * 100))%"
         
         //start angle of each circle
         let startAngle = -CGFloat.pi / 2
         
         // Draw a circle
-        let center = view.center
+        let center = contentView.center
         
-        //create my track layer
+        /// create my track layer
         let trackLayer = CAShapeLayer()
         
         let circularPath = UIBezierPath(arcCenter: center, radius: 100, startAngle: startAngle, endAngle: 2 * CGFloat.pi, clockwise: true)
@@ -61,10 +58,12 @@ class ProgressCollectionViewCell: UICollectionViewCell, CellRegisterable {
         trackLayer.fillColor = UIColor.clear.cgColor
         trackLayer.lineCap = CAShapeLayerLineCap.round
         
-        view.layer.addSublayer(trackLayer)
+        contentView.layer.addSublayer(trackLayer)
+        
+        trackLayer.anchorPoint = center
         
         
-        //create progress layer
+        ///create progress layer
         let shapeLayer = CAShapeLayer()
 
         let progressPath = UIBezierPath(arcCenter: center, radius: 100, startAngle: startAngle, endAngle: startAngle + (2 * CGFloat.pi * currentProgress), clockwise: true)
@@ -77,7 +76,7 @@ class ProgressCollectionViewCell: UICollectionViewCell, CellRegisterable {
         
         shapeLayer.strokeEnd = 0
         
-        view.layer.addSublayer(shapeLayer)
+        contentView.layer.addSublayer(shapeLayer)
 
         let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
         basicAnimation.toValue = 1
@@ -91,38 +90,6 @@ class ProgressCollectionViewCell: UICollectionViewCell, CellRegisterable {
         
     }//end of func
     
-    fileprivate func didProgressUpdate() {
-        label.text = "\(Int(currentProgress * 100))%"
-    }
-    
-    fileprivate func weightHistoryLineGraph() {
-        let lineChart = LineChartView()
-        
-        //set frame
-        lineChart.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-        lineChart.center = self.view.center
-        
-        //add to view
-        view.addSubview(lineChart)
-        
-        //add data
-        //JCHUN - need actual data
-        var entries = [ChartDataEntry]()
-        
-        for x in 0..<10 {
-            entries.append(ChartDataEntry(x: Double(x), y: Double(x)))
-        }
-        
-        let set = LineChartDataSet(entries: entries)
-        set.colors = ChartColorTemplates.pastel()
-        let data = LineChartData(dataSet: set)
-        lineChart.data = data
-    }
-    
-    override func prepareForReuse() {
-        view = nil
-    }
-
 }//End of class
 
 

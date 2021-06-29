@@ -164,9 +164,9 @@ extension NSUIPinchGestureRecognizer
     }
 
     /// FIXME: Currently there are no more than 1 touch in OSX gestures, and not way to create custom touch gestures.
-    final func nsuiLocationOfTouch(_ touch: Int, inView view: NSView?) -> NSPoint
+    final func nsuiLocationOfTouch(_ touch: Int, inView containerView: NSView?) -> NSPoint
     {
-        return super.location(in: view)
+        return super.location(in: containerView)
     }
 }
 #endif
