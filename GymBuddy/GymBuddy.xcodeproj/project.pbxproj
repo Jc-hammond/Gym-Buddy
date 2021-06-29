@@ -66,6 +66,10 @@
 		714A744126791C4E005F46F2 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 714A744026791C4E005F46F2 /* CloudKit.framework */; };
 		714A744B26791D01005F46F2 /* PlaceholderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714A744A26791D01005F46F2 /* PlaceholderModel.swift */; };
 		714A744D26791D0E005F46F2 /* PlaceholderModelController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714A744C26791D0E005F46F2 /* PlaceholderModelController.swift */; };
+		71E8A4AB268B790D00478729 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4AA268B790D00478729 /* User.swift */; };
+		71E8A4AD268B7BFC00478729 /* Friend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4AC268B7BFC00478729 /* Friend.swift */; };
+		71E8A4AF268B7C0E00478729 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4AE268B7C0E00478729 /* Event.swift */; };
+		71E8A4B3268B7C8200478729 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4B2268B7C8200478729 /* Workout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -131,6 +135,10 @@
 		714A744026791C4E005F46F2 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		714A744A26791D01005F46F2 /* PlaceholderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderModel.swift; sourceTree = "<group>"; };
 		714A744C26791D0E005F46F2 /* PlaceholderModelController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderModelController.swift; sourceTree = "<group>"; };
+		71E8A4AA268B790D00478729 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		71E8A4AC268B7BFC00478729 /* Friend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friend.swift; sourceTree = "<group>"; };
+		71E8A4AE268B7C0E00478729 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
+		71E8A4B2268B7C8200478729 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		9F94FE8403AEE91FA1E68F9B /* Pods-GymBuddy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddy.release.xcconfig"; path = "Target Support Files/Pods-GymBuddy/Pods-GymBuddy.release.xcconfig"; sourceTree = "<group>"; };
 		A15BC835BD15ED1FB9CB9341 /* Pods-GymBuddy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddy.debug.xcconfig"; path = "Target Support Files/Pods-GymBuddy/Pods-GymBuddy.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -335,6 +343,10 @@
 			isa = PBXGroup;
 			children = (
 				714A744A26791D01005F46F2 /* PlaceholderModel.swift */,
+				71E8A4AA268B790D00478729 /* User.swift */,
+				71E8A4AC268B7BFC00478729 /* Friend.swift */,
+				71E8A4AE268B7C0E00478729 /* Event.swift */,
+				71E8A4B2268B7C8200478729 /* Workout.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -551,6 +563,7 @@
 			files = (
 				3B5CBCCA268173B2005036EC /* TabBarController.swift in Sources */,
 				3B5CBCD426817508005036EC /* EventsListTableViewController.swift in Sources */,
+				71E8A4B3268B7C8200478729 /* Workout.swift in Sources */,
 				3B727F7E268B4CB300395029 /* ConversationViewController.swift in Sources */,
 				3B5EFD2D2680FA5600F83E50 /* StyleGuide.swift in Sources */,
 				3B727F6F268B189500395029 /* HomeDataSource.swift in Sources */,
@@ -567,11 +580,14 @@
 				3B727F6D268AF93E00395029 /* ProgressDetailViewController.swift in Sources */,
 				3B5CBCE02681A86B005036EC /* UILabel Extension.swift in Sources */,
 				3B5CBCDA26819ED7005036EC /* MessagesTableViewCell.swift in Sources */,
+				71E8A4AB268B790D00478729 /* User.swift in Sources */,
 				3B727F80268B4ED500395029 /* FriendTableViewCell.swift in Sources */,
 				3B058AA42683EFA40047FF61 /* ProgressDataSource.swift in Sources */,
 				3B727F6A268A357600395029 /* WeightHistoryCollectionViewCell.swift in Sources */,
 				3B5CBCF126835FF4005036EC /* UITextField Extension.swift in Sources */,
 				3B058AA72683FA060047FF61 /* ExerciseCollectionViewCell.swift in Sources */,
+				71E8A4AF268B7C0E00478729 /* Event.swift in Sources */,
+				71E8A4AD268B7BFC00478729 /* Friend.swift in Sources */,
 				3B5CBCEF26835DF2005036EC /* EventDetailViewController.swift in Sources */,
 				3B5CBCCC268173F3005036EC /* InitialProfileViewController.swift in Sources */,
 				714A744B26791D01005F46F2 /* PlaceholderModel.swift in Sources */,

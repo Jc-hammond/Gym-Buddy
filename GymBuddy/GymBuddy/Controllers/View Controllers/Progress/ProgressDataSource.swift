@@ -24,13 +24,13 @@ struct Item: Hashable {
     }
 }
 
-struct Workout: Hashable {
-    let title: String
-    let goal: Int
-    let completionDate: String?
-    let current: Int
-    let unit: String
-}
+//struct Workout: Hashable {
+//    let title: String
+//    let goal: Int
+//    let completionDate: String?
+//    let current: Int
+//    let unit: String
+//}
 
 //MARK: - Class
 class ProgressDataSource: UICollectionViewDiffableDataSource<Section, Item> {
