@@ -19,7 +19,10 @@ class HeaderCollectionReusableView: UICollectionReusableView, CellRegisterable {
     
     fileprivate func updateViews() {
         headerLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 20)
+        headerLabel.textColor = .white
+        headerLabel.backgroundColor = .customGreen
         headerLabel.underline()
+        self.addCornerRadius(color: .customGreen)
     }
     
 }//End of class

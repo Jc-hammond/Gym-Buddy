@@ -21,7 +21,8 @@ extension UIImage {
                                         y: 0.5)
 
         UIGraphicsBeginImageContext(gradientLayer.bounds.size)
-        gradientLayer.render(in: UIGraphicsGetCurrentContext()!)
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        gradientLayer.render(in: context)
         guard let image = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
         UIGraphicsEndImageContext()
         return image

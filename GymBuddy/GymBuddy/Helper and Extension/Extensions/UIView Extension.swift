@@ -55,5 +55,39 @@ extension UIView {
         
     }//end of func
     
+    func anchorCenter(x: NSLayoutXAxisAnchor?, y: NSLayoutYAxisAnchor?, paddingX: CGFloat, paddingY: CGFloat, width: CGFloat? = nil, height: CGFloat? = nil) {
+        self.translatesAutoresizingMaskIntoConstraints = false
+        
+        if let x = x {
+            self.centerXAnchor.constraint(equalTo: x, constant: paddingX).isActive = true
+        }
+        
+        if let y = y {
+            self.centerYAnchor.constraint(equalTo: y, constant: -paddingY).isActive = true
+        }
+        
+        if let width = width {
+            self.widthAnchor.constraint(equalToConstant: width).isActive = true
+        }
+        
+        if let height = height {
+            self.heightAnchor.constraint(equalToConstant: height).isActive = true
+        }
+    }
+    
 }//End of extension
 
+extension UIView {
+    var parentViewContoller: UIViewController? {
+        var parentResponder: UIResponder? = self
+        while parentResponder != nil {
+            parentResponder = parentResponder!.next
+            if parentResponder is UIViewController {
+                return parentResponder as? UIViewController
+            }
+        }
+        
+        return nil
+    }//end of func
+    
+}//End of extension
