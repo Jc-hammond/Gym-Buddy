@@ -290,6 +290,9 @@
                                             <constraint firstAttribute="width" secondItem="kva-ac-6u7" secondAttribute="height" multiplier="1:1" id="tzL-de-giP"/>
                                         </constraints>
                                         <state key="normal" image="icons8-plus_filled-40"/>
+                                        <connections>
+                                            <action selector="addInviteeButtonTapped:" destination="0yl-Ie-eKM" eventType="touchUpInside" id="p3h-Wn-yBa"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>

@@ -49,8 +49,6 @@ class EventCreateViewController: UIViewController {
         //JCHUN - Add dropdown menu...
     }
     
-    
-    
     //MARK: - Functions
     fileprivate func updateViews() {
         eventTitleTextField.addCornerRadius()

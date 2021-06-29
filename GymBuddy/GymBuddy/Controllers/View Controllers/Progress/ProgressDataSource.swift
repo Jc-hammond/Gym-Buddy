@@ -104,7 +104,7 @@ class ProgressDataSource: UICollectionViewDiffableDataSource<Section, Item> {
             case .weightHistory:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeightHistoryCollectionViewCell.id, for: indexPath) as? WeightHistoryCollectionViewCell
                 
-                //cell?.weightHistoryLineGraph()
+                //do I need cell.weightData = weightData ?
                 
                 return cell
                 
@@ -196,7 +196,7 @@ class ProgressDataSource: UICollectionViewDiffableDataSource<Section, Item> {
                 let section = NSCollectionLayoutSection(group: group)
                 section.boundarySupplementaryItems = [headerItem]
                 section.interGroupSpacing = 5
-                section.contentInsets = NSDirectionalEdgeInsets.init(top: 20, leading: 20, bottom: 20, trailing: 20)
+                section.contentInsets = NSDirectionalEdgeInsets.init(top: 10, leading: 10, bottom: 10, trailing: 10)
                 
                 configuredSection = section
                 
@@ -212,7 +212,7 @@ class ProgressDataSource: UICollectionViewDiffableDataSource<Section, Item> {
                 section.boundarySupplementaryItems = [headerItem]
                 
                 section.interGroupSpacing = 5
-                section.contentInsets = NSDirectionalEdgeInsets.init(top: 20, leading: 20, bottom: 20, trailing: 20)
+                section.contentInsets = NSDirectionalEdgeInsets.init(top: 10, leading: 10, bottom: 10, trailing: 10)
                 
                 configuredSection = section
                 
@@ -227,7 +227,7 @@ class ProgressDataSource: UICollectionViewDiffableDataSource<Section, Item> {
                 let section = NSCollectionLayoutSection(group: group)
                 section.boundarySupplementaryItems = [headerItem]
                 section.interGroupSpacing = 5
-                section.contentInsets = NSDirectionalEdgeInsets.init(top: 20, leading: 20, bottom: 20, trailing: 20)
+                section.contentInsets = NSDirectionalEdgeInsets.init(top: 10, leading: 10, bottom: 10, trailing: 10)
                 
                 configuredSection = section
                 
@@ -244,7 +244,7 @@ class ProgressDataSource: UICollectionViewDiffableDataSource<Section, Item> {
                 section.boundarySupplementaryItems = [headerItem]
                 
                 section.interGroupSpacing = 5
-                section.contentInsets = NSDirectionalEdgeInsets.init(top: 20, leading: 20, bottom: 20, trailing: 20)
+                section.contentInsets = NSDirectionalEdgeInsets.init(top: 10, leading: 10, bottom: 10, trailing: 10)
                 
                 configuredSection = section
 
