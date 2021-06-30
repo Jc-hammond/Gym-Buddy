@@ -36,7 +36,8 @@ class ProgressViewController: UIViewController {
 extension ProgressViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let destinationVC = storyboard?.instantiateViewController(identifier: "ProgressDetailViewController") as? ProgressDetailViewController else { return }
+        guard let destinationVC = storyboard?.instantiateViewController(identifier: "ProgressDetailViewController") as? ProgressDetailViewController,
+              (indexPath.section == 1 || indexPath.section == 3) else { return }
         
         if indexPath.section == 1 {
             let itemToSend = progressDataSource.mockWorkoutData[indexPath.row]
