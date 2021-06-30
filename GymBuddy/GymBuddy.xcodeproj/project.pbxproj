@@ -75,6 +75,8 @@
 		71E8A4BD268BB23500478729 /* UIDate Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4BC268BB23500478729 /* UIDate Extension.swift */; };
 		71E8A4BF268BB4BB00478729 /* UserError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4BE268BB4BB00478729 /* UserError.swift */; };
 		71E8A4C1268BBEAA00478729 /* EventError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4C0268BBEAA00478729 /* EventError.swift */; };
+		71E8A4C3268CCDE100478729 /* FriendError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4C2268CCDE100478729 /* FriendError.swift */; };
+		71E8A4C5268D1C1700478729 /* WorkoutError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4C4268D1C1700478729 /* WorkoutError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -149,6 +151,8 @@
 		71E8A4BC268BB23500478729 /* UIDate Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDate Extension.swift"; sourceTree = "<group>"; };
 		71E8A4BE268BB4BB00478729 /* UserError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserError.swift; sourceTree = "<group>"; };
 		71E8A4C0268BBEAA00478729 /* EventError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventError.swift; sourceTree = "<group>"; };
+		71E8A4C2268CCDE100478729 /* FriendError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendError.swift; sourceTree = "<group>"; };
+		71E8A4C4268D1C1700478729 /* WorkoutError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutError.swift; sourceTree = "<group>"; };
 		9F94FE8403AEE91FA1E68F9B /* Pods-GymBuddy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddy.release.xcconfig"; path = "Target Support Files/Pods-GymBuddy/Pods-GymBuddy.release.xcconfig"; sourceTree = "<group>"; };
 		A15BC835BD15ED1FB9CB9341 /* Pods-GymBuddy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddy.debug.xcconfig"; path = "Target Support Files/Pods-GymBuddy/Pods-GymBuddy.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -359,6 +363,8 @@
 				71E8A4B2268B7C8200478729 /* Workout.swift */,
 				71E8A4BE268BB4BB00478729 /* UserError.swift */,
 				71E8A4C0268BBEAA00478729 /* EventError.swift */,
+				71E8A4C2268CCDE100478729 /* FriendError.swift */,
+				71E8A4C4268D1C1700478729 /* WorkoutError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -598,6 +604,7 @@
 				71E8A4B5268BAEA400478729 /* UserController.swift in Sources */,
 				3B5CBCDA26819ED7005036EC /* MessagesTableViewCell.swift in Sources */,
 				71E8A4AB268B790D00478729 /* User.swift in Sources */,
+				71E8A4C3268CCDE100478729 /* FriendError.swift in Sources */,
 				3B727F80268B4ED500395029 /* FriendTableViewCell.swift in Sources */,
 				71E8A4BF268BB4BB00478729 /* UserError.swift in Sources */,
 				3B058AA42683EFA40047FF61 /* ProgressDataSource.swift in Sources */,
@@ -609,6 +616,7 @@
 				3B5CBCEF26835DF2005036EC /* EventDetailViewController.swift in Sources */,
 				3B5CBCCC268173F3005036EC /* InitialProfileViewController.swift in Sources */,
 				3B058AA12683EF470047FF61 /* HeaderCollectionReusableView.swift in Sources */,
+				71E8A4C5268D1C1700478729 /* WorkoutError.swift in Sources */,
 				3B727F75268B1B3300395029 /* FriendCollectionViewCell.swift in Sources */,
 				71E8A4B9268BAEC000478729 /* EventController.swift in Sources */,
 				71E8A4BD268BB23500478729 /* UIDate Extension.swift in Sources */,
@@ -771,7 +779,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = GymBuddy/GymBuddy.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QEN666WPC7;
+				DEVELOPMENT_TEAM = UF94N945G8;
 				INFOPLIST_FILE = GymBuddy/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -792,7 +800,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = GymBuddy/GymBuddy.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QEN666WPC7;
+				DEVELOPMENT_TEAM = UF94N945G8;
 				INFOPLIST_FILE = GymBuddy/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
