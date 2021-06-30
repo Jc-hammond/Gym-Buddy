@@ -13,6 +13,8 @@ class InviteeTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var profileStackView: UIStackView!
     
+    //MARK: - Properites
+    var attendee: User?
     
     //MARK: - Lifecycle
     override func awakeFromNib() {
@@ -23,6 +25,9 @@ class InviteeTableViewCell: UITableViewCell {
     
     //MARK: - Functions
     fileprivate func updateViews() {
+        guard let attendee = attendee else { return }
+        nameLabel.text = attendee.fullName
+        
         profileStackView.addCornerRadius()
         profileImageView.addCornerRadius(radius: profileImageView.frame.width / 2, width: 0, color: nil)
     }

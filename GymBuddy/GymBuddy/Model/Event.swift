@@ -45,7 +45,7 @@ class Event {
     var recordID: CKRecord.ID
     var userRef: CKRecord.Reference
     
-    init(title: String, emoji: String, date: Date, location: String, type: String, info: String?, invitees: [User]?, inviteeRefs: [CKRecord.Reference]?, attendees: [User]?, attendeeRefs: [CKRecord.Reference]?, recordID: CKRecord.ID, userRef: CKRecord.Reference) {
+    init(title: String, emoji: String, date: Date, location: String, type: String, info: String?, invitees: [User]?, inviteeRefs: [CKRecord.Reference]?, attendees: [User]?, attendeeRefs: [CKRecord.Reference]?, recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString), userRef: CKRecord.Reference) {
         self.title = title
         self.emoji = emoji
         self.date = date

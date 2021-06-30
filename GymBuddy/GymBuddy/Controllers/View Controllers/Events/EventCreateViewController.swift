@@ -30,14 +30,33 @@ class EventCreateViewController: UIViewController {
         ["💃","🏊‍♂️","❓"]
     ]
     
+    let workoutTypes: [String] = [
+        "Strengh Training",
+        "Run",
+        "Walk",
+        "Basketball",
+        "Soccer",
+        "Cycling",
+        "HIIT",
+        "Hiking",
+        "Yoga",
+        "Dance",
+        "Swimming",
+        "Other"
+    ]
+    
     var emojiButtons: [UIButton] = []
+    var workoutButtons: [UIButton] = []
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationController?.navigationBar.tintColor = .customLightGreen
+        
         updateViews()
         setupEmojiButtons()
+        setupWorkoutTypeButtons()
     }
     
     //MARK: - Actions
@@ -46,8 +65,32 @@ class EventCreateViewController: UIViewController {
     }
     
     @IBAction func typeButtonTapped(_ sender: Any) {
-        //JCHUN - Add dropdown menu...
+        workoutButtons.forEach{ $0.isHidden.toggle() }
     }
+    
+    @IBAction func creatEventButtonTapped(_ sender: Any) {
+        guard let title = eventTitleTextField.text,
+              let emoji = eventEmojiButton.titleLabel?.text,
+              let location = whereTextField.text,
+              let type = typeButton.titleLabel?.text,
+              let currentUser = UserController.shared.currentUser else { return }
+              
+        let info = infoTextView.text
+        let date = datePicker.date
+        
+        EventController.shared.createEvent(with: title, emoji: emoji, date: date, location: location, type: type, info: info, user: currentUser) { result in
+            switch result {
+            case .success(let event):
+                guard let event = event else { return }
+                print("\(event.title) is successfully saved")
+            case .failure(let error):
+                print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+            }
+        }
+        
+        self.navigationController?.popViewController(animated: true)
+        
+    }//end of func
     
     //MARK: - Functions
     fileprivate func updateViews() {
@@ -113,6 +156,36 @@ class EventCreateViewController: UIViewController {
         emojiButtons.forEach{ $0.isHidden = true }
     }
     
+    fileprivate func setupWorkoutTypeButtons() {
+        for i in 0..<workoutTypes.count {
+            let width = view.frame.width * 0.65
+            let height = width / 9
+            
+            let button = UIButton(frame: CGRect(x: 0, y: 0, width: width, height: height))
+            button.addCornerRadius()
+            button.setBackgroundColor(.white)
+            button.setTitle(workoutTypes[i], for: .normal)
+            button.titleLabel?.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 14)
+            button.setTitleColor(.customDarkGreen!, for: .normal)
+            
+            button.isHidden = true
+            view.addSubview(button)
+            
+            button.anchor(top: typeButton.bottomAnchor, bottom: nil, leading: nil, trailing: nil, paddingTop: height * CGFloat(i), paddingBottom: 0, paddingLeading: 0, paddingTrailing: 0, width: width, height: height)
+            
+            button.anchorCenter(x: typeButton.centerXAnchor, y: nil, paddingX: 0, paddingY: 0)
+            
+            button.addTarget(self, action: #selector(workoutTypeSelected(button:)), for: .touchUpInside)
+            workoutButtons.append(button)
+        }
+    }//end of func
+    
+    @objc func workoutTypeSelected(button: UIButton) {
+        guard let workoutType = button.titleLabel?.text else { return }
+        typeButton.setTitle(workoutType, for: .normal)
+        workoutButtons.forEach{ $0.isHidden = true }
+    }
+    
 
     /*
     // MARK: - Navigation
@@ -124,4 +197,4 @@ class EventCreateViewController: UIViewController {
     }
     */
 
-}
+}//End of class

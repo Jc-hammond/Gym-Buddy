@@ -23,12 +23,13 @@ class EventController {
         guard let currentUser = UserController.shared.currentUser else {return completion(.failure(.noProfile))}
         let userRef = CKRecord.Reference(recordID: currentUser.recordID, action: .deleteSelf)
         
-        let newEvent = Event(title: title, emoji: emoji, date: date, location: location, type: type, info: info, invitees: nil, inviteeRefs: nil, attendees: nil, attendeeRefs: nil, recordID: currentUser.recordID, userRef: userRef)
+        let newEvent = Event(title: title, emoji: emoji, date: date, location: location, type: type, info: info, invitees: nil, inviteeRefs: nil, attendees: nil, attendeeRefs: nil, userRef: userRef)
         
         let record = CKRecord(event: newEvent)
         
         publicDB.save(record) { record, error in
             if let error = error {
+                print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
                 return completion(.failure(.ckError(error)))
             }
             guard let record = record,
@@ -80,6 +81,28 @@ class EventController {
                 completion(.failure(.nilRecord))
             }
         }
+    }
+    
+    
+    //JCHUN - Does this work?
+    func fetchEventUsers(attendeeRefs: [CKRecord.Reference], completion: @escaping (Result<[User]?, EventError>) -> Void) {
+        var attendees = [User]()
+        
+        for reference in attendeeRefs {
+            
+            publicDB.fetch(withRecordID: reference.recordID) { record, error in
+                if let error = error {
+                    completion(.failure(.ckError(error)))
+                }
+                
+                guard let record = record,
+                      let user = User(ckRecord: record) else { return completion(.failure(.noRecord)) }
+                
+                attendees.append(user)
+            }
+        }
+        
+        completion(.success(attendees))
     }
     
     func deleteEvent(event: Event, completion: @escaping (Result<Bool, EventError>) -> Void) {

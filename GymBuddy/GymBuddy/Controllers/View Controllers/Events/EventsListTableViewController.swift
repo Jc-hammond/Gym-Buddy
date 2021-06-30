@@ -10,30 +10,74 @@ import UIKit
 class EventsListTableViewController: UITableViewController {
     //MARK: - Properties
     let sections: [String] = ["My Events", "Invited"]
+    var allEvents = [[Event]]()
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        allEvents = []
+        fetchAllEvents()
+    }
+    
+    //MARK: - Function
+    fileprivate func fetchAllEvents() {
+        guard let currentUserRef = UserController.shared.currentUserRef else { return }
+        
+        let ownerPredicate = NSPredicate(format: "%K == %@", EventStrings.userRefKey, currentUserRef)
+//        let inviteesPredicate = NSPredicate(format: "%K == %@", EventStrings.inviteeRefsKey, currentUserRef)
+//        let allEventPredicate = NSPredicate(value: true)
+        
+        EventController.shared.fetchEvent(predicate: ownerPredicate) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let events):
+                    guard let attendingEvents = events else { return }
+                    self.allEvents.append(attendingEvents)
+                    self.tableView.reloadData()
+                case .failure(let error):
+                    print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+                }
+            }
+        }
+        
+//        EventController.shared.fetchEvent(predicate: inviteesPredicate) { result in
+//            switch result {
+//            case .success(let events):
+//                guard let invitedEvents = events else { return }
+//                self.allEvents.append(invitedEvents)
+//            case .failure(let error):
+//                print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+//            }
+//        }
+        
+        
+    }//end of func
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return sections.count
+        return allEvents.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 2
+        return allEvents[section].count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "EventCell", for: indexPath) as? EventsTableViewCell else { return UITableViewCell() }
         
         let sectionNumber = indexPath.section
+        let event = allEvents[sectionNumber][indexPath.row]
         cell.sectionNumber = sectionNumber
+        cell.event = event
 
         return cell
     }
@@ -42,10 +86,14 @@ class EventsListTableViewController: UITableViewController {
         return view.frame.height / 10
     }
 
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        return sections[section]
-    }
+//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        if section == 0 {
+//            return "My Event"
+//        } else {
+//            return "Invitations"
+//        }
+//
+//    }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
@@ -56,7 +104,7 @@ class EventsListTableViewController: UITableViewController {
         
         textLabel.anchor(top: headerView.topAnchor, bottom: headerView.bottomAnchor, leading: headerView.leadingAnchor, trailing: nil, paddingTop: 8, paddingBottom: 8, paddingLeading: 8, paddingTrailing: 0, width: tableView.bounds.width - 16, height: 40)
         
-        textLabel.text = sections[section]
+        textLabel.text = section == 0 ? "My Event" : "Invitations"
         textLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 24)
         textLabel.textColor = .customLightGreen
         textLabel.underline()
@@ -85,7 +133,14 @@ class EventsListTableViewController: UITableViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         //IIDOO
-        
+        if segue.identifier == "toEventDetailVC" {
+            guard let indexPath = tableView.indexPathForSelectedRow,
+                  let destinationVC = segue.destination as? EventDetailViewController else { return }
+            
+            let eventToSend = allEvents[indexPath.section][indexPath.row]
+            
+            destinationVC.event = eventToSend
+        }
     }
 
 }//End of class
