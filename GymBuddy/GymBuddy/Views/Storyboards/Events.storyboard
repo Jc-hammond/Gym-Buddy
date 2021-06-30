@@ -518,6 +518,9 @@
                                     <constraint firstAttribute="height" constant="40" id="O4L-Kz-E4D"/>
                                 </constraints>
                                 <state key="normal" title="Create Event"/>
+                                <connections>
+                                    <action selector="creatEventButtonTapped:" destination="pIv-p4-4lv" eventType="touchUpInside" id="9cC-yv-o8N"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vKH-qU-1Hj"/>
@@ -580,7 +583,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="bZb-FU-0ds"/>
+        <segue reference="nb6-EO-LH4"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="addEmoji" width="60" height="60"/>

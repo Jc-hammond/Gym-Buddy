@@ -31,7 +31,7 @@ class InitialProfileViewController: UIViewController {
         
         //JCHUN - what is the best practice?
         //JCHUN - Maybe make the main storyboard first storyboard and come to this VC when the user opens app for the first time
-        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
+        Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
             if UserController.shared.currentUser != nil {
                 self.presentTabBarController()
             }

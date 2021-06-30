@@ -25,15 +25,43 @@ class EventDetailViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    //MARK: - Properties
+    var event: Event? {
+        didSet {
+            
+        }
+    }
+    var attendees = [User]()
+    
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.navigationBar.tintColor = .customLightGreen
 
         tableView.delegate = self
         tableView.dataSource = self
         
         updateViews()
     }
+    
+    //MARK: - Function
+    fileprivate func fetchAttendees() {
+        guard let event = event,
+              let attendeeRefs = event.attendeeRefs else { return }
+        
+        EventController.shared.fetchEventUsers(attendeeRefs: attendeeRefs) { result in
+            switch result {
+            case .success(let attendees):
+                guard let attendees = attendees else { return }
+                self.attendees = attendees
+            case .failure(let error):
+                print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+            }
+        }
+        
+        
+    }//end of func
     
     //MARK: - Actions
     @IBAction func addInviteeButtonTapped(_ sender: Any) {
@@ -46,7 +74,16 @@ class EventDetailViewController: UIViewController {
     
     //MARK: - Functions
     fileprivate func updateViews() {
+        guard let event = event else { return }
         tableView.addCornerRadius()
+        eventTitleLabel.text = event.title
+        eventEmojiLabel.text = event.emoji
+        dateLabel.text = event.date.formatDate()
+        timeLabel.text = event.date.formatTime()
+        locationLabel.text = event.location
+        exerciseTypeLabel.text = event.type
+        eventInfoLabel.text = event.info
+        
         eventTitleLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 24)
         eventDetailLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 22)
         inviteesLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 22)
@@ -78,12 +115,14 @@ class EventDetailViewController: UIViewController {
 //MARK: - Extensions
 extension EventDetailViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return attendees.count
     }
     
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "inviteeCell") as? InviteeTableViewCell else { return UITableViewCell() }
+        
+        
         
         return cell
     }
