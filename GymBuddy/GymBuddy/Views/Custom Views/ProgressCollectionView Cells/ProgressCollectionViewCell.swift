@@ -13,7 +13,7 @@ class ProgressCollectionViewCell: UICollectionViewCell, CellRegisterable {
     //MARK: - Properties
     lazy var currentProgress: CGFloat? = 0.0 {
         didSet {
-            Timer.scheduledTimer(withTimeInterval: 0.2, repeats: false) { _ in
+            Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { _ in
                 self.progressRing()
             }
         }

@@ -28,7 +28,7 @@ class EventDetailViewController: UIViewController {
     //MARK: - Properties
     var event: Event? {
         didSet {
-            
+            fetchAttendees()
         }
     }
     var attendees = [User]()
