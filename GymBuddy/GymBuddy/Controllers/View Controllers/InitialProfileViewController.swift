@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CloudKit
 
 class InitialProfileViewController: UIViewController {
     //MARK: - Outlets
@@ -23,21 +24,9 @@ class InitialProfileViewController: UIViewController {
         fullNameTextField.addCornerRadius()
         nextButton.addCornerRadius(radius: 20)
         nextButton.setBackgroundColor(UIColor.customLightGreen ?? .clear)
-        
+                
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        //JCHUN - what is the best practice?
-        //JCHUN - Maybe make the main storyboard first storyboard and come to this VC when the user opens app for the first time
-        Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { _ in
-            if UserController.shared.currentUser != nil {
-                self.presentTabBarController()
-            }
-        }
-        
-    }
     
     //MARK: - Actions
     @IBAction func nextButtonTapped(_ sender: Any) {
@@ -56,21 +45,10 @@ class InitialProfileViewController: UIViewController {
             }
         }
               
-        presentTabBarController()
+        self.dismiss(animated: true, completion: nil)
     }
     
     
-    //MARK: - Functions
-    fileprivate func presentTabBarController() {
-        DispatchQueue.main.async {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let rootVC = storyboard.instantiateInitialViewController() else { return }
-            rootVC.modalPresentationStyle = .fullScreen
-            
-            self.present(rootVC, animated: true, completion: nil)
-        }
-    }
-
     /*
     // MARK: - Navigation
 
