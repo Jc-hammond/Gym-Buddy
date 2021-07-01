@@ -8,52 +8,52 @@
 import Foundation
 import CloudKit
 
-class FriendController {
+class FriendRequestController {
     
     //MARK: - Properties
-    static let shared = FriendController()
+    static let shared = FriendRequestController()
     let publicDB = CKContainer.default().publicCloudDatabase
     
-    func createFriendRequest(friendUser: User, completion: @escaping (Result<[Friend]?, FriendError>) -> Void){
+    func createFriendRequest(friendUser: User, completion: @escaping (Result<[FriendRequest]?, FriendError>) -> Void){
         
         guard let currentUser = UserController.shared.currentUser else {return completion(.failure(.noCurrentUser))}
         let ownerRef = CKRecord.Reference(recordID: currentUser.recordID, action: .deleteSelf)
         let friendRef = CKRecord.Reference(recordID: friendUser.recordID, action: .deleteSelf)
-        let ownerRequest = Friend(ownerUserRef: ownerRef, friendUserRef: friendRef, friendName: friendUser.fullName, ownerDidSend: true, accepted: false, siblingRef: nil)
+        let ownerRequest = FriendRequest(ownerUserRef: ownerRef, friendUserRef: friendRef, userName: friendUser.fullName, ownerDidSend: true, accepted: false, siblingRef: nil)
         let ownerReqRef = CKRecord.Reference(recordID: ownerRequest.recordID, action: .deleteSelf)
         
-        let friendRequest = Friend(ownerUserRef: friendRef, friendUserRef: ownerRef, friendName: currentUser.fullName, ownerDidSend: false, accepted: false, siblingRef: ownerReqRef)
+        let friendRequest = FriendRequest(ownerUserRef: friendRef, friendUserRef: ownerRef, userName: currentUser.fullName, ownerDidSend: false, accepted: false, siblingRef: ownerReqRef)
         let friendReqRef = CKRecord.Reference(recordID: friendRequest.recordID, action: .deleteSelf)
         
         ownerRequest.siblingRef = friendReqRef
         
-        let ownerRecord = CKRecord(friend: ownerRequest)
-        let friendRecord = CKRecord(friend: friendRequest)
-        var requests: [Friend] = []
+        let ownerRecord = CKRecord(friendRequest: ownerRequest)
+        let friendRecord = CKRecord(friendRequest: friendRequest)
+        var requests: [FriendRequest] = []
         
         publicDB.save(ownerRecord) { record, error in
             if let error = error {
                 return completion(.failure(.ckError(error)))
             }
             guard let record = record,
-                  let friend = Friend(ckRecord: record) else {return completion(.failure(.nilRecord))}
-            requests.append(friend)
+                  let owner = FriendRequest(ckRecord: record) else {return completion(.failure(.nilRecord))}
+            requests.append(owner)
         }
         publicDB.save(friendRecord) { record, error in
             if let error = error {
                 return completion(.failure(.ckError(error)))
             }
             guard let record = record,
-                  let friend = Friend(ckRecord: record) else {return completion(.failure(.nilRecord))}
+                  let friend = FriendRequest(ckRecord: record) else {return completion(.failure(.nilRecord))}
             requests.append(friend)
         }
         completion(.success(requests))
         
     }
     
-    func fetchRequestsForProfile(predicate: NSPredicate, completion: @escaping (Result<[Friend]?, FriendError>) -> Void) {
+    func fetchRequestsForProfile(predicate: NSPredicate, completion: @escaping (Result<[FriendRequest]?, FriendError>) -> Void) {
         
-        let friendQuery = CKQuery(recordType: FriendConstants.recordType, predicate: predicate)
+        let friendQuery = CKQuery(recordType: FriendRequestConstants.recordType, predicate: predicate)
         
         publicDB.perform(friendQuery, inZoneWith: nil) { records, error in
             if let error = error {
@@ -61,12 +61,12 @@ class FriendController {
             }
             
             guard let records = records else {return completion(.failure(.nilRecord))}
-            let friends = records.compactMap({ Friend(ckRecord: $0 )})
+            let friends = records.compactMap({ FriendRequest(ckRecord: $0 )})
             completion(.success(friends))
         }
     }
     
-    func toggleFriendAcceptance(response: Bool, request: Friend, completion: @escaping (Result<[Friend]?, FriendError>) -> Void) {
+    func toggleFriendAcceptance(response: Bool, request: FriendRequest, completion: @escaping (Result<[FriendRequest]?, FriendError>) -> Void) {
         
         switch response {
         case true:
@@ -79,8 +79,8 @@ class FriendController {
                 case .success(let friends):
                     guard let friend = friends?.first else {return completion(.failure(.nilRecord))}
                     friend.accepted = response
-                    let ownerReq = CKRecord(friend: request)
-                    let friendReq = CKRecord(friend: friend)
+                    let ownerReq = CKRecord(friendRequest: request)
+                    let friendReq = CKRecord(friendRequest: friend)
                     
                     let ownerOperation = CKModifyRecordsOperation(recordsToSave: [ownerReq], recordIDsToDelete: nil)
                     ownerOperation.savePolicy = .changedKeys
@@ -90,7 +90,7 @@ class FriendController {
                             return completion(.failure(.ckError(error)))
                         }
                         guard let records = records else {return completion(.failure(.failedSavingRequest))}
-                        let friendRequests = records.compactMap( { Friend(ckRecord: $0) } )
+                        let friendRequests = records.compactMap( { FriendRequest(ckRecord: $0) } )
                         completion(.success(friendRequests))
                     }
                     let friendOperation = CKModifyRecordsOperation(recordsToSave: [friendReq], recordIDsToDelete: nil)
@@ -101,7 +101,7 @@ class FriendController {
                             return completion(.failure(.ckError(error)))
                         }
                         guard let records = records else {return completion(.failure(.failedSavingRequest))}
-                        let friendRequests = records.compactMap( { Friend(ckRecord: $0) } )
+                        let friendRequests = records.compactMap( { FriendRequest(ckRecord: $0) } )
                         completion(.success(friendRequests))
                     }
                     self.publicDB.add(ownerOperation)
@@ -121,7 +121,7 @@ class FriendController {
                     return completion(.failure(.ckError(error)))
                 }
                 guard let records = records else {return completion(.failure(.failedSavingRequest))}
-                let friendRequests = records.compactMap( { Friend(ckRecord: $0) } )
+                let friendRequests = records.compactMap( { FriendRequest(ckRecord: $0) } )
                 completion(.success(friendRequests))
             }
             self.publicDB.add(operation)

@@ -31,7 +31,7 @@ class UserController {
             case .success(let reference):
                 guard let reference = reference else {return completion(.failure(.noAppleUser))}
                 let date = Date()
-                let user = User(fullName: fullName, currentWeights: [currentWeight], currentDates: [date], targetWeight: targetWeight, friends: nil, friendRefs: nil, workouts: [], appleUserRef: reference)
+                let user = User(fullName: fullName, currentWeights: [currentWeight], currentDates: [date], targetWeight: targetWeight, friends: [], friendRefs: nil, friendRequests: nil, friendRequestRefs: nil, workouts: [], appleUserRef: reference)
                 let record = CKRecord(user: user)
                 
                 self.publicDB.save(record) { record, error in
@@ -106,7 +106,7 @@ class UserController {
         }
     }
     
-    func addWeight(currentUser: User, completion: @escaping (Result<User?, UserError>) -> Void) {
+    func saveUserUpdates(currentUser: User, completion: @escaping (Result<User?, UserError>) -> Void) {
       
         let record = CKRecord(user: currentUser)
         
