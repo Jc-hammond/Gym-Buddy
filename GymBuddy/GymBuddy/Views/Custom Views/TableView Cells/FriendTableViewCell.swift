@@ -14,7 +14,9 @@ class FriendTableViewCell: UITableViewCell {
     @IBOutlet weak var cellButton: UIButton!
     
     //MARK: - Properties
-    var buttonTitles: [String]? {
+    var buttonTitle: String?
+    
+    var user: User? {
         didSet {
             updateViews()
         }
@@ -22,21 +24,39 @@ class FriendTableViewCell: UITableViewCell {
     
     //MARK: - Functions
     fileprivate func updateViews() {
-        guard let buttonTitles = buttonTitles else { return }
+        guard let buttonTitle = buttonTitle,
+              let user = user else { return }
+        
         profileImageView.addCornerRadius(radius: profileImageView.frame.height/2, width: 1)
         friendNameLabel.font = UIFont(name: FontNames.sfRoundedReg, size: 20)
-//        friendNameLabel.text =
+        friendNameLabel.text = user.fullName
         cellButton.addCornerRadius(color: .clear)
         cellButton.setTitleColor(.white, for: .normal)
+        cellButton.setTitle(buttonTitle, for: .normal)
         
-        if let randomInt = [0,1].shuffled().first {
-            cellButton.setTitle(buttonTitles[randomInt], for: .normal)
-            if randomInt == 0 {
-                cellButton.setBackgroundColor(.customLightGreen!)
-            } else {
-                cellButton.setBackgroundColor(.gray)
-            }
+        if buttonTitle == "added" {
+            cellButton.setBackgroundColor(.gray)
+            cellButton.isEnabled = false
+        } else if buttonTitle == "pending" {
+            cellButton.setBackgroundColor(.gray)
+            cellButton.setTitleColor(.black, for: .normal)
+            cellButton.isEnabled = false
+        } else if buttonTitle == "accept" {
+            cellButton.setBackgroundColor(.customLightGreen!)
+            cellButton.isEnabled = true
+        } else if buttonTitle == "add friend" {
+            cellButton.setBackgroundColor(.customLightGreen!)
+            cellButton.isEnabled = true
         }
+        
+//        if let randomInt = [0,1].shuffled().first {
+//            cellButton.setTitle(buttonTitles[randomInt], for: .normal)
+//            if randomInt == 0 {
+//                cellButton.setBackgroundColor(.customLightGreen!)
+//            } else {
+//                cellButton.setBackgroundColor(.gray)
+//            }
+//        }
         
     }
 

@@ -23,7 +23,7 @@ class MessagesViewController: UIViewController {
     @IBAction func newConversationButtonTapped(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Friends", bundle: nil)
         guard let destinationVC = storyboard.instantiateViewController(identifier: "FriendsListTableViewController") as? FriendsListTableViewController else { return }
-        destinationVC.buttonTitles = ["friend request", "added"]
+        //destinationVC.buttonTitles = ["friend request", "added"]
         self.navigationController?.pushViewController(destinationVC, animated: true)
 
     }

@@ -67,7 +67,7 @@ class EventDetailViewController: UIViewController {
     @IBAction func addInviteeButtonTapped(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Friends", bundle: nil)
         guard let destinationVC = storyboard.instantiateViewController(identifier: "FriendsListTableViewController") as? FriendsListTableViewController else { return }
-        destinationVC.buttonTitles = ["invite", "attending"]
+        //destinationVC.buttonTitles = ["invite", "attending"]
         self.navigationController?.pushViewController(destinationVC, animated: true)
     }
     
