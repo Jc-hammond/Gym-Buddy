@@ -32,5 +32,4 @@ class InviteeTableViewCell: UITableViewCell {
         profileImageView.addCornerRadius(radius: profileImageView.frame.width / 2, width: 0, color: nil)
     }
 
-
 }//End of class

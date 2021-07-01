@@ -85,24 +85,46 @@ class EventController {
     
     
     //JCHUN - Does this work?
-    func fetchEventUsers(attendeeRefs: [CKRecord.Reference], completion: @escaping (Result<[User]?, EventError>) -> Void) {
-        var attendees = [User]()
+    func fetchEventAttendees(attendeeRefs: [CKRecord.Reference], completion: @escaping (Result<[User]?, EventError>) -> Void) {
         
+        var recordIDs = [CKRecord.ID]()
         for reference in attendeeRefs {
-            
-            publicDB.fetch(withRecordID: reference.recordID) { record, error in
-                if let error = error {
-                    completion(.failure(.ckError(error)))
-                }
-                
-                guard let record = record,
-                      let user = User(ckRecord: record) else { return completion(.failure(.noRecord)) }
-                
-                attendees.append(user)
-            }
+            let recordID = reference.recordID
+            recordIDs.append(recordID)
         }
         
-        completion(.success(attendees))
+        let fetchOp = CKFetchRecordsOperation(recordIDs: recordIDs)
+        
+        fetchOp.fetchRecordsCompletionBlock = { (records, error) in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+                    return completion(.failure(.nilRecord))
+                }
+                
+                if let records = records {
+                    let attendees = records.compactMap{ User(ckRecord: $0.value) }
+                    completion(.success(attendees))
+                }
+            }
+        }
+        publicDB.add(fetchOp)
+        
+//        for reference in attendeeRefs {
+//
+//            publicDB.fetch(withRecordID: reference.recordID) { record, error in
+//                if let error = error {
+//                    completion(.failure(.ckError(error)))
+//                }
+//
+//                guard let record = record,
+//                      let user = User(ckRecord: record) else { return completion(.failure(.noRecord)) }
+//
+//                attendees.append(user)
+//            }
+//        }
+//
+//        completion(.success(attendees))
     }
     
     func deleteEvent(event: Event, completion: @escaping (Result<Bool, EventError>) -> Void) {
@@ -125,4 +147,4 @@ class EventController {
         publicDB.add(deleteOp)
     }
  
-}
+}//End of class

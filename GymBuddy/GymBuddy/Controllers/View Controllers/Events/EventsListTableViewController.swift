@@ -8,27 +8,33 @@
 import UIKit
 
 class EventsListTableViewController: UITableViewController {
+    //MARK: - Outlets
+
     //MARK: - Properties
     let sections: [String] = ["My Events", "Invited"]
     var allEvents = [[Event]]()
+    
+    var refresh: UIRefreshControl = UIRefreshControl()
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupViews()
+        //fetchAllEvents()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        allEvents = []
         fetchAllEvents()
     }
     
     //MARK: - Function
     fileprivate func fetchAllEvents() {
         guard let currentUserRef = UserController.shared.currentUserRef else { return }
-        
+        allEvents = []
+
         let ownerPredicate = NSPredicate(format: "%K == %@", EventStrings.userRefKey, currentUserRef)
 //        let inviteesPredicate = NSPredicate(format: "%K == %@", EventStrings.inviteeRefsKey, currentUserRef)
 //        let allEventPredicate = NSPredicate(value: true)
@@ -40,6 +46,7 @@ class EventsListTableViewController: UITableViewController {
                     guard let attendingEvents = events else { return }
                     self.allEvents.append(attendingEvents)
                     self.tableView.reloadData()
+                    self.refresh.endRefreshing()
                 case .failure(let error):
                     print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
                 }
@@ -56,8 +63,17 @@ class EventsListTableViewController: UITableViewController {
 //            }
 //        }
         
-        
     }//end of func
+    
+    func setupViews() {
+        refresh.attributedTitle = NSAttributedString(string: "Pull to refresh events")
+        refresh.addTarget(self, action: #selector(loadEvents), for: .valueChanged)
+        tableView.addSubview(refresh)
+    }
+    
+    @objc func loadEvents() {
+        fetchAllEvents()
+    }
     
     // MARK: - Table view data source
 

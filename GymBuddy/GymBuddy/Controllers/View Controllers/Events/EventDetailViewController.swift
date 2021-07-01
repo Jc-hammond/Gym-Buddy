@@ -50,7 +50,7 @@ class EventDetailViewController: UIViewController {
         guard let event = event,
               let attendeeRefs = event.attendeeRefs else { return }
         
-        EventController.shared.fetchEventUsers(attendeeRefs: attendeeRefs) { result in
+        EventController.shared.fetchEventAttendees(attendeeRefs: attendeeRefs) { result in
             switch result {
             case .success(let attendees):
                 guard let attendees = attendees else { return }
@@ -122,7 +122,8 @@ extension EventDetailViewController: UITableViewDelegate, UITableViewDataSource 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "inviteeCell") as? InviteeTableViewCell else { return UITableViewCell() }
         
-        
+        let attendee = attendees[indexPath.row]
+        cell.attendee = attendee
         
         return cell
     }
