@@ -25,6 +25,9 @@ class FriendTableViewCell: UITableViewCell {
     
     //MARK: - Actions
     @IBAction func cellButtonTapped(_ sender: UIButton) {
+        guard let user = user,
+              let currentUser = UserController.shared.currentUser else { return }
+        
         if sender.titleLabel?.text == "accept" {
             guard let friendRequest = friendRequest else { return }
             FriendRequestController.shared.toggleFriendAcceptance(response: true, request: friendRequest) { result in
@@ -42,16 +45,22 @@ class FriendTableViewCell: UITableViewCell {
         }
         
         if sender.titleLabel?.text == "add friend" {
-            guard let user = user else { return }
             FriendRequestController.shared.createFriendRequest(friendUser: user) { result in
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let friendRequests):
-                        guard let friendRequest = friendRequests?.first else { return }
-                        guard let currentUser = UserController.shared.currentUser else { return }
-                        currentUser.friendRequests?.append(friendRequest)
+                        guard let friendRequests = friendRequests,
+                              let senderRequestRef = friendRequests[0].siblingRef,
+                              let receiverRequestRef = friendRequests[1].siblingRef else { return }
+                        
+                        user.friendRequestRefs?.append(senderRequestRef)
+                        currentUser.friendRequestRefs?.append(receiverRequestRef)
+                        self.saveUser(user: user)
+                        self.saveUser(user: currentUser)
+
                         self.updateButtons(buttonTitle: "pending")
                         print("Successfully sent friend request")
+                        
                     case .failure(let error):
                         print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
                     }
@@ -59,6 +68,19 @@ class FriendTableViewCell: UITableViewCell {
             }
         }
     }//end of func
+    
+    fileprivate func saveUser(user: User) {
+        UserController.shared.saveUserUpdates(currentUser: user) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    print("successfully saved friendRequestRef for \(user.fullName)")
+                case .failure(let error):
+                    print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+                }
+            }
+        }
+    }
     
     //MARK: - Functions
     fileprivate func updateViews() {
