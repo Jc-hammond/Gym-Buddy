@@ -192,6 +192,9 @@
                                                                                     <constraint firstAttribute="width" constant="30" id="lez-5J-waI"/>
                                                                                 </constraints>
                                                                                 <state key="normal" image="icons8-chevron_down_filled-40"/>
+                                                                                <connections>
+                                                                                    <action selector="upDownButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="pbC-6F-zh1"/>
+                                                                                </connections>
                                                                             </button>
                                                                         </subviews>
                                                                     </stackView>

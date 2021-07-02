@@ -51,6 +51,9 @@
                                                 <constraint firstAttribute="width" secondItem="cRk-ui-Q0W" secondAttribute="height" multiplier="3:1" id="OQZ-Ss-PaS"/>
                                             </constraints>
                                             <state key="normal" title="Button"/>
+                                            <connections>
+                                                <action selector="cellButtonTapped:" destination="Pf5-3O-BNs" eventType="touchUpInside" id="weY-Bh-jIc"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <constraints>

@@ -15,12 +15,50 @@ class FriendTableViewCell: UITableViewCell {
     
     //MARK: - Properties
     var buttonTitle: String?
+    var friendRequest: FriendRequest?
     
     var user: User? {
         didSet {
             updateViews()
         }
     }
+    
+    //MARK: - Actions
+    @IBAction func cellButtonTapped(_ sender: UIButton) {
+        if sender.titleLabel?.text == "accept" {
+            guard let friendRequest = friendRequest else { return }
+            FriendRequestController.shared.toggleFriendAcceptance(response: true, request: friendRequest) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(_):
+                        
+                        self.updateButtons(buttonTitle: "added")
+                        print("Successfully accepted friend request")
+                    case .failure(let error):
+                        print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+                    }
+                }
+            }
+        }
+        
+        if sender.titleLabel?.text == "add friend" {
+            guard let user = user else { return }
+            FriendRequestController.shared.createFriendRequest(friendUser: user) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let friendRequests):
+                        guard let friendRequest = friendRequests?.first else { return }
+                        guard let currentUser = UserController.shared.currentUser else { return }
+                        currentUser.friendRequests?.append(friendRequest)
+                        self.updateButtons(buttonTitle: "pending")
+                        print("Successfully sent friend request")
+                    case .failure(let error):
+                        print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+                    }
+                }
+            }
+        }
+    }//end of func
     
     //MARK: - Functions
     fileprivate func updateViews() {
@@ -34,6 +72,20 @@ class FriendTableViewCell: UITableViewCell {
         cellButton.setTitleColor(.white, for: .normal)
         cellButton.setTitle(buttonTitle, for: .normal)
         
+
+        
+//        if let randomInt = [0,1].shuffled().first {
+//            cellButton.setTitle(buttonTitles[randomInt], for: .normal)
+//            if randomInt == 0 {
+//                cellButton.setBackgroundColor(.customLightGreen!)
+//            } else {
+//                cellButton.setBackgroundColor(.gray)
+//            }
+//        }
+        updateButtons(buttonTitle: buttonTitle)
+    }
+    
+    fileprivate func updateButtons(buttonTitle: String) {
         if buttonTitle == "added" {
             cellButton.setBackgroundColor(.gray)
             cellButton.isEnabled = false
@@ -48,16 +100,6 @@ class FriendTableViewCell: UITableViewCell {
             cellButton.setBackgroundColor(.customLightGreen!)
             cellButton.isEnabled = true
         }
-        
-//        if let randomInt = [0,1].shuffled().first {
-//            cellButton.setTitle(buttonTitles[randomInt], for: .normal)
-//            if randomInt == 0 {
-//                cellButton.setBackgroundColor(.customLightGreen!)
-//            } else {
-//                cellButton.setBackgroundColor(.gray)
-//            }
-//        }
-        
     }
 
 }//End of class
