@@ -66,6 +66,32 @@ class FriendRequestController {
         }
     }
     
+    func fetchFriendRequests(friendRequestRefs: [CKRecord.Reference], completion: @escaping (Result<[FriendRequest], FriendError>) -> Void) {
+        
+        var recordIDs = [CKRecord.ID]()
+        for reference in friendRequestRefs {
+            let recordID = reference.recordID
+            recordIDs.append(recordID)
+        }
+        
+        let fetchOp = CKFetchRecordsOperation(recordIDs: recordIDs)
+        
+        fetchOp.fetchRecordsCompletionBlock = { (records, error) in
+            DispatchQueue.main.async {
+                if let error = error {
+                    print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+                    return completion(.failure(.nilRecord))
+                }
+                
+                if let records = records {
+                    let friendRequests = records.compactMap{ FriendRequest(ckRecord: $0.value) }
+                    completion(.success(friendRequests))
+                }
+            }
+        }
+        publicDB.add(fetchOp)
+    }
+    
     func toggleFriendAcceptance(response: Bool, request: FriendRequest, completion: @escaping (Result<[FriendRequest]?, FriendError>) -> Void) {
         
         switch response {
