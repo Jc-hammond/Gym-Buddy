@@ -27,27 +27,59 @@ class FriendRequestController {
         
         ownerRequest.siblingRef = friendReqRef
         
+        //JCHUN - Is this correct?
+        friendUser.friendRequestRefs?.append(ownerReqRef)
+        currentUser.friendRequestRefs?.append(friendReqRef)
+        
+        UserController.shared.saveUserUpdates(currentUser: currentUser) { result in
+            switch result {
+            case .success(_):
+                print("successfully saved the current user with friendRequestRef")
+            case .failure(let error):
+                print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+            }
+        }
+        
+        UserController.shared.saveUserUpdates(currentUser: friendUser) { result in
+            switch result {
+            case .success(_):
+                print("successfully saved the friend user with friendRequestRef")
+            case .failure(let error):
+                print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+            }
+        }
+        
+        //JCHUN - above..
+        
         let ownerRecord = CKRecord(friendRequest: ownerRequest)
         let friendRecord = CKRecord(friendRequest: friendRequest)
         var requests: [FriendRequest] = []
         
+        DispatchQueue.main.async {
+            
+        }
         publicDB.save(ownerRecord) { record, error in
-            if let error = error {
-                return completion(.failure(.ckError(error)))
+            DispatchQueue.main.async {
+                if let error = error {
+                    return completion(.failure(.ckError(error)))
+                }
+                guard let record = record,
+                      let owner = FriendRequest(ckRecord: record) else {return completion(.failure(.nilRecord))}
+                requests.append(owner)
+                
+                self.publicDB.save(friendRecord) { record, error in
+                    DispatchQueue.main.async {
+                        if let error = error {
+                            return completion(.failure(.ckError(error)))
+                        }
+                        guard let record = record,
+                              let friend = FriendRequest(ckRecord: record) else {return completion(.failure(.nilRecord))}
+                        requests.append(friend)
+                        completion(.success(requests))
+                    }
+                }
             }
-            guard let record = record,
-                  let owner = FriendRequest(ckRecord: record) else {return completion(.failure(.nilRecord))}
-            requests.append(owner)
         }
-        publicDB.save(friendRecord) { record, error in
-            if let error = error {
-                return completion(.failure(.ckError(error)))
-            }
-            guard let record = record,
-                  let friend = FriendRequest(ckRecord: record) else {return completion(.failure(.nilRecord))}
-            requests.append(friend)
-        }
-        completion(.success(requests))
         
     }
     
