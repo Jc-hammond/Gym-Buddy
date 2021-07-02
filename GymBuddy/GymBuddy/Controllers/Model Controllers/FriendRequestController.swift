@@ -28,26 +28,26 @@ class FriendRequestController {
         ownerRequest.siblingRef = friendReqRef
         
         //JCHUN - Is this correct?
-        friendUser.friendRequestRefs?.append(ownerReqRef)
-        currentUser.friendRequestRefs?.append(friendReqRef)
-        
-        UserController.shared.saveUserUpdates(currentUser: currentUser) { result in
-            switch result {
-            case .success(_):
-                print("successfully saved the current user with friendRequestRef")
-            case .failure(let error):
-                print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
-            }
-        }
-        
-        UserController.shared.saveUserUpdates(currentUser: friendUser) { result in
-            switch result {
-            case .success(_):
-                print("successfully saved the friend user with friendRequestRef")
-            case .failure(let error):
-                print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
-            }
-        }
+//        friendUser.friendRequestRefs?.append(ownerReqRef)
+//        currentUser.friendRequestRefs?.append(friendReqRef)
+//
+//        UserController.shared.saveUserUpdates(currentUser: currentUser) { result in
+//            switch result {
+//            case .success(_):
+//                print("successfully saved the current user with friendRequestRef")
+//            case .failure(let error):
+//                print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+//            }
+//        }
+//
+//        UserController.shared.saveUserUpdates(currentUser: friendUser) { result in
+//            switch result {
+//            case .success(_):
+//                print("successfully saved the friend user with friendRequestRef")
+//            case .failure(let error):
+//                print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+//            }
+//        }
         
         //JCHUN - above..
         
@@ -55,9 +55,6 @@ class FriendRequestController {
         let friendRecord = CKRecord(friendRequest: friendRequest)
         var requests: [FriendRequest] = []
         
-        DispatchQueue.main.async {
-            
-        }
         publicDB.save(ownerRecord) { record, error in
             DispatchQueue.main.async {
                 if let error = error {
@@ -80,7 +77,6 @@ class FriendRequestController {
                 }
             }
         }
-        
     }
     
     func fetchRequestsForProfile(predicate: NSPredicate, completion: @escaping (Result<[FriendRequest]?, FriendError>) -> Void) {

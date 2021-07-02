@@ -42,7 +42,7 @@ class AddGoalViewController: UIViewController {
     var exerciseTypeButtons: [UIButton] = []
     var durationMetricButtons: [UIButton] = []
     var distanceMetricButtons: [UIButton] = []
-    
+        
     //StackViews
     @IBOutlet weak var distanceStackView: UIStackView!
     
@@ -51,6 +51,9 @@ class AddGoalViewController: UIViewController {
     
     let durationMetrics: [String] = ["hour", "minute"]
     let distanceMetrics: [String] = ["mi", "km"]
+    var durationQuantity: Int = 0
+    var distanceQuantity: Int = 0
+    var caloriesQuantity: Int = 0
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -84,6 +87,11 @@ class AddGoalViewController: UIViewController {
         durationLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 18)
         distanceLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 18)
         caloriesLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 18)
+        
+        durationDetailLabel.text = "\(durationQuantity)"
+        distanceDetailLabel.text = "\(distanceQuantity)"
+        caloriesDetailLabel.text = "\(caloriesQuantity)"
+        
         createButton.addCornerRadius()
         createButton.titleLabel?.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 20)
         exerciseButton.addCornerRadius()
@@ -320,8 +328,79 @@ class AddGoalViewController: UIViewController {
     }
     
     @IBAction func upDownButtonTapped(_ sender: UIButton) {
-        
+        switch sender.tag {
+        case 1:
+            durationQuantity += 1
+            durationDetailLabel.text = "\(durationQuantity)"
+        case 2:
+            if durationQuantity > 0 {
+                durationQuantity -= 1
+                durationDetailLabel.text = "\(durationQuantity)"
+            }
+        case 3:
+            distanceQuantity += 1
+            distanceDetailLabel.text = "\(distanceQuantity)"
+        case 4:
+            if distanceQuantity > 0 {
+                distanceQuantity -= 1
+                durationDetailLabel.text = "\(distanceQuantity)"
+            }
+        case 5:
+            caloriesQuantity += 10
+            caloriesDetailLabel.text = "\(caloriesQuantity)"
+        case 6:
+            if caloriesQuantity > 0 {
+                caloriesQuantity -= 10
+                caloriesDetailLabel.text = "\(caloriesQuantity)"
+            }
+        default:
+            print("unknown button found")
+        }
     }
+    
+    @IBAction func createButtonTapped(_ sender: Any) {
+        //JCHUN - guard let to make sure only create goal when all information is valid
+        guard let currentUser = UserController.shared.currentUser,
+              let title = exerciseButton.titleLabel?.text,
+              title != "Select Exercise Type" else { return }
+        
+        var goal: Int = 0
+        var unit: String = ""
+        
+        if durationUpButton.isEnabled {
+            guard let durationUnit = durationUnitButton.titleLabel?.text,
+                  durationQuantity > 0 else { return }
+            goal = durationQuantity
+            unit = durationUnit
+        }
+        
+        if distanceUpButton.isEnabled {
+            guard let distanceUnit = distanceUnitButton.titleLabel?.text,
+                  distanceQuantity > 0 else { return }
+            goal = distanceQuantity
+            unit = distanceUnit
+        }
+        
+        if caloriesUpButton.isEnabled {
+            guard let caloriesUnit = caloriesUnitButton.titleLabel?.text,
+                  caloriesQuantity > 0 else { return }
+            goal = caloriesQuantity
+            unit = caloriesUnit
+        }
+        
+        WorkoutController.shared.addWorkout(title: title, goal: goal, unit: unit, user: currentUser) { result in
+            switch result {
+            case .success(let workout):
+                guard let workout = workout else { return }
+                currentUser.workouts.append(workout)
+            case .failure(let error):
+                print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+            }
+        }
+        
+        self.tabBarController?.selectedIndex = 1
+        
+    }//end of func
     
 
     /*

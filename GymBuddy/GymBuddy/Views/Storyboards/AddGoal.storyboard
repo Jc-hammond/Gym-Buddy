@@ -328,6 +328,9 @@
                                     <constraint firstAttribute="height" constant="45" id="gPu-4L-Yvc"/>
                                 </constraints>
                                 <state key="normal" title="Create New Goal"/>
+                                <connections>
+                                    <action selector="createButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="wVb-Gh-sJp"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="yCE-PS-ERU">
                                 <rect key="frame" x="19.666666666666657" y="100.33333333333334" width="351" height="73.333333333333343"/>
