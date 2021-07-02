@@ -14,20 +14,33 @@
             <autoresizingMask key="autoresizingMask"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Vs-f6-2rb">
-                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                    <rect key="frame" x="0.0" y="0.0" width="168" height="50"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="COn-xE-S7h">
+                    <rect key="frame" x="176" y="8" width="136" height="34"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="COn-xE-S7h" secondAttribute="height" multiplier="4:1" id="kwI-NH-IXk"/>
+                    </constraints>
+                    <connections>
+                        <action selector="headerButtonTapped:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="U3I-NW-t8v"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
             <constraints>
+                <constraint firstItem="VXr-Tz-HHm" firstAttribute="bottom" secondItem="COn-xE-S7h" secondAttribute="bottom" constant="8" id="MkH-hH-ZlQ"/>
                 <constraint firstItem="5Vs-f6-2rb" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="Rzn-o1-FoX"/>
+                <constraint firstAttribute="trailing" secondItem="COn-xE-S7h" secondAttribute="trailing" constant="8" id="TMd-iL-c2c"/>
                 <constraint firstItem="5Vs-f6-2rb" firstAttribute="leading" secondItem="U6b-Vx-4bR" secondAttribute="leading" id="W2i-u5-9pV"/>
+                <constraint firstItem="COn-xE-S7h" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" constant="8" id="aml-GR-TId"/>
                 <constraint firstItem="VXr-Tz-HHm" firstAttribute="bottom" secondItem="5Vs-f6-2rb" secondAttribute="bottom" id="eYo-at-jp2"/>
-                <constraint firstAttribute="trailing" secondItem="5Vs-f6-2rb" secondAttribute="trailing" id="sSp-5n-gXs"/>
+                <constraint firstItem="COn-xE-S7h" firstAttribute="leading" secondItem="5Vs-f6-2rb" secondAttribute="trailing" constant="8" id="fuz-6a-VhX"/>
             </constraints>
             <connections>
+                <outlet property="headerButton" destination="COn-xE-S7h" id="Jgl-0b-xd7"/>
                 <outlet property="headerLabel" destination="5Vs-f6-2rb" id="IPL-pb-zRN"/>
             </connections>
             <point key="canvasLocation" x="-96" y="-8"/>

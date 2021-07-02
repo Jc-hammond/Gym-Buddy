@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import CloudKit
 
 class InitialProfileViewController: UIViewController {
     //MARK: - Outlets
     @IBOutlet weak var currentWeightTextField: UITextField!
     @IBOutlet weak var targetWeightTextField: UITextField!
-    @IBOutlet weak var usernameTextField: UITextField!
+    @IBOutlet weak var fullNameTextField: UITextField!
     @IBOutlet weak var nextButton: UIButton!
     
     //MARK: - Lifecycle
@@ -20,28 +21,34 @@ class InitialProfileViewController: UIViewController {
         
         currentWeightTextField.addCornerRadius()
         targetWeightTextField.addCornerRadius()
-        usernameTextField.addCornerRadius()
+        fullNameTextField.addCornerRadius()
         nextButton.addCornerRadius(radius: 20)
         nextButton.setBackgroundColor(UIColor.customLightGreen ?? .clear)
+                
     }
+    
     
     //MARK: - Actions
     @IBAction func nextButtonTapped(_ sender: Any) {
-        presentTabBarController()
-    }
-    
-    
-    //MARK: - Functions
-    fileprivate func presentTabBarController() {
-        DispatchQueue.main.async {
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            guard let rootVC = storyboard.instantiateInitialViewController() else { return }
-            rootVC.modalPresentationStyle = .fullScreen
-            
-            self.present(rootVC, animated: true, completion: nil)
+        guard let currentWeight = currentWeightTextField.text,
+              let currentWeightInt = Int(currentWeight),
+              let targetWeight = targetWeightTextField.text,
+              let targetWeightInt = Int(targetWeight),
+              let fullName = fullNameTextField.text else { return }
+                
+        UserController.shared.createUser(fullName: fullName, currentWeight: currentWeightInt, targetWeight: targetWeightInt) { result in
+            switch result {
+            case .success(let user):
+                UserController.shared.currentUser = user
+            case .failure(let error):
+                print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+            }
         }
+              
+        self.dismiss(animated: true, completion: nil)
     }
-
+    
+    
     /*
     // MARK: - Navigation
 
@@ -52,4 +59,4 @@ class InitialProfileViewController: UIViewController {
     }
     */
 
-}
+}//End of class

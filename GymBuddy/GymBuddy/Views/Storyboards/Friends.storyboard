@@ -7,22 +7,70 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
+        <!--Friends-->
         <scene sceneID="R2P-P4-XDu">
             <objects>
-                <tableViewController id="JSq-eo-JZj" customClass="FriendsListTableViewController" customModule="GymBuddy" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="FriendsListTableViewController" id="JSq-eo-JZj" customClass="FriendsListTableViewController" customModule="GymBuddy" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="GqK-Qs-UGO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="WNz-1W-dME">
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="friendCell" id="Pf5-3O-BNs">
-                                <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="friendCell" rowHeight="63" id="Pf5-3O-BNs" customClass="FriendTableViewCell" customModule="GymBuddy" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="68.5" width="414" height="63"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Pf5-3O-BNs" id="Tef-on-xfE">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="63"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="r2b-qj-N7q">
+                                            <rect key="frame" x="8" y="8" width="249" height="47"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-person_male-40" translatesAutoresizingMaskIntoConstraints="NO" id="bhD-4F-pnZ">
+                                                    <rect key="frame" x="0.0" y="0.0" width="47" height="47"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="bhD-4F-pnZ" secondAttribute="height" multiplier="1:1" id="J9u-7M-Xse"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="John Appleseed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GGf-Xw-mnR">
+                                                    <rect key="frame" x="51" y="0.0" width="198" height="47"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </stackView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cRk-ui-Q0W">
+                                            <rect key="frame" x="265" y="8" width="141" height="47"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="cRk-ui-Q0W" secondAttribute="height" multiplier="3:1" id="OQZ-Ss-PaS"/>
+                                            </constraints>
+                                            <state key="normal" title="Button"/>
+                                            <connections>
+                                                <action selector="cellButtonTapped:" destination="Pf5-3O-BNs" eventType="touchUpInside" id="weY-Bh-jIc"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="cRk-ui-Q0W" secondAttribute="bottom" constant="8" id="I18-t2-gKJ"/>
+                                        <constraint firstItem="cRk-ui-Q0W" firstAttribute="top" secondItem="Tef-on-xfE" secondAttribute="top" constant="8" id="NOi-od-p6o"/>
+                                        <constraint firstItem="r2b-qj-N7q" firstAttribute="top" secondItem="Tef-on-xfE" secondAttribute="top" constant="8" id="W7s-cC-oaH"/>
+                                        <constraint firstItem="r2b-qj-N7q" firstAttribute="leading" secondItem="Tef-on-xfE" secondAttribute="leading" constant="8" id="bPZ-D4-Zwc"/>
+                                        <constraint firstAttribute="trailing" secondItem="cRk-ui-Q0W" secondAttribute="trailing" constant="8" id="if4-TN-OdR"/>
+                                        <constraint firstAttribute="bottom" secondItem="r2b-qj-N7q" secondAttribute="bottom" constant="8" id="nmS-tH-Xue"/>
+                                        <constraint firstItem="cRk-ui-Q0W" firstAttribute="leading" secondItem="r2b-qj-N7q" secondAttribute="trailing" constant="8" id="teC-d4-xiM"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="cellButton" destination="cRk-ui-Q0W" id="YxQ-SF-o3a"/>
+                                    <outlet property="friendNameLabel" destination="GGf-Xw-mnR" id="jgx-GO-Qle"/>
+                                    <outlet property="profileImageView" destination="bhD-4F-pnZ" id="ePH-wH-OQJ"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -30,11 +78,11 @@
                             <outlet property="delegate" destination="JSq-eo-JZj" id="noq-8f-sT0"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="Dt9-7H-BtR"/>
+                    <navigationItem key="navigationItem" title="Friends" id="Dt9-7H-BtR"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iQh-V5-iMs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="192" y="-2"/>
+            <point key="canvasLocation" x="191.30434782608697" y="-2.0089285714285712"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="t04-ZW-nld">
@@ -50,10 +98,11 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TZa-Tg-Qbq" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-696" y="-2"/>
+            <point key="canvasLocation" x="-557" y="-2"/>
         </scene>
     </scenes>
     <resources>
+        <image name="icons8-person_male-40" width="40" height="40"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

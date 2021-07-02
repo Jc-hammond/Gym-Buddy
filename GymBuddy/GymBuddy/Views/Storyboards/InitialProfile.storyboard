@@ -20,7 +20,7 @@
         <!--Initial Profile View Controller-->
         <scene sceneID="s0d-6b-0kx">
             <objects>
-                <viewController storyboardIdentifier="InitialProfileVC" id="Y6W-OH-hqX" customClass="InitialProfileViewController" customModule="GymBuddy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="InitialProfileViewController" id="Y6W-OH-hqX" customClass="InitialProfileViewController" customModule="GymBuddy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="5EZ-qb-Rvc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -92,13 +92,13 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="m5M-It-mG6">
                                         <rect key="frame" x="0.0" y="192" width="252" height="76"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter userName" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qRF-LR-npn">
-                                                <rect key="frame" x="55" y="0.0" width="142" height="24"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter full name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qRF-LR-npn">
+                                                <rect key="frame" x="60.5" y="0.0" width="131.5" height="24"/>
                                                 <fontDescription key="fontDescription" name="SFProRounded-Semibold" family="SF Pro Rounded" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="username" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n2N-fa-oyt">
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="full name" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n2N-fa-oyt">
                                                 <rect key="frame" x="26" y="36" width="200" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="200" id="4HZ-Os-GKk"/>
@@ -125,9 +125,9 @@
                     </view>
                     <connections>
                         <outlet property="currentWeightTextField" destination="F3T-lg-na9" id="UaZ-xh-kbc"/>
+                        <outlet property="fullNameTextField" destination="n2N-fa-oyt" id="ATg-x0-6As"/>
                         <outlet property="nextButton" destination="2pU-rD-xdZ" id="TaT-Gy-KZZ"/>
                         <outlet property="targetWeightTextField" destination="tov-sU-uv6" id="jiL-v8-Usx"/>
-                        <outlet property="usernameTextField" destination="n2N-fa-oyt" id="ATg-x0-6As"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ief-a0-LHa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

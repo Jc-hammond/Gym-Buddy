@@ -9,14 +9,49 @@ import UIKit
 
 class HomeViewController: UIViewController {
 
+    //MARK: - Outlets
+    @IBOutlet weak var profileNameButton: UIButton!
+    @IBOutlet weak var profileImageButton: UIButton!
+    @IBOutlet weak var homeCollectionView: UICollectionView!
     
+    //MARK: - Properties
+    private lazy var homeDataSource = {
+        HomeDataSource(collectionView: homeCollectionView)
+    }()
     
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+        homeCollectionView.delegate = self
+        homeCollectionView.dataSource = homeDataSource
+        updateViews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        homeDataSource.applyData()
+    }
+    
+    //MARK: - Actions
+    @IBAction func profileButtonsTapped(_ sender: UIButton) {
+        //JCHUN - Segue to profileDetailVC
+        guard let destinationVC = storyboard?.instantiateViewController(identifier: "ProfileViewController") as? ProfileViewController else { return }
+        
+        navigationController?.pushViewController(destinationVC, animated: true)
+    }
+    
+    
+    //MARK: - Functions
+    func updateViews() {
+        profileNameButton.tintColor = .clear
+        profileNameButton.titleLabel?.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 36)
+        profileNameButton.setTitle("John Doe", for: .normal)
+        
+        profileImageButton.tintColor = .clear
+        profileImageButton.addCornerRadius()
+    }
 
     /*
     // MARK: - Navigation
@@ -28,4 +63,8 @@ class HomeViewController: UIViewController {
     }
     */
 
+}//End of class
+
+extension HomeViewController: UICollectionViewDelegate {
+    
 }

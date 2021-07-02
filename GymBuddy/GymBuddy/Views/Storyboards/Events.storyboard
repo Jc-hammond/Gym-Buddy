@@ -290,11 +290,14 @@
                                             <constraint firstAttribute="width" secondItem="kva-ac-6u7" secondAttribute="height" multiplier="1:1" id="tzL-de-giP"/>
                                         </constraints>
                                         <state key="normal" image="icons8-plus_filled-40"/>
+                                        <connections>
+                                            <action selector="addInviteeButtonTapped:" destination="0yl-Ie-eKM" eventType="touchUpInside" id="p3h-Wn-yBa"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ISV-lq-k1e">
-                                <rect key="frame" x="20.5" y="408.5" width="373" height="400.5"/>
+                                <rect key="frame" x="20.5" y="408.5" width="373" height="392.5"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="inviteeCell" rowHeight="97" id="g8u-Jp-e7p" customClass="InviteeTableViewCell" customModule="GymBuddy" customModuleProvider="target">
@@ -351,7 +354,7 @@
                             <constraint firstItem="Z8M-IE-dqV" firstAttribute="top" secondItem="hxu-t5-rUF" secondAttribute="top" constant="20" id="Xr0-mH-frM"/>
                             <constraint firstItem="ISV-lq-k1e" firstAttribute="width" secondItem="qz4-Xl-oJc" secondAttribute="width" multiplier="0.9" id="bZo-hY-UQQ"/>
                             <constraint firstItem="ISV-lq-k1e" firstAttribute="centerX" secondItem="hxu-t5-rUF" secondAttribute="centerX" id="c2W-Il-K2z"/>
-                            <constraint firstItem="hxu-t5-rUF" firstAttribute="bottom" secondItem="ISV-lq-k1e" secondAttribute="bottom" constant="4" id="cMS-ad-Ava"/>
+                            <constraint firstItem="hxu-t5-rUF" firstAttribute="bottom" secondItem="ISV-lq-k1e" secondAttribute="bottom" constant="12" id="cMS-ad-Ava"/>
                             <constraint firstItem="Gt8-Z1-Usp" firstAttribute="width" secondItem="qz4-Xl-oJc" secondAttribute="width" multiplier="0.9" id="gnL-mI-Lzp"/>
                             <constraint firstItem="HKR-l7-teG" firstAttribute="centerX" secondItem="hxu-t5-rUF" secondAttribute="centerX" id="o9K-rH-bCs"/>
                             <constraint firstItem="ISV-lq-k1e" firstAttribute="top" secondItem="Gt8-Z1-Usp" secondAttribute="bottom" constant="4" id="pUh-1E-VD0"/>
@@ -515,6 +518,9 @@
                                     <constraint firstAttribute="height" constant="40" id="O4L-Kz-E4D"/>
                                 </constraints>
                                 <state key="normal" title="Create Event"/>
+                                <connections>
+                                    <action selector="creatEventButtonTapped:" destination="pIv-p4-4lv" eventType="touchUpInside" id="9cC-yv-o8N"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vKH-qU-1Hj"/>

@@ -30,23 +30,14 @@ class ProgressViewController: UIViewController {
         progressDataSource.applyData()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }//End of class
 
+//MARK: - Extensions
 extension ProgressViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let destinationVC = storyboard?.instantiateViewController(identifier: "ProgressDetailViewController") as? ProgressDetailViewController else { return }
+        guard let destinationVC = storyboard?.instantiateViewController(identifier: "ProgressDetailViewController") as? ProgressDetailViewController,
+              (indexPath.section == 1 || indexPath.section == 3) else { return }
         
         if indexPath.section == 1 {
             let itemToSend = progressDataSource.mockWorkoutData[indexPath.row]

@@ -18,7 +18,9 @@ class EventsTableViewCell: UITableViewCell {
     @IBOutlet weak var changeableImageView: UIImageView!
     
     //MARK: - Properties
-    var sectionNumber: Int? {
+    var sectionNumber: Int?
+    
+    var event: Event? {
         didSet {
             updateViews()
         }
@@ -33,7 +35,14 @@ class EventsTableViewCell: UITableViewCell {
 
     //MARK: - Functions
     fileprivate func updateViews() {
-        guard let sectionNumber = sectionNumber else { return }
+        guard let sectionNumber = sectionNumber,
+              let event = event else { return }
+        eventTitleLabel.text = event.title
+        emojiLabel.text = event.emoji
+        eventDateLabel.text = event.date.formatDate()
+        eventTimeLabel.text = event.date.formatTime()
+        ownerLabel.isHidden = event.userRef == UserController.shared.currentUser?.recordID ? false : true
+        attendanceStatusLabel.text = "\(event.attendeeRefs?.count ?? 0) attending"
         
         eventTitleLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 20)
         eventDateLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 18)
