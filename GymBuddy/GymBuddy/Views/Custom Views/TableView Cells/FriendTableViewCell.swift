@@ -70,7 +70,6 @@ class FriendTableViewCell: UITableViewCell {
         friendNameLabel.text = user.fullName
         cellButton.addCornerRadius(color: .clear)
         cellButton.setTitleColor(.white, for: .normal)
-        cellButton.setTitle(buttonTitle, for: .normal)
         
 
         
@@ -86,6 +85,7 @@ class FriendTableViewCell: UITableViewCell {
     }
     
     fileprivate func updateButtons(buttonTitle: String) {
+        cellButton.setTitle(buttonTitle, for: .normal)
         if buttonTitle == "added" {
             cellButton.setBackgroundColor(.gray)
             cellButton.isEnabled = false
