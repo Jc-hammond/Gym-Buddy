@@ -72,7 +72,6 @@
                         <segue destination="iQV-q4-jSh" kind="relationship" relationship="viewControllers" id="bbx-H9-djb"/>
                         <segue destination="hSn-IW-xST" kind="relationship" relationship="viewControllers" id="LMF-A7-aF1"/>
                         <segue destination="fdB-fd-g66" kind="relationship" relationship="viewControllers" id="MQR-gO-RH9"/>
-                        <segue destination="tyO-Uy-mlH" kind="relationship" relationship="viewControllers" id="ZOQ-fW-PsD"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JGu-mf-me8" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

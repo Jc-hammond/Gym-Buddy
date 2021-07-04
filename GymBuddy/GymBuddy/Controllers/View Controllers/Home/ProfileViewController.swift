@@ -21,12 +21,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var deleteAccountButton: UIButton!
     
     //MARK: - Properties
-    ///need a profile lading pad here
-//    var profile: Profile? {
-//        didSet {
-//            updateViews()
-//        }
-//    }
+    
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -38,20 +33,56 @@ class ProfileViewController: UIViewController {
     
     //MARK: - Actions
     @IBAction func saveButtonTapped(_ sender: Any) {
+        guard let currentUser = UserController.shared.currentUser,
+              let newName = fullNameTextField.text, !newName.isEmpty,
+              let newWeight = targetWeightTextField.text, !newWeight.isEmpty,
+              let newTargetWeight = Int(newWeight) else { return }
+        
+        currentUser.fullName = newName
+        currentUser.targetWeight = newTargetWeight
+        
+        UserController.shared.saveUserUpdates(currentUser: currentUser) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    print("successfully saved current user")
+                case .failure(let error):
+                    print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+                }
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func deleteAccountButtonTapped(_ sender: Any) {
+        guard let currentUser = UserController.shared.currentUser else { return }
+        UserController.shared.deleteUser(for: currentUser) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    print("successfully deleted current user")
+                case .failure(let error):
+                    print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+                }
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
     }
     
     //MARK: - Functions
     fileprivate func updateViews() {
+        
+        guard let currentUser = UserController.shared.currentUser else { return }
+        
         profileImageButton.addCornerRadius(radius: profileImageButton.frame.width/2, width: 1, color: .customLightGreen)
         profileImageButton.imageView?.contentMode = .scaleAspectFit
         profileImageButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         nameLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 40)
+        nameLabel.text = currentUser.fullName
         infoLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 32)
         infoLabel.textColor = .darkGray
         fullNameLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 16)
@@ -60,7 +91,9 @@ class ProfileViewController: UIViewController {
         targetWeightLabel.textColor = .customGreen
         
         fullNameTextField.addCornerRadius()
+        fullNameTextField.text = currentUser.fullName
         targetWeightTextField.addCornerRadius()
+        targetWeightTextField.text = "\(currentUser.targetWeight)"
         
         saveButton.addCornerRadius()
         saveButton.tintColor = .customLightGreen

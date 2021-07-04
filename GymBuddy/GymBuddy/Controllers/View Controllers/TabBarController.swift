@@ -8,16 +8,22 @@
 import UIKit
 import CloudKit
 
+
+let activeDispatchGroup = DispatchGroup()
+
+
 class TabBarController: UITabBarController {
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        activeDispatchGroup.enter()
         UserController.shared.fetchAppleUserReference { result in
             switch result {
             case .success(let reference):
                 let predicate = NSPredicate(format: "%K==%@", argumentArray: [UserStrings.appleUserRefKey, reference!])
+                activeDispatchGroup.leave()
+                activeDispatchGroup.enter()
                 UserController.shared.fetchProfile(predicate: predicate) { result in
                     switch result {
                     case .success(let users):
@@ -27,6 +33,7 @@ class TabBarController: UITabBarController {
                         print("No user found in publicDB")
                         self.presentInitialProfileVC()
                     }
+                    activeDispatchGroup.leave()
                 }
                 
             case .failure(let error):
@@ -79,7 +86,7 @@ class TabBarController: UITabBarController {
                     print("Settings opened: \(success)")
                 }
             }
-
+            
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         

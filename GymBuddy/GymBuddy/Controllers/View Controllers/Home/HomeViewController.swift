@@ -25,12 +25,19 @@ class HomeViewController: UIViewController {
         
         homeCollectionView.delegate = self
         homeCollectionView.dataSource = homeDataSource
-        updateViews()
+        
+        activeDispatchGroup.notify(queue: .main) {
+            self.updateViews()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        activeDispatchGroup.notify(queue: .main) {
+            self.updateViews()
+        }
+                
         homeDataSource.applyData()
     }
     
@@ -45,9 +52,10 @@ class HomeViewController: UIViewController {
     
     //MARK: - Functions
     func updateViews() {
+        guard let currentUser = UserController.shared.currentUser else { return }
         profileNameButton.tintColor = .clear
         profileNameButton.titleLabel?.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 36)
-        profileNameButton.setTitle("John Doe", for: .normal)
+        profileNameButton.setTitle(currentUser.fullName, for: .normal)
         
         profileImageButton.tintColor = .clear
         profileImageButton.addCornerRadius()
