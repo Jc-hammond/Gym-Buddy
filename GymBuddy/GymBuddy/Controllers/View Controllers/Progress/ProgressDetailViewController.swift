@@ -24,6 +24,8 @@ class ProgressDetailViewController: UIViewController {
     
     //MARK: - Properties
     var workout: Workout?
+    var goal: Int = 0
+    var current: Int = 0
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -31,24 +33,73 @@ class ProgressDetailViewController: UIViewController {
         view.backgroundColor = .white
         navigationController?.navigationBar.tintColor = .customLightGreen
         
+        guard let workout = workout else { return }
+        goal = workout.goal
+        current = workout.current
+        
         progressView.transform = progressView.transform.scaledBy(x: 1, y: 4)
         updateViews()
     }
     
     //MARK: - Actions
-    @IBAction func upDownButtonsTapped(_ sender: Any) {
+    @IBAction func upDownButtonsTapped(_ sender: UIButton) {
         //button tags 1,3 are up & 2,4 are down
+        switch sender.tag {
+        case 1:
+            goal += 1
+            goalQuantityLabel.text = "\(goal)"
+        case 2:
+            if goal > current {
+                goal -= 1
+                goalQuantityLabel.text = "\(goal)"
+            }
+        case 3:
+            if current < goal {
+                current += 1
+                currentQuantityLabel.text = "\(current)"
+            }
+        case 4:
+            if current > 0 {
+                current -= 1
+                currentQuantityLabel.text = "\(current)"
+            }
+        default:
+            print("unknown button found")
+        }
+        
+        let progress = Float(current)/Float(goal)
+        updateProgressView(progress: progress)
     }
     
     @IBAction func saveButtonTapped(_ sender: Any) {
+        guard var workout = workout,
+              let goalText = goalQuantityLabel.text,
+              let goal = Int(goalText),
+              let currentText = currentQuantityLabel.text,
+              let current = Int(currentText) else { return }
+        
+        workout.current = current
+        workout.goal = goal
+        
+        WorkoutController.shared.updateWorkout(workout: workout) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let workout):
+                    print("successfully saved workout: \(String(describing: workout?.title))")
+                case .failure(let error):
+                    print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+                }
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+        
         // maybe change text to "you've completed" when goal == current
     }
     
     
     //MARK: - Functions
     fileprivate func updateViews() {
-        guard let gradientImage = UIImage.gradientImage(with: progressView.frame),
-              let workout = workout else { return }
+        guard let workout = workout else { return }
 
         let progress = Float(workout.current) / Float(workout.goal)
         
@@ -62,7 +113,6 @@ class ProgressDetailViewController: UIViewController {
         currentLabel.underline()
         completionLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 20)
         completionLabel.underline()
-        completionLabel.text = progress == 1 ? "Completed" : "\(Int(progress*100))% complete"
         
         // quantity labels
         goalQuantityLabel.addCornerRadius()
@@ -88,16 +138,25 @@ class ProgressDetailViewController: UIViewController {
         saveButton.setTitleColor(.white, for: .normal)
         saveButton.titleLabel?.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 20)
         
+        updateProgressView(progress: progress)
+        
+    }//end of func
+    
+    fileprivate func updateProgressView(progress: Float) {
+        guard let gradientImage = UIImage.gradientImage(with: progressView.frame) else { return }
+        
+        // completion label
+        completionLabel.text = progress == 1 ? "COMPLETED" : "\(Int(progress*100))% complete"
+
         // progressView
         progressView.addCornerRadius(radius: 4, width: 1, color: .customLightGreen)
         
         Timer.scheduledTimer(withTimeInterval: 0.5, repeats: false) { timer in
-
+            
             self.progressView.progressImage = gradientImage
             self.progressView.setProgress(progress, animated: true)
         }
-        
-    }//end of func
+    }
     
 //    fileprivate func setProgressView() {
 //        guard let gradientImage = UIImage.gradientImage(with: progressView.frame),
