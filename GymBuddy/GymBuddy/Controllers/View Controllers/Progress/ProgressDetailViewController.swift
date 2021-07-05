@@ -26,6 +26,7 @@ class ProgressDetailViewController: UIViewController {
     var workout: Workout?
     var goal: Int = 0
     var current: Int = 0
+    let activeGroup = DispatchGroup()
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -83,13 +84,17 @@ class ProgressDetailViewController: UIViewController {
         
         WorkoutController.shared.updateWorkout(workout: workout) { result in
             DispatchQueue.main.async {
+                self.activeGroup.enter()
                 switch result {
                 case .success(let workout):
                     print("successfully saved workout: \(String(describing: workout?.title))")
                 case .failure(let error):
                     print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
                 }
-                self.navigationController?.popViewController(animated: true)
+                self.activeGroup.leave()
+                self.activeGroup.notify(queue: .main) {
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
         }
         
