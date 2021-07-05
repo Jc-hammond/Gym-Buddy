@@ -19,6 +19,9 @@ class InitialProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        currentWeightTextField.delegate = self
+        targetWeightTextField.delegate = self
+        
         currentWeightTextField.addCornerRadius()
         targetWeightTextField.addCornerRadius()
         fullNameTextField.addCornerRadius()
@@ -59,4 +62,19 @@ class InitialProfileViewController: UIViewController {
     }
     */
 
+}//End of class
+
+
+extension InitialProfileViewController: UITextFieldDelegate {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == fullNameTextField {
+            textField.resignFirstResponder()
+        }
+        return true
+    }
+    
 }//End of class
