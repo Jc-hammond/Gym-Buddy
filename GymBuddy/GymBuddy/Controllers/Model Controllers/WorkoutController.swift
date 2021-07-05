@@ -50,7 +50,7 @@ class WorkoutController {
             }
             guard let records = records else {return completion(.failure(.noRecord))}
             let workoutPoints = records.compactMap{ Workout(ckRecord: $0)}
-            user.workouts.append(contentsOf: workoutPoints)
+            user.workouts = workoutPoints //.append(contentsOf: workoutPoints)
             completion(.success(workoutPoints))
         }
     }
@@ -75,8 +75,6 @@ class WorkoutController {
         }
         publicDB.add(operation)
     }
-    
-    
     
     func deleteWorkout(for workout: Workout, completion: @escaping (Result<Bool, WorkoutError>) -> Void) {
         let deleteOP = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: [workout.recordID])

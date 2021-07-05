@@ -44,7 +44,9 @@ class ExerciseCollectionViewCell: UICollectionViewCell, CellRegisterable {
         completionDatelabel.text = workout.completionDate == nil ? "" : "completed \(workout.completionDate!)"
         goalUnitLabel.font = UIFont(name: FontNames.sfRoundedReg, size: 16)
         goalUnitLabel.textColor = .gray
-        goalUnitLabel.text = "\(workout.goal) \(workout.unit)"
+        
+        let goalUnitText: String = workout.goal > 1 ? "\(workout.goal) \(workout.unit)s" : "\(workout.goal) \(workout.unit)"
+        goalUnitLabel.text = goalUnitText
         
         let progress = Float(workout.current) / Float(workout.goal)
         setProgress(with: progress)
