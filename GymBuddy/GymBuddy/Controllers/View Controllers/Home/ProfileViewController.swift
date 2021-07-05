@@ -26,6 +26,9 @@ class ProfileViewController: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        fullNameTextField.delegate = self
+        targetWeightTextField.delegate = self
 
         navigationController?.navigationBar.tintColor = .customLightGreen
         updateViews()
@@ -121,5 +124,19 @@ class ProfileViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+
+}
+
+extension ProfileViewController: UITextFieldDelegate {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == fullNameTextField {
+            targetWeightTextField.becomeFirstResponder()
+        }
+        return true
+    }
 
 }

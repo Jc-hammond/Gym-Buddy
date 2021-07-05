@@ -54,6 +54,10 @@ class EventCreateViewController: UIViewController {
 
         navigationController?.navigationBar.tintColor = .customLightGreen
         
+        eventTitleTextField.delegate = self
+        whereTextField.delegate = self
+        infoTextView.delegate = self
+        
         updateViews()
         setupEmojiButtons()
         setupWorkoutTypeButtons()
@@ -198,3 +202,24 @@ class EventCreateViewController: UIViewController {
     */
 
 }//End of class
+
+extension EventCreateViewController: UITextFieldDelegate, UITextViewDelegate {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            textView.resignFirstResponder()
+            return false
+        }
+        
+        return true
+    }
+
+}
