@@ -73,7 +73,7 @@ class UserController {
         publicDB.add(deleteOp)
     }
     
-    func fetchProfile(predicate: NSPredicate, completion: @escaping (Result<[User]?, UserError>) -> Void) {
+    func fetchUser(predicate: NSPredicate, completion: @escaping (Result<[User]?, UserError>) -> Void) {
         
         let profQuery = CKQuery(recordType: UserStrings.recordType, predicate: predicate)
         
@@ -91,6 +91,25 @@ class UserController {
             } else {
                 completion(.failure(.nilRecord))
             }
+        }
+    }
+    
+    func fetchUserFrom(searchTerm: String, completion: @escaping (Result<[User]?, UserError>) -> Void) {
+        
+        let searchPredicate = NSPredicate(format: "%K == %@", UserStrings.fullNameKey, searchTerm)
+        
+        let userQuery = CKQuery(recordType: UserStrings.recordType, predicate: searchPredicate)
+        
+        self.publicDB.perform(userQuery, inZoneWith: nil) { records, error in
+            if let error = error {
+                return completion(.failure(.ckError(error)))
+            }
+            
+            guard let records = records else {return completion(.failure(.nilRecord))}
+            
+            let users = records.compactMap({User(ckRecord: $0)})
+            completion(.success(users))
+            
         }
     }
     

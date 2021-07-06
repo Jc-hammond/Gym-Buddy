@@ -11,11 +11,11 @@ import CloudKit
 struct UserStrings {
     
     static let recordType = "User"
-    fileprivate static let fullNameKey = "fullName"
-    fileprivate static let currentWeightsKey = "currentWeights"
-    fileprivate static let currentDatesKey = "currentDates"
-    fileprivate static let targetWeightKey = "targetWeight"
-    fileprivate static let friendsKey = "friends"
+     static let fullNameKey = "fullName"
+     static let currentWeightsKey = "currentWeights"
+     static let currentDatesKey = "currentDates"
+     static let targetWeightKey = "targetWeight"
+     static let friendsKey = "friends"
     fileprivate static let friendRefsKey = "friendRefs"
     fileprivate static let friendRequestsKey = "friendRequests"
     fileprivate static let friendRequestRefsKey = "friendRequestRefs"

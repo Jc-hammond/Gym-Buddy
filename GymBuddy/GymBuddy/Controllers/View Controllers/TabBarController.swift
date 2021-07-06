@@ -24,7 +24,7 @@ class TabBarController: UITabBarController {
                 let predicate = NSPredicate(format: "%K==%@", argumentArray: [UserStrings.appleUserRefKey, reference!])
                 activeDispatchGroup.leave()
                 activeDispatchGroup.enter()
-                UserController.shared.fetchProfile(predicate: predicate) { result in
+                UserController.shared.fetchUser(predicate: predicate) { result in
                     switch result {
                     case .success(let users):
                         guard let user = users?.first else { return }

@@ -9,32 +9,40 @@ import UIKit
 import CloudKit
 
 class FriendsListTableViewController: UITableViewController {
+   
+    @IBOutlet weak var userSearchBar: UISearchBar!
+    
     //MARK: - Properties
     //var buttonTitles: [String]?
     var allUsers: [User]?
     var friendRequests: [FriendRequest]?
+    var friendReqArray: [[FriendRequest]] = [[],[]]
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        userSearchBar.delegate = self
+        
         navigationController?.navigationBar.tintColor = .customLightGreen
         
-        fetchFriendRequests()
-        fetchAllUsers()
+        fetchFriendRequestRefs()
+//        fetchAllUsers()
+        fetchPendingRequests()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        fetchFriendRequests()
-        fetchAllUsers()
+        fetchFriendRequestRefs()
+//        fetchAllUsers()
     }
     
     //MARK: - Functions
+    //FETCH ALL USERS, Only appear on search
     func fetchAllUsers() {
         let predicate = NSPredicate(value: true)
-        UserController.shared.fetchProfile(predicate: predicate) { result in
+        UserController.shared.fetchUser(predicate: predicate) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let users):
@@ -50,7 +58,25 @@ class FriendsListTableViewController: UITableViewController {
         }
     }
     
-    func fetchFriendRequests() {
+    func fetchUserAndUpdateViews(for user: [User]) {
+        guard let searchTerm = userSearchBar.text, !searchTerm.isEmpty else {return}
+        UserController.shared.fetchUserFrom(searchTerm: searchTerm) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let users):
+                    guard let users = users else {return}
+                    let excludedUsers = users.filter({$0 != UserController.shared.currentUser })
+                    let sortedUsers = excludedUsers.sorted{ $0.fullName < $1.fullName }
+                    self.allUsers = sortedUsers
+                    self.tableView.reloadData()
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    func fetchFriendRequestRefs() {
         guard let currentUser = UserController.shared.currentUser,
               let friendRequestRefs = currentUser.friendRequestRefs else { return }
         
@@ -65,12 +91,63 @@ class FriendsListTableViewController: UITableViewController {
         }
     }
     
+    //FETCH PENDING REQUESTS
+    func fetchPendingRequests() {
+        guard let currentUser = UserController.shared.currentUser else {return}
+        let pendingPredicate = NSPredicate(format: "%K==%@", argumentArray: [FriendRequestConstants.ownerUserRefKey, currentUser.recordID])
+        
+        FriendRequestController.shared.fetchRequestsForUser(predicate: pendingPredicate) { results in
+            switch results {
+            
+            case .success(let requests):
+                currentUser.friendRequests = requests
+                _ = requests?.compactMap({$0.accepted})
+                
+               
+                
+//                guard let friendArray = currentUser.friendRequests else {return}
+//                self.friendReqArray = [[], []]
+//                for friend in friendArray {
+//                    if !friend.accepted {
+//                        self.friendReqArray[0].append(friend)
+//                    } else {
+//                        self.friendReqArray[1].append(friend)
+//                    }
+//                }
+//                DispatchQueue.main.async {
+//                    self.tableView.reloadData()
+//                }
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    //FETCH ACCEPTED REQUESTS
+    
+    func fetchAcceptedRequests() {
+        
+        
+    }
+    
+    //FETCH SENT REQUESTS
+    func fetchSentRequests() {
+        
+        
+    }
+    
     // MARK: - Table view data source
+    
+//    override func numberOfSections(in tableView: UITableView) -> Int {
+//        return self.friendReqArray.count
+//    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         guard let allUsers = allUsers else { return 0 }
         return allUsers.count
+//        return friendReqArray[section].count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -109,21 +186,29 @@ class FriendsListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return view.frame.height/16
     }
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
+
     
 }//End of class
 
-
+extension FriendsListTableViewController: UISearchBarDelegate {
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let searchTerm = searchBar.text, !searchTerm.isEmpty else {return}
+        
+        UserController.shared.fetchUserFrom(searchTerm: searchTerm) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let user):
+                    guard let user = user else {return}
+                    self.fetchUserAndUpdateViews(for: user)
+                    print(user)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+} //End of extension
 
 
 

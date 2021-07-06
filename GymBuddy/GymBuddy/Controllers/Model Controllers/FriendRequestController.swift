@@ -79,7 +79,7 @@ class FriendRequestController {
         }
     }
     
-    func fetchRequestsForProfile(predicate: NSPredicate, completion: @escaping (Result<[FriendRequest]?, FriendError>) -> Void) {
+    func fetchRequestsForUser(predicate: NSPredicate, completion: @escaping (Result<[FriendRequest]?, FriendError>) -> Void) {
         
         let friendQuery = CKQuery(recordType: FriendRequestConstants.recordType, predicate: predicate)
         
@@ -128,7 +128,7 @@ class FriendRequestController {
             request.accepted = response
             guard let siblingRef = request.siblingRef else {return completion(.failure(.nilRecord))}
             let siblingsPredicate = NSPredicate(format: "%K==%@", argumentArray: ["recordID", siblingRef])
-            fetchRequestsForProfile(predicate: siblingsPredicate) { result in
+            fetchRequestsForUser(predicate: siblingsPredicate) { result in
                 switch result {
                 case .success(let friends):
                     guard let friend = friends?.first else {return completion(.failure(.nilRecord))}

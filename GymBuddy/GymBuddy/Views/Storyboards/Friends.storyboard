@@ -79,6 +79,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Friends" id="Dt9-7H-BtR"/>
+                    <connections>
+                        <outlet property="userSearchBar" destination="WNz-1W-dME" id="bGf-ei-mPR"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iQh-V5-iMs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
