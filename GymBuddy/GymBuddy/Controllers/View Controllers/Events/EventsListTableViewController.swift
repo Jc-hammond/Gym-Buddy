@@ -29,7 +29,7 @@ class EventsListTableViewController: UITableViewController {
         
         fetchAllEvents()
     }
-    
+        
     //MARK: - Function
     fileprivate func fetchAllEvents() {
         guard let currentUserRef = UserController.shared.currentUserRef else { return }
@@ -156,6 +156,11 @@ class EventsListTableViewController: UITableViewController {
             let eventToSend = allEvents[indexPath.section][indexPath.row]
             
             destinationVC.event = eventToSend
+        }
+        
+        if segue.identifier == "toEventCreateVC" {
+            guard let destinationVC = segue.destination as? EventCreateViewController else { return }
+            destinationVC.event = nil
         }
     }
 

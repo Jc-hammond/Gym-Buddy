@@ -36,42 +36,12 @@ extension Item {
 }
 
 
-//struct Workout: Hashable {
-//    let title: String
-//    let goal: Int
-//    let completionDate: String?
-//    let current: Int
-//    let unit: String
-//}
-
 //MARK: - Class
 class ProgressDataSource: UICollectionViewDiffableDataSource<Section, Item> {
+    
     //MARK: - Properties
     var inProgress = [Workout]()
     var completed = [Workout]()
-
-    //JCHUN - Mock Data
-//    let mockWorkoutData: [Workout] = {
-//        var mockData = [Workout]()
-//
-//        let running = Workout(title: "Running", goal: 3, completionDate: nil, current: 2, unit: "mi", userRef: nil)
-//        let strengthTraining = Workout(title: "Strength Training", goal: 5, completionDate: nil, current: 4, unit: "hour", userRef: nil)
-//
-//        mockData = [running, strengthTraining]
-//
-//        return mockData
-//    }()
-//
-//    let mockCompletedWorkoutData: [Workout] = {
-//        var mockData = [Workout]()
-//
-//        let running = Workout(title: "Running", goal: 3, completionDate: "6/25/21", current: 3, unit: "mi", userRef: nil)
-//        let strengthTraining = Workout(title: "Strength Training", goal: 5, completionDate: "6/25/21", current: 5, unit: "hour", userRef: nil)
-//
-//        mockData = [running, strengthTraining]
-//
-//        return mockData
-//    }()
     
     let sections: [Section] = {
         var sections = [Section]()
@@ -162,8 +132,9 @@ class ProgressDataSource: UICollectionViewDiffableDataSource<Section, Item> {
         var inProgressItems = [Item]()
         for workout in inProgress {
             let item = Item(context: .list(workout))
-            totalGoal += CGFloat(workout.goal)
-            totalCurrent += CGFloat(workout.current)
+            let caloriesBuffer: CGFloat = workout.unit == "calories" ? 0.1 : 1
+            totalGoal += (CGFloat(workout.goal) * caloriesBuffer)
+            totalCurrent += (CGFloat(workout.current) * caloriesBuffer)
             inProgressItems.append(item)
         }
         
@@ -223,9 +194,9 @@ class ProgressDataSource: UICollectionViewDiffableDataSource<Section, Item> {
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 item.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 0, bottom: 8, trailing: 0)
                 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(0.375))
-                let count = self.inProgress.count == 0 ? 1 : self.inProgress.count
-                let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: count)
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(0.2))
+                //let count = self.inProgress.count == 0 ? 1 : self.inProgress.count
+                let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
                 
                 let section = NSCollectionLayoutSection(group: group)
                 section.boundarySupplementaryItems = [headerItem]
@@ -256,10 +227,10 @@ class ProgressDataSource: UICollectionViewDiffableDataSource<Section, Item> {
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 item.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 0, bottom: 8, trailing: 0)
                 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(0.375))
-                let count = self.completed.count == 0 ? 1 : self.completed.count
-                let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: count)
-                
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(0.2))
+                //let count = self.completed.count == 0 ? 1 : self.completed.count
+                let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+
                 let section = NSCollectionLayoutSection(group: group)
                 section.boundarySupplementaryItems = [headerItem]
                 

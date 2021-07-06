@@ -21,27 +21,29 @@ class HomeDataSource: UICollectionViewDiffableDataSource<Section, HomeItem> {
     //MARK: - Temp Mock Data
     //JCHUN - Mock Data
     let mockFriends: [String] = [
-        "Ben Tincher",
-        "Connor Hammond",
-        "Semisi Taufa",
-        "Carson Ward",
-        "James Chun"
+        "Tyrion Lannister",
+        "Arya Stark",
+        "Jon Snow",
+        "Daenerys Targaryen",
+        "Tormund Giantsbane"
     ]
     
-    let mockCompletedWorkoutData: [Workout] = {
-        var mockData = [Workout]()
-        
-        let running = Workout(title: "Running", goal: 3, completionDate: "6/25/21", current: 3, unit: "mi", userRef: nil)
-        let strengthTraining = Workout(title: "Strength Training", goal: 5, completionDate: "6/25/21", current: 5, unit: "hour", userRef: nil)
-        let basketball = Workout(title: "Basketball", goal: 5, completionDate: "6/25/21", current: 5, unit: "hour", userRef: nil)
-        let soccer = Workout(title: "Soccer", goal: 5, completionDate: "6/25/21", current: 5, unit: "hour", userRef: nil)
-        
-        mockData = [running, strengthTraining, basketball, soccer]
-        
-        return mockData
-    }()
+//    let mockCompletedWorkoutData: [Workout] = {
+//        var mockData = [Workout]()
+//
+//        let running = Workout(title: "Running", goal: 3, completionDate: "6/25/21", current: 3, unit: "mi", userRef: nil)
+//        let strengthTraining = Workout(title: "Strength Training", goal: 5, completionDate: "6/25/21", current: 5, unit: "hour", userRef: nil)
+//        let basketball = Workout(title: "Basketball", goal: 5, completionDate: "6/25/21", current: 5, unit: "hour", userRef: nil)
+//        let soccer = Workout(title: "Soccer", goal: 5, completionDate: "6/25/21", current: 5, unit: "hour", userRef: nil)
+//
+//        mockData = [running, strengthTraining, basketball, soccer]
+//
+//        return mockData
+//    }()
     
-    let mockSections: [Section] = {
+    var personalBests = [Workout]()
+    
+    let sections: [Section] = {
         var sections = [Section]()
         
         let firendList = Section(title: "  Friends")
@@ -98,6 +100,27 @@ class HomeDataSource: UICollectionViewDiffableDataSource<Section, HomeItem> {
     func applyData() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, HomeItem>()
         
+        guard let currentUser = UserController.shared.currentUser else { return }
+        personalBests = []
+        
+        currentUser.workouts.forEach { workout in
+            if workout.goal <= workout.current {
+                personalBests.append(workout)
+            }
+        }
+        
+        personalBests = personalBests.sorted { $0.title < $1.title }
+        
+//        for i in 0..<personalBests.count {
+//            if personalBests[i].title == personalBests[i+1].title {
+//                if personalBests[i].goal < personalBests[i+1].goal {
+//                    personalBests.remove(at: i)
+//                } else {
+//                    personalBests.remove(at: i+1)
+//                }
+//            }
+//        }
+        
         // Friends
         var friends = [HomeItem]()
         for friend in mockFriends {
@@ -107,15 +130,15 @@ class HomeDataSource: UICollectionViewDiffableDataSource<Section, HomeItem> {
         
         // Personal Best
         var personalBestData = [HomeItem]()
-        for workout in mockCompletedWorkoutData {
-            let item = HomeItem(context: .personalBest(workout))
+        for best in personalBests {
+            let item = HomeItem(context: .personalBest(best))
             personalBestData.append(item)
         }
         
-        snapshot.appendSections(mockSections)
+        snapshot.appendSections(sections)
         
-        snapshot.appendItems(friends, toSection: mockSections[0])
-        snapshot.appendItems(personalBestData, toSection: mockSections[1])
+        snapshot.appendItems(friends, toSection: sections[0])
+        snapshot.appendItems(personalBestData, toSection: sections[1])
         
         apply(snapshot)
     }

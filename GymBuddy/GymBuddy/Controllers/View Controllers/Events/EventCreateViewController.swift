@@ -47,6 +47,7 @@ class EventCreateViewController: UIViewController {
     
     var emojiButtons: [UIButton] = []
     var workoutButtons: [UIButton] = []
+    var event: Event?
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -58,9 +59,14 @@ class EventCreateViewController: UIViewController {
         whereTextField.delegate = self
         infoTextView.delegate = self
         
-        updateViews()
         setupEmojiButtons()
         setupWorkoutTypeButtons()
+    }
+    
+    override func loadViewIfNeeded() {
+        super.loadViewIfNeeded()
+        
+        updateViews()
     }
     
     //MARK: - Actions
@@ -82,13 +88,24 @@ class EventCreateViewController: UIViewController {
         let info = infoTextView.text
         let date = datePicker.date
         
-        EventController.shared.createEvent(with: title, emoji: emoji, date: date, location: location, type: type, info: info, user: currentUser) { result in
-            switch result {
-            case .success(let event):
-                guard let event = event else { return }
-                print("\(event.title) is successfully saved")
-            case .failure(let error):
-                print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+        if let event = event {
+            EventController.shared.updateEvent(for: event) { result in
+                switch result {
+                case .success(_):
+                    print("Event: \(event.title) successfully saved")
+                case .failure(let error):
+                    print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+                }
+            }
+        } else {
+            EventController.shared.createEvent(with: title, emoji: emoji, date: date, location: location, type: type, info: info, user: currentUser) { result in
+                switch result {
+                case .success(let event):
+                    guard let event = event else { return }
+                    print("\(event.title) is successfully saved")
+                case .failure(let error):
+                    print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+                }
             }
         }
         
@@ -98,6 +115,17 @@ class EventCreateViewController: UIViewController {
     
     //MARK: - Functions
     fileprivate func updateViews() {
+        if let event = event {
+            eventTitleTextField.text = event.title
+            eventEmojiButton.setImage(nil, for: .normal)
+            eventEmojiButton.setTitle(event.emoji, for: .normal)
+            datePicker.date = event.date
+            whereTextField.text = event.location
+            typeButton.setTitle(event.type, for: .normal)
+            infoTextView.text = event.info
+            createEventButton.setTitle("Save Event", for: .normal)
+        }
+        
         eventTitleTextField.addCornerRadius()
         eventTitleTextField.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 22)
         eventTitleTextField.updatePlaceHolder(fontName: FontNames.sfRoundedSemiBold, size: 22)

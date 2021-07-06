@@ -13,6 +13,7 @@ class FriendsListTableViewController: UITableViewController {
     //var buttonTitles: [String]?
     var allUsers: [User]?
     var friendRequests: [FriendRequest]?
+    var originVC: String?
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -83,22 +84,27 @@ class FriendsListTableViewController: UITableViewController {
         let userRef = CKRecord.Reference(recordID: user.recordID, action: .none)
         let friendRequestForUser = friendRequests?.filter{ $0.friendUserRef == userRef }.first
         
-        if let friendRefs = currentUser.friendRefs,
-           friendRefs.contains(userRef) {
-            
-            cell.buttonTitle = "added"
-            
-        } else if friendRequestForUser != nil {
-            
-            if friendRequestForUser!.ownerDidSend == true {
-                cell.buttonTitle = "pending"
-            } else {
-                cell.buttonTitle = "accept"
-            }
+        if originVC == "EventDetailVC" {
+            cell.buttonTitle = "invite"
             
         } else {
-            cell.buttonTitle = "add friend"
+            if let friendRefs = currentUser.friendRefs,
+               friendRefs.contains(userRef) {
+                
+                cell.buttonTitle = "added"
+                
+            } else if friendRequestForUser != nil {
+                if friendRequestForUser!.ownerDidSend == true {
+                    cell.buttonTitle = "pending"
+                } else {
+                    cell.buttonTitle = "accept"
+                }
+                
+            } else {
+                cell.buttonTitle = "add friend"
+            }
         }
+        
         
         cell.friendRequest = friendRequestForUser
         cell.user = user
