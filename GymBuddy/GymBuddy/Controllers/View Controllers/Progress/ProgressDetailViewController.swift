@@ -20,10 +20,14 @@ class ProgressDetailViewController: UIViewController {
     @IBOutlet weak var currentSelectedUnitLabel: UILabel!
     @IBOutlet weak var completionLabel: UILabel!
     @IBOutlet weak var progressView: UIProgressView!
+    @IBOutlet weak var completionDateLabel: UILabel!
+    
+    @IBOutlet var upDownButtons: [UIButton]!
     @IBOutlet weak var saveButton: UIButton!
     
     //MARK: - Properties
     var workout: Workout?
+    var section: Int?
     var goal: Int = 0
     var current: Int = 0
     let activeGroup = DispatchGroup()
@@ -44,24 +48,41 @@ class ProgressDetailViewController: UIViewController {
     
     //MARK: - Actions
     @IBAction func upDownButtonsTapped(_ sender: UIButton) {
+        guard let workout = workout else { return }
         //button tags 1,3 are up & 2,4 are down
         switch sender.tag {
         case 1:
-            goal += 1
+            if workout.unit == "calories" {
+                goal += 10
+            } else {
+                goal += 1
+            }
             goalQuantityLabel.text = "\(goal)"
         case 2:
             if goal > current {
-                goal -= 1
+                if workout.unit == "calories" {
+                    goal -= 10
+                } else {
+                    goal -= 1
+                }
                 goalQuantityLabel.text = "\(goal)"
             }
         case 3:
             if current < goal {
-                current += 1
+                if workout.unit == "calories" {
+                    current += 10
+                } else {
+                    current += 1
+                }
                 currentQuantityLabel.text = "\(current)"
             }
         case 4:
             if current > 0 {
-                current -= 1
+                if workout.unit == "calories" {
+                    current -= 10
+                } else {
+                    current -= 1
+                }
                 currentQuantityLabel.text = "\(current)"
             }
         default:
@@ -78,6 +99,11 @@ class ProgressDetailViewController: UIViewController {
               let goal = Int(goalText),
               let currentText = currentQuantityLabel.text,
               let current = Int(currentText) else { return }
+        
+        let date = Date()
+        if goal <= current {
+            workout.completionDate = date.formatDate()
+        }
         
         workout.current = current
         workout.goal = goal
@@ -104,7 +130,8 @@ class ProgressDetailViewController: UIViewController {
     
     //MARK: - Functions
     fileprivate func updateViews() {
-        guard let workout = workout else { return }
+        guard let workout = workout,
+              let section = section else { return }
 
         let progress = Float(workout.current) / Float(workout.goal)
         
@@ -118,6 +145,7 @@ class ProgressDetailViewController: UIViewController {
         currentLabel.underline()
         completionLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 20)
         completionLabel.underline()
+        completionDateLabel.text = ""
         
         // quantity labels
         goalQuantityLabel.addCornerRadius()
@@ -142,6 +170,16 @@ class ProgressDetailViewController: UIViewController {
         saveButton.setBackgroundColor(.customLightGreen!)
         saveButton.setTitleColor(.white, for: .normal)
         saveButton.titleLabel?.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 20)
+        
+        if section == 3 {
+            for button in upDownButtons {
+                button.isHidden = true
+            }
+            saveButton.isHidden = true
+            completionDateLabel.text = "Completion Date: \(workout.completionDate ?? "N/A")"
+            completionDateLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 24)
+            completionLabel.textColor = .customDarkGreen
+        }
         
         updateProgressView(progress: progress)
         

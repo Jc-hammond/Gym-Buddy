@@ -41,8 +41,8 @@ class WorkoutController {
         let userRef = user.recordID
         let predicate = NSPredicate(format: "%K == %@", WorkoutStrings.userRefKey, userRef)
         let workoutIDs = user.workouts.compactMap({$0.recordID})
-        let predicate2 = NSPredicate(format: "NOT(recordID IN %@)", workoutIDs)
-        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, predicate2])
+        //let predicate2 = NSPredicate(format: "NOT(recordID IN %@)", workoutIDs)
+        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, /*predicate2*/])
         let query = CKQuery(recordType: "Workout", predicate: compoundPredicate)
         publicDB.perform(query, inZoneWith: nil) { records, error in
             if let error = error {

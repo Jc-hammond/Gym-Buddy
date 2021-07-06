@@ -143,7 +143,7 @@
         <!--Event Detail-->
         <scene sceneID="XZq-dr-7PV">
             <objects>
-                <viewController id="0yl-Ie-eKM" customClass="EventDetailViewController" customModule="GymBuddy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EventDetailViewController" id="0yl-Ie-eKM" customClass="EventDetailViewController" customModule="GymBuddy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="qz4-Xl-oJc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -394,7 +394,7 @@
         <!--Create New Event-->
         <scene sceneID="CJb-Ae-yKB">
             <objects>
-                <viewController id="pIv-p4-4lv" customClass="EventCreateViewController" customModule="GymBuddy" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EventCreateViewController" id="pIv-p4-4lv" customClass="EventCreateViewController" customModule="GymBuddy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Q3P-ss-OVL">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -583,7 +583,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="bZb-FU-0ds"/>
+        <segue reference="nb6-EO-LH4"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="addEmoji" width="60" height="60"/>

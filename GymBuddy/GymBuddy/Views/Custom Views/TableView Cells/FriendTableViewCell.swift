@@ -67,6 +67,11 @@ class FriendTableViewCell: UITableViewCell {
                 }
             }
         }
+        
+        if sender.titleLabel?.text == "invite" {
+            self.updateButtons(buttonTitle: "sent")
+        }
+        
     }//end of func
     
     fileprivate func saveUser(user: User) {
@@ -111,11 +116,11 @@ class FriendTableViewCell: UITableViewCell {
         if buttonTitle == "added" {
             cellButton.setBackgroundColor(.gray)
             cellButton.isEnabled = false
-        } else if buttonTitle == "pending" {
+        } else if buttonTitle == "pending" || buttonTitle == "sent" {
             cellButton.setBackgroundColor(.gray)
             cellButton.setTitleColor(.black, for: .normal)
             cellButton.isEnabled = false
-        } else if buttonTitle == "accept" {
+        } else if buttonTitle == "accept" || buttonTitle == "invite" {
             cellButton.setBackgroundColor(.customLightGreen!)
             cellButton.isEnabled = true
         } else if buttonTitle == "add friend" {

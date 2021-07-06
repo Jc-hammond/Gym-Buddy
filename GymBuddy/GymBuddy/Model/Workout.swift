@@ -23,7 +23,7 @@ struct Workout: Hashable {
     
     let title: String
     var goal: Int
-    let completionDate: String?
+    var completionDate: String?
     var current: Int
     let unit: String
     var userRef: CKRecord.Reference?

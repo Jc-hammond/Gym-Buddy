@@ -60,7 +60,6 @@ class EventDetailViewController: UIViewController {
             }
         }
         
-        
     }//end of func
     
     //MARK: - Actions
@@ -68,9 +67,9 @@ class EventDetailViewController: UIViewController {
         let storyboard = UIStoryboard(name: "Friends", bundle: nil)
         guard let destinationVC = storyboard.instantiateViewController(identifier: "FriendsListTableViewController") as? FriendsListTableViewController else { return }
         //destinationVC.buttonTitles = ["invite", "attending"]
+        destinationVC.originVC = "EventDetailVC"
         self.navigationController?.pushViewController(destinationVC, animated: true)
     }
-    
     
     //MARK: - Functions
     fileprivate func updateViews() {
@@ -100,15 +99,16 @@ class EventDetailViewController: UIViewController {
     }
     
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "toEventEditVC" {
+            guard let destinationVC = segue.destination as? EventCreateViewController else { return }
+            
+            destinationVC.event = event
+        }
+        
     }
-    */
 
 }//End of class
 

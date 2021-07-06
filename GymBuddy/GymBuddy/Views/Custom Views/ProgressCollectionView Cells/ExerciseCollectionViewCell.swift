@@ -45,7 +45,13 @@ class ExerciseCollectionViewCell: UICollectionViewCell, CellRegisterable {
         goalUnitLabel.font = UIFont(name: FontNames.sfRoundedReg, size: 16)
         goalUnitLabel.textColor = .gray
         
-        let goalUnitText: String = workout.goal > 1 ? "\(workout.goal) \(workout.unit)s" : "\(workout.goal) \(workout.unit)"
+        var goalUnitText: String {
+            if workout.goal > 1 && (workout.unit == "hour" || workout.unit == "minute") {
+                return "\(workout.goal) \(workout.unit)s"
+            } else {
+                return "\(workout.goal) \(workout.unit)"
+            }
+        }
         goalUnitLabel.text = goalUnitText
         
         let progress = Float(workout.current) / Float(workout.goal)
