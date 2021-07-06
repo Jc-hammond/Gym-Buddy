@@ -65,6 +65,7 @@
 		714A743426791C3D005F46F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 714A743326791C3D005F46F2 /* Assets.xcassets */; };
 		714A743726791C3D005F46F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 714A743526791C3D005F46F2 /* LaunchScreen.storyboard */; };
 		714A744126791C4E005F46F2 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 714A744026791C4E005F46F2 /* CloudKit.framework */; };
+		7189E7A826951B2C00DCB3D4 /* PhotoSelectorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7189E7A726951B2C00DCB3D4 /* PhotoSelectorViewController.swift */; };
 		71E8A4AB268B790D00478729 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4AA268B790D00478729 /* User.swift */; };
 		71E8A4AD268B7BFC00478729 /* FriendRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4AC268B7BFC00478729 /* FriendRequest.swift */; };
 		71E8A4AF268B7C0E00478729 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4AE268B7C0E00478729 /* Event.swift */; };
@@ -142,6 +143,7 @@
 		714A743826791C3D005F46F2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		714A743E26791C4A005F46F2 /* GymBuddy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GymBuddy.entitlements; sourceTree = "<group>"; };
 		714A744026791C4E005F46F2 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		7189E7A726951B2C00DCB3D4 /* PhotoSelectorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorViewController.swift; sourceTree = "<group>"; };
 		71E8A4AA268B790D00478729 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		71E8A4AC268B7BFC00478729 /* FriendRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequest.swift; sourceTree = "<group>"; };
 		71E8A4AE268B7C0E00478729 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				3B5EFD2E26811B5800F83E50 /* HomeViewController.swift */,
 				3B727F6E268B189500395029 /* HomeDataSource.swift */,
 				3B727F7B268B3FC400395029 /* ProfileViewController.swift */,
+				7189E7A726951B2C00DCB3D4 /* PhotoSelectorViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -621,6 +624,7 @@
 				3B058AA12683EF470047FF61 /* HeaderCollectionReusableView.swift in Sources */,
 				3B2F19322693763100543313 /* LaunchScreenViewController.swift in Sources */,
 				71E8A4C5268D1C1700478729 /* WorkoutError.swift in Sources */,
+				7189E7A826951B2C00DCB3D4 /* PhotoSelectorViewController.swift in Sources */,
 				3B727F75268B1B3300395029 /* FriendCollectionViewCell.swift in Sources */,
 				71E8A4B9268BAEC000478729 /* EventController.swift in Sources */,
 				71E8A4BD268BB23500478729 /* UIDate Extension.swift in Sources */,

@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol PhotoSelectorViewControllerDelegate: AnyObject {
+    func photoSelectorViewControllerSelected(image: UIImage)
+}
+
 class ProfileViewController: UIViewController {
     //MARK: - Outlets
     @IBOutlet weak var profileImageButton: UIButton!
@@ -21,7 +25,7 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var deleteAccountButton: UIButton!
     
     //MARK: - Properties
-    
+    var selectedImage: UIImage?
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -39,10 +43,12 @@ class ProfileViewController: UIViewController {
         guard let currentUser = UserController.shared.currentUser,
               let newName = fullNameTextField.text, !newName.isEmpty,
               let newWeight = targetWeightTextField.text, !newWeight.isEmpty,
-              let newTargetWeight = Int(newWeight) else { return }
+              let newTargetWeight = Int(newWeight),
+              let photo = selectedImage else { return }
         
         currentUser.fullName = newName
         currentUser.targetWeight = newTargetWeight
+        currentUser.photo = photo
         
         UserController.shared.saveUserUpdates(currentUser: currentUser) { result in
             DispatchQueue.main.async {
@@ -115,15 +121,16 @@ class ProfileViewController: UIViewController {
         deleteAccountButton.titleLabel?.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 20)
     }
     
-    /*
+    
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "toPhotoSelectorVC" {
+            let photoSelector = segue.destination as? PhotoSelectorViewController
+            photoSelector?.delegate = self
+        }
     }
-    */
+    
 
 }
 
@@ -140,3 +147,10 @@ extension ProfileViewController: UITextFieldDelegate {
     }
 
 }
+
+extension ProfileViewController: PhotoSelectorViewControllerDelegate {
+    
+    func photoSelectorViewControllerSelected(image: UIImage) {
+        selectedImage = image
+    }
+}//End of extension

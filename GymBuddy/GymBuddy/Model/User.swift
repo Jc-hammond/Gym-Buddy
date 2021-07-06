@@ -5,7 +5,7 @@
 //  Created by Connor Hammond on 6/29/21.
 //
 
-import Foundation
+import UIKit
 import CloudKit
 
 struct UserStrings {
@@ -22,6 +22,7 @@ struct UserStrings {
     fileprivate static let goalDataKey = "goalData"
     fileprivate static let eventsKey = "events"
     static let appleUserRefKey = "appleUserRef"
+    static let photoKey = "photo"
     
 }
 
@@ -39,8 +40,33 @@ class User {
     var workouts: [Workout]
     var recordID: CKRecord.ID
     var appleUserRef: CKRecord.Reference
+    var photoData: Data?
     
-    init(fullName: String, currentWeights: [Int]?, currentDates: [Date]?, targetWeight: Int, friends: [User] = [], friendRefs: [CKRecord.Reference]?, friendRequests: [FriendRequest]?, friendRequestRefs: [CKRecord.Reference]?, workouts: [Workout] = [], recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString), appleUserRef: CKRecord.Reference) {
+    var photo: UIImage? {
+        get {
+            guard let photoData = photoData else {return nil}
+            return UIImage(data: photoData)
+        } set {
+            photoData = newValue?.jpegData(compressionQuality: 0.5)
+        }
+    }
+    
+    var imageAsset: CKAsset? {
+        get {
+            let tempDirectory = NSTemporaryDirectory()
+            let tempDirecotryURL = URL(fileURLWithPath: tempDirectory)
+            let fileURL = tempDirecotryURL.appendingPathComponent(recordID.recordName).appendingPathExtension("jpg")
+            
+            do {
+                try photoData?.write(to: fileURL)
+            } catch {
+                print("Error writing to temporary URL \(error) \(error.localizedDescription)")
+            }
+            return CKAsset(fileURL: fileURL)
+        }
+    }
+    
+    init(photo: UIImage?, fullName: String, currentWeights: [Int]?, currentDates: [Date]?, targetWeight: Int, friends: [User] = [], friendRefs: [CKRecord.Reference]?, friendRequests: [FriendRequest]?, friendRequestRefs: [CKRecord.Reference]?, workouts: [Workout] = [], recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString), appleUserRef: CKRecord.Reference) {
         
         self.fullName = fullName
         self.currentWeights = currentWeights
@@ -53,6 +79,7 @@ class User {
         self.workouts = workouts
         self.recordID = recordID
         self.appleUserRef = appleUserRef
+        self.photo = photo
     }
 }
 
@@ -69,8 +96,19 @@ extension User {
         
         let friendRefs = ckRecord[UserStrings.friendRefsKey] as? [CKRecord.Reference]
         let friendRequestRefs = ckRecord[UserStrings.friendRequestRefsKey] as? [CKRecord.Reference]
+        var photo: UIImage?
         
-        self.init(fullName: fullName, currentWeights: currentWeights, currentDates: currentDates, targetWeight: targetWeight, friends: [], friendRefs: friendRefs, friendRequests: nil, friendRequestRefs: friendRequestRefs, workouts: [], recordID: ckRecord.recordID, appleUserRef: appleUserRef)
+        if let photoAsset = ckRecord[UserStrings.photoKey] as? CKAsset {
+            do {
+                guard let url = photoAsset.fileURL else {return nil}
+                let data = try Data(contentsOf: url)
+                photo = UIImage(data: data)
+            } catch {
+                print("Could not transfrom asset to data.")
+            }
+        }
+        
+        self.init(photo: photo, fullName: fullName, currentWeights: currentWeights, currentDates: currentDates, targetWeight: targetWeight, friends: [], friendRefs: friendRefs, friendRequests: nil, friendRequestRefs: friendRequestRefs, workouts: [], recordID: ckRecord.recordID, appleUserRef: appleUserRef)
     }
 }
 
@@ -98,6 +136,9 @@ extension CKRecord {
         if let currentDates = user.currentDates {
             self.setValue(currentDates, forKey: UserStrings.currentDatesKey)
         }
+        if let photo = user.imageAsset {
+            self.setValue(photo, forKey: UserStrings.photoKey)
+        }
     }
 }
 
@@ -106,3 +147,4 @@ extension User: Equatable {
         return lhs.recordID == rhs.recordID
     }
 }
+

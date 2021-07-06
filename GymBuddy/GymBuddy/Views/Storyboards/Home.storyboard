@@ -179,6 +179,9 @@
                                 <state key="normal" backgroundImage="icons8-person_male-40">
                                     <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                                 </state>
+                                <connections>
+                                    <segue destination="DzK-I4-Lbj" kind="show" identifier="toPhotoSelectorVC" id="Z89-cm-oCu"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="IUf-vc-WAh"/>
@@ -218,6 +221,53 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wS0-Tf-m0F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1682.608695652174" y="114.50892857142857"/>
+        </scene>
+        <!--Photo Selector View Controller-->
+        <scene sceneID="igB-RV-aT1">
+            <objects>
+                <viewController id="DzK-I4-Lbj" customClass="PhotoSelectorViewController" customModule="GymBuddy" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="aHc-0H-76r">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FIi-mj-vvI">
+                                <rect key="frame" x="20" y="111" width="374" height="374"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="FIi-mj-vvI" secondAttribute="height" multiplier="1:1" id="6sY-m7-YYv"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Pr-PA-RPu">
+                                <rect key="frame" x="20" y="111" width="374" height="374"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="7Pr-PA-RPu" secondAttribute="height" multiplier="1:1" id="5ds-IR-WT9"/>
+                                    <constraint firstAttribute="width" constant="374" id="jAE-wG-9Pg"/>
+                                </constraints>
+                                <state key="normal" title="Select Photo"/>
+                                <connections>
+                                    <action selector="selectPhotoButtonTapped:" destination="DzK-I4-Lbj" eventType="touchUpInside" id="WHy-5n-v0u"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="G9x-jw-EZ5"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="FIi-mj-vvI" firstAttribute="centerX" secondItem="G9x-jw-EZ5" secondAttribute="centerX" id="9hW-O2-Xbq"/>
+                            <constraint firstItem="FIi-mj-vvI" firstAttribute="top" secondItem="G9x-jw-EZ5" secondAttribute="top" constant="111" id="Q3p-TD-LEl"/>
+                            <constraint firstItem="G9x-jw-EZ5" firstAttribute="trailing" secondItem="7Pr-PA-RPu" secondAttribute="trailing" constant="20" id="VWC-Su-ewA"/>
+                            <constraint firstItem="FIi-mj-vvI" firstAttribute="width" secondItem="aHc-0H-76r" secondAttribute="width" multiplier="0.903382" id="gEn-wQ-xKJ"/>
+                            <constraint firstItem="7Pr-PA-RPu" firstAttribute="top" secondItem="FIi-mj-vvI" secondAttribute="top" id="hUS-97-m7H"/>
+                            <constraint firstItem="7Pr-PA-RPu" firstAttribute="leading" secondItem="G9x-jw-EZ5" secondAttribute="leading" constant="20" id="wOT-iv-QEi"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="OOy-hu-tY5"/>
+                    <connections>
+                        <outlet property="photoImageView" destination="FIi-mj-vvI" id="gaj-iU-abg"/>
+                        <outlet property="selectPhotoButton" destination="7Pr-PA-RPu" id="03V-Tx-plv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lye-De-h0c" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2476.811594202899" y="126.5625"/>
         </scene>
         <!--Home-->
         <scene sceneID="dyi-yW-SDL">
