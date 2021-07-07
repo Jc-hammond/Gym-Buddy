@@ -78,13 +78,17 @@
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icons8-chevron_right-40" translatesAutoresizingMaskIntoConstraints="NO" id="6MQ-4u-Fea">
+                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m5Z-O4-w4Z">
                                                                     <rect key="frame" x="31" y="0.0" width="50" height="25"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" secondItem="6MQ-4u-Fea" secondAttribute="height" multiplier="2:1" id="WNC-t6-wkS"/>
-                                                                        <constraint firstAttribute="width" constant="50" id="f9j-cy-k79"/>
+                                                                        <constraint firstAttribute="width" secondItem="m5Z-O4-w4Z" secondAttribute="height" multiplier="2:1" id="Vmg-GT-9Ea"/>
+                                                                        <constraint firstAttribute="width" constant="50" id="mSU-X4-BZQ"/>
                                                                     </constraints>
-                                                                </imageView>
+                                                                    <state key="normal" image="icons8-chevron_right-40"/>
+                                                                    <connections>
+                                                                        <action selector="rsvpButtonTapped:" destination="N03-to-2F0" eventType="touchUpInside" id="8YW-mL-cES"/>
+                                                                    </connections>
+                                                                </button>
                                                             </subviews>
                                                         </stackView>
                                                     </subviews>
@@ -110,7 +114,7 @@
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="attendanceStatusLabel" destination="OiB-qB-QvA" id="0i5-tD-nwr"/>
-                                    <outlet property="changeableImageView" destination="6MQ-4u-Fea" id="UcK-10-hoL"/>
+                                    <outlet property="changeableButton" destination="m5Z-O4-w4Z" id="Cy2-52-pcj"/>
                                     <outlet property="emojiLabel" destination="v6Z-Ye-mqt" id="Dhi-ba-N8R"/>
                                     <outlet property="eventDateLabel" destination="aOH-aW-cba" id="MnT-Je-06H"/>
                                     <outlet property="eventTimeLabel" destination="6j7-Bb-qJU" id="5su-gl-fwf"/>
