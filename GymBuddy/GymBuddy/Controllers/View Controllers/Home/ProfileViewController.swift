@@ -13,7 +13,7 @@ protocol PhotoSelectorViewControllerDelegate: AnyObject {
 
 class ProfileViewController: UIViewController {
     //MARK: - Outlets
-    @IBOutlet weak var profileImageButton: UIButton!
+//    @IBOutlet weak var profileImageButton: UIButton!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var fullNameLabel: UILabel!
@@ -87,9 +87,9 @@ class ProfileViewController: UIViewController {
         
         guard let currentUser = UserController.shared.currentUser else { return }
         
-        profileImageButton.addCornerRadius(radius: profileImageButton.frame.width/2, width: 1, color: .customLightGreen)
-        profileImageButton.imageView?.contentMode = .scaleAspectFit
-        profileImageButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+//        profileImageButton.addCornerRadius(radius: profileImageButton.frame.width/2, width: 1, color: .customLightGreen)
+//        profileImageButton.imageView?.contentMode = .scaleAspectFit
+//        profileImageButton.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         nameLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 40)
         nameLabel.text = currentUser.fullName
         infoLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 32)
