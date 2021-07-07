@@ -14,13 +14,17 @@ class InviteeTableViewCell: UITableViewCell {
     @IBOutlet weak var profileStackView: UIStackView!
     
     //MARK: - Properites
-    var attendee: User?
+    var attendee: User? {
+        didSet {
+            updateViews()            
+        }
+    }
     
     //MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        updateViews()
+//        updateViews()
     }
     
     //MARK: - Functions

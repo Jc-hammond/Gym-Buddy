@@ -12,7 +12,7 @@ class HeaderCollectionReusableView: UICollectionReusableView, CellRegisterable {
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var headerButton: UIButton!
     
-    var isButtonHidden: Bool = true {
+    var sectionNumber: Int? {
         didSet {
             updateViews()
         }
@@ -43,7 +43,7 @@ class HeaderCollectionReusableView: UICollectionReusableView, CellRegisterable {
         self.addCornerRadius(color: .customGreen)
         self.backgroundColor = .customGreen
         
-        headerButton.isHidden = isButtonHidden
+        headerButton.isHidden = sectionNumber == 0 ? false : true
         headerButton.addCornerRadius()
         headerButton.setBackgroundColor(.customLightGreen!)
         headerButton.titleLabel?.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 14)
