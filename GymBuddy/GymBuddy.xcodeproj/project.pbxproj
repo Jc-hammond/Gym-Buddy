@@ -16,7 +16,6 @@
 		3B058AA72683FA060047FF61 /* ExerciseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B058AA52683FA060047FF61 /* ExerciseCollectionViewCell.swift */; };
 		3B058AA82683FA060047FF61 /* ExerciseCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B058AA62683FA060047FF61 /* ExerciseCollectionViewCell.xib */; };
 		3B058AAA2684F9580047FF61 /* UIImage Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B058AA92684F9580047FF61 /* UIImage Extension.swift */; };
-		3B2F19322693763100543313 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B2F19312693763100543313 /* LaunchScreenViewController.swift */; };
 		3B5CBCCA268173B2005036EC /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCC9268173B2005036EC /* TabBarController.swift */; };
 		3B5CBCCC268173F3005036EC /* InitialProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCCB268173F3005036EC /* InitialProfileViewController.swift */; };
 		3B5CBCCE26817424005036EC /* FriendsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCCD26817424005036EC /* FriendsListTableViewController.swift */; };
@@ -90,7 +89,6 @@
 		3B058AA52683FA060047FF61 /* ExerciseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCollectionViewCell.swift; sourceTree = "<group>"; };
 		3B058AA62683FA060047FF61 /* ExerciseCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseCollectionViewCell.xib; sourceTree = "<group>"; };
 		3B058AA92684F9580047FF61 /* UIImage Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage Extension.swift"; sourceTree = "<group>"; };
-		3B2F19312693763100543313 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenViewController.swift; sourceTree = "<group>"; };
 		3B5CBCC9268173B2005036EC /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		3B5CBCCB268173F3005036EC /* InitialProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialProfileViewController.swift; sourceTree = "<group>"; };
 		3B5CBCCD26817424005036EC /* FriendsListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsListTableViewController.swift; sourceTree = "<group>"; };
@@ -403,7 +401,6 @@
 		714A744626791CBD005F46F2 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				3B2F19312693763100543313 /* LaunchScreenViewController.swift */,
 				3B5CBCC9268173B2005036EC /* TabBarController.swift */,
 				3B5CBCCB268173F3005036EC /* InitialProfileViewController.swift */,
 				3B5CBCCD26817424005036EC /* FriendsListTableViewController.swift */,
@@ -619,7 +616,6 @@
 				3B5CBCEF26835DF2005036EC /* EventDetailViewController.swift in Sources */,
 				3B5CBCCC268173F3005036EC /* InitialProfileViewController.swift in Sources */,
 				3B058AA12683EF470047FF61 /* HeaderCollectionReusableView.swift in Sources */,
-				3B2F19322693763100543313 /* LaunchScreenViewController.swift in Sources */,
 				71E8A4C5268D1C1700478729 /* WorkoutError.swift in Sources */,
 				3B727F75268B1B3300395029 /* FriendCollectionViewCell.swift in Sources */,
 				71E8A4B9268BAEC000478729 /* EventController.swift in Sources */,
