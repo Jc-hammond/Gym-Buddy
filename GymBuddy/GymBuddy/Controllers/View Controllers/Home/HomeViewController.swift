@@ -37,7 +37,10 @@ class HomeViewController: UIViewController {
         
 //        guard UserController.shared.currentUser != nil else { return }
 //        fetchData()
-        updateViews()
+//        updateViews()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.fetchUser()
+        }
         
     }
     

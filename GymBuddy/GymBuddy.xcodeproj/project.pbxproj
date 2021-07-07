@@ -779,7 +779,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = GymBuddy/GymBuddy.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QEN666WPC7;
+				DEVELOPMENT_TEAM = UF94N945G8;
 				INFOPLIST_FILE = GymBuddy/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -800,7 +800,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = GymBuddy/GymBuddy.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QEN666WPC7;
+				DEVELOPMENT_TEAM = UF94N945G8;
 				INFOPLIST_FILE = GymBuddy/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -40,15 +40,16 @@ class InitialProfileViewController: UIViewController {
               let fullName = fullNameTextField.text else { return }
                 
         UserController.shared.createUser(fullName: fullName, currentWeight: currentWeightInt, targetWeight: targetWeightInt) { result in
-            switch result {
-            case .success(let user):
-                UserController.shared.currentUser = user
-            case .failure(let error):
-                print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let user):
+                    UserController.shared.currentUser = user
+                    self.dismiss(animated: true, completion: nil)
+                case .failure(let error):
+                    print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+                }
             }
         }
-              
-        self.dismiss(animated: true, completion: nil)
     }
     
 }//End of class
