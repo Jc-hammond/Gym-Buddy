@@ -42,7 +42,7 @@ class EventsTableViewCell: UITableViewCell {
         eventDateLabel.text = event.date.formatDate()
         eventTimeLabel.text = event.date.formatTime()
         ownerLabel.isHidden = event.userRef == UserController.shared.currentUser?.recordID ? false : true
-        attendanceStatusLabel.text = "\(event.attendeeRefs?.count ?? 0) attending"
+        attendanceStatusLabel.text = "\(event.attendeeRefs.count) attending"
         
         eventTitleLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 20)
         eventDateLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 18)

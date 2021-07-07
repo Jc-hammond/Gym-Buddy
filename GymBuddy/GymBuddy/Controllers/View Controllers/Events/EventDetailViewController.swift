@@ -47,8 +47,8 @@ class EventDetailViewController: UIViewController {
     
     //MARK: - Function
     fileprivate func fetchAttendees() {
-        guard let event = event,
-              let attendeeRefs = event.attendeeRefs else { return }
+        guard let event = event else {return}
+              let attendeeRefs = event.attendeeRefs
         
         EventController.shared.fetchEventAttendees(attendeeRefs: attendeeRefs) { result in
             switch result {
@@ -65,9 +65,11 @@ class EventDetailViewController: UIViewController {
     //MARK: - Actions
     @IBAction func addInviteeButtonTapped(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Friends", bundle: nil)
+        let eventToSend = event
         guard let destinationVC = storyboard.instantiateViewController(identifier: "FriendsListTableViewController") as? FriendsListTableViewController else { return }
         //destinationVC.buttonTitles = ["invite", "attending"]
         destinationVC.originVC = "EventDetailVC"
+        destinationVC.event = eventToSend
         self.navigationController?.pushViewController(destinationVC, animated: true)
     }
     

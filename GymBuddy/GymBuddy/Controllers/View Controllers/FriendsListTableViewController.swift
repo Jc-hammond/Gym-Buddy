@@ -14,6 +14,7 @@ class FriendsListTableViewController: UITableViewController {
     var allUsers: [User]?
     var friendRequests: [FriendRequest]?
     var originVC: String?
+    var event: Event?
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -103,6 +104,10 @@ class FriendsListTableViewController: UITableViewController {
             } else {
                 cell.buttonTitle = "add friend"
             }
+        }
+        
+        if let event = event {
+            cell.event = event
         }
         
         

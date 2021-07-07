@@ -33,7 +33,7 @@ class EventsListTableViewController: UITableViewController {
     //MARK: - Function
     fileprivate func fetchAllEvents() {
         guard let currentUserRef = UserController.shared.currentUserRef else { return }
-        allEvents = []
+        allEvents = [[], []]
 
         let ownerPredicate = NSPredicate(format: "%K == %@", EventStrings.userRefKey, currentUserRef)
 //        let inviteesPredicate = NSPredicate(format: "%K == %@", EventStrings.inviteeRefsKey, currentUserRef)
@@ -44,11 +44,13 @@ class EventsListTableViewController: UITableViewController {
                 switch result {
                 case .success(let events):
                     guard let attendingEvents = events else { return }
-                    self.allEvents.append(attendingEvents)
+                    self.allEvents[0] = attendingEvents
                     self.tableView.reloadData()
                     self.refresh.endRefreshing()
                 case .failure(let error):
                     print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+                    self.refresh.endRefreshing()
+
                 }
             }
         }

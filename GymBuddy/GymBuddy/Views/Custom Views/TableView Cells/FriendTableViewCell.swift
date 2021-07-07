@@ -17,6 +17,8 @@ class FriendTableViewCell: UITableViewCell {
     var buttonTitle: String?
     var friendRequest: FriendRequest?
     
+    var event: Event?
+    
     var user: User? {
         didSet {
             updateViews()
@@ -68,8 +70,34 @@ class FriendTableViewCell: UITableViewCell {
             }
         }
         
-        if sender.titleLabel?.text == "invite" {
-            self.updateButtons(buttonTitle: "sent")
+        if sender.titleLabel?.text == "invite", let event = event {
+            EventController.shared.inviteTo(event: event, invitee: user) { result in
+                DispatchQueue.main.async {
+                    switch result{
+                    case .success(let event):
+                        guard let event = event else {return}
+                        print("Successfully invited \(user.fullName) to \(event.title)")
+                        self.updateButtons(buttonTitle: "sent")
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                }
+            }
+        }
+        
+        if sender.titleLabel?.text == "RSVP", let event = event {
+            EventController.shared.acceptInvite(event: event, user: user) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let event):
+                        guard let event = event else {return}
+                        print("\(user.fullName) is now attendint \(event.title)")
+                        self.updateButtons(buttonTitle: "attending")
+                    case .failure(let error):
+                        print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+                    }
+                }
+            }
         }
         
     }//end of func
@@ -116,14 +144,11 @@ class FriendTableViewCell: UITableViewCell {
         if buttonTitle == "added" {
             cellButton.setBackgroundColor(.gray)
             cellButton.isEnabled = false
-        } else if buttonTitle == "pending" || buttonTitle == "sent" {
+        } else if buttonTitle == "pending" || buttonTitle == "sent" || buttonTitle == "attending" {
             cellButton.setBackgroundColor(.gray)
             cellButton.setTitleColor(.black, for: .normal)
             cellButton.isEnabled = false
-        } else if buttonTitle == "accept" || buttonTitle == "invite" {
-            cellButton.setBackgroundColor(.customLightGreen!)
-            cellButton.isEnabled = true
-        } else if buttonTitle == "add friend" {
+        } else if buttonTitle == "accept" || buttonTitle == "invite" || buttonTitle == "RSVP" || buttonTitle == "add friend" {
             cellButton.setBackgroundColor(.customLightGreen!)
             cellButton.isEnabled = true
         }
