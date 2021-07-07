@@ -12,7 +12,7 @@ class EventsListTableViewController: UITableViewController {
 
     //MARK: - Properties
     let sections: [String] = ["My Events", "Invited"]
-    var allEvents = [[Event]]()
+    var allEvents: [[Event]] = [[], []]
     
     var refresh: UIRefreshControl = UIRefreshControl()
     
@@ -36,39 +36,63 @@ class EventsListTableViewController: UITableViewController {
         allEvents = [[], []]
 
         let ownerPredicate = NSPredicate(format: "%K == %@", EventStrings.userRefKey, currentUserRef)
-        let inviteesPredicate = NSPredicate(format: "%K == %@", EventStrings.inviteeRefsKey, currentUserRef)
-//        let allEventPredicate = NSPredicate(value: true)
         
         EventController.shared.fetchEvent(predicate: ownerPredicate) { result in
             DispatchQueue.main.async {
                 switch result {
-                case .success(let events):
-                    guard let attendingEvents = events else { return }
-                    self.allEvents[0] = attendingEvents
-                    self.tableView.reloadData()
-                    self.refresh.endRefreshing()
+                case .success(let myEents):
+                    guard let myEvents = myEents else { return }
+                    self.allEvents[0] = myEvents
+                    self.fetchAttendingEvents()
+                    
                 case .failure(let error):
                     print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
-                    self.refresh.endRefreshing()
-
+                    self.fetchAttendingEvents()
                 }
             }
         }
+    }//end of func
+    
+    func fetchAttendingEvents() {
+        guard let currentUserRef = UserController.shared.currentUserRef else { return }
+        let attendeesPredicate = NSPredicate(format: "%K CONTAINS %@", EventStrings.attendeeRefsKey, currentUserRef)
+        
+        EventController.shared.fetchEvent(predicate: attendeesPredicate) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let attendingEvents):
+                    guard let attendingEvents = attendingEvents else { return }
+                    attendingEvents.forEach { self.allEvents[0].append($0) }
+                    self.fetchInvitedEvents()
+                    
+                case .failure(let error):
+                    print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+                    self.fetchInvitedEvents()
+                }
+            }
+        }
+    }//end of func
+    
+    func fetchInvitedEvents() {
+        guard let currentUserRef = UserController.shared.currentUserRef else { return }
+        let inviteesPredicate = NSPredicate(format: "%K CONTAINS %@", EventStrings.inviteeRefsKey, currentUserRef)
         
         EventController.shared.fetchEvent(predicate: inviteesPredicate) { result in
             DispatchQueue.main.async {
                 switch result {
-                case .success(let events):
-                    guard let invitedEvents = events else { return }
+                case .success(let invitedEvents):
+                    guard let invitedEvents = invitedEvents else { return }
                     self.allEvents[1] = invitedEvents
                     self.tableView.reloadData()
+                    self.refresh.endRefreshing()
+
                 case .failure(let error):
                     print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+                    self.tableView.reloadData()
+                    self.refresh.endRefreshing()
                 }
-                
             }
         }
-        
     }//end of func
     
     func setupViews() {
@@ -78,6 +102,8 @@ class EventsListTableViewController: UITableViewController {
     }
     
     @objc func loadEvents() {
+        allEvents = [[], []]
+        self.tableView.reloadData()
         fetchAllEvents()
     }
     

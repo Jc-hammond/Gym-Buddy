@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CloudKit
 
 class EventsTableViewCell: UITableViewCell {
     //MARK: - Outlets
@@ -15,7 +16,8 @@ class EventsTableViewCell: UITableViewCell {
     @IBOutlet weak var eventTimeLabel: UILabel!
     @IBOutlet weak var ownerLabel: UILabel!
     @IBOutlet weak var attendanceStatusLabel: UILabel!
-    @IBOutlet weak var changeableImageView: UIImageView!
+    @IBOutlet weak var changeableButton: UIButton!
+    
     
     //MARK: - Properties
     var sectionNumber: Int?
@@ -31,7 +33,32 @@ class EventsTableViewCell: UITableViewCell {
         super.awakeFromNib()
         //updateViews()
     }
-
+    
+    //MARK: - Actions
+    @IBAction func rsvpButtonTapped(_ sender: UIButton) {
+        guard let sectionNumber = sectionNumber,
+              sectionNumber == 1,
+              let event = event,
+              let currentUser = UserController.shared.currentUser else { return }
+        
+        EventController.shared.acceptInvite(event: event, user: currentUser) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let event):
+                    guard let event = event else { return }
+                    print("\(currentUser.fullName) is now attending \(event.title)")
+                    self.changeableButton.setImage(nil, for: .normal)
+                    self.changeableButton.setTitle("attending", for: .normal)
+                    self.changeableButton.titleLabel?.font = UIFont(name: FontNames.sfRoundedReg, size: 10)
+                    self.changeableButton.addCornerRadius(color: .gray)
+                    self.changeableButton.setBackgroundColor(.gray)
+                case .failure(let error):
+                    print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+                }
+            }
+        }
+        
+    }
 
     //MARK: - Functions
     fileprivate func updateViews() {
@@ -51,13 +78,27 @@ class EventsTableViewCell: UITableViewCell {
         attendanceStatusLabel.textColor = .gray
         ownerLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 12)
         ownerLabel.textColor = .customLightGreen
+        changeableButton.tintColor = .customLightGreen
+        changeableButton.setTitleColor(.white, for: .normal)
         
         if sectionNumber == 0 {
-            ownerLabel.isHidden = false
-            changeableImageView.image = #imageLiteral(resourceName: "icons8-chevron_right-40")
+            if event.userRef.recordID == UserController.shared.currentUser?.recordID {
+                ownerLabel.isHidden = false
+                changeableButton.setImage(#imageLiteral(resourceName: "icons8-chevron_right-40"), for: .normal)
+                changeableButton.isEnabled = false
+            } else {
+                ownerLabel.isHidden = true
+                self.changeableButton.setImage(nil, for: .normal)
+                self.changeableButton.setTitle("attending", for: .normal)
+                self.changeableButton.titleLabel?.font = UIFont(name: FontNames.sfRoundedReg, size: 10)
+                self.changeableButton.addCornerRadius(color: .gray)
+                self.changeableButton.setBackgroundColor(.gray)
+                changeableButton.isEnabled = false
+            }
         } else {
             ownerLabel.isHidden = true
-            changeableImageView.image = #imageLiteral(resourceName: "rsvp")
+            changeableButton.setImage(#imageLiteral(resourceName: "rsvp"), for: .normal)
+            changeableButton.isEnabled = true
         }
     }
     
