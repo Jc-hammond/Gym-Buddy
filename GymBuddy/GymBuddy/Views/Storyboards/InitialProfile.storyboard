@@ -136,7 +136,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="GitFit" width="28.5" height="9.5"/>
+        <image name="GitFit" width="256" height="109.5"/>
         <namedColor name="custom dark green">
             <color red="0.16862745098039217" green="0.17254901960784313" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
