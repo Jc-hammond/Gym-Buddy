@@ -55,8 +55,18 @@ class FriendTableViewCell: UITableViewCell {
                               let senderRequestRef = friendRequests[0].siblingRef,
                               let receiverRequestRef = friendRequests[1].siblingRef else { return }
                         
-                        user.friendRequestRefs?.append(senderRequestRef)
-                        currentUser.friendRequestRefs?.append(receiverRequestRef)
+                        if user.friendRequestRefs != nil {
+                            user.friendRequestRefs?.append(senderRequestRef)
+                        } else {
+                            user.friendRequestRefs = [senderRequestRef]
+                        }
+                        
+                        if currentUser.friendRequestRefs != nil {
+                            currentUser.friendRequestRefs?.append(receiverRequestRef)
+                        } else {
+                            currentUser.friendRequestRefs = [receiverRequestRef]
+                        }
+                        
                         self.saveUser(user: user)
                         self.saveUser(user: currentUser)
 
