@@ -168,7 +168,7 @@ class HomeViewController: UIViewController {
     func updateViews() {
         guard let currentUser = UserController.shared.currentUser else { return }
         profileNameButton.tintColor = .clear
-        profileNameButton.titleLabel?.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 36)
+        profileNameButton.titleLabel?.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 28)
         profileNameButton.setTitle(currentUser.fullName, for: .normal)
         
         profileImageButton.tintColor = .clear

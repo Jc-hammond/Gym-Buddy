@@ -105,7 +105,7 @@
                                                     <constraint firstAttribute="height" constant="40" id="mNR-Jr-v5i"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="SFProRounded-Regular" family="SF Pro Rounded" pointSize="20"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="name"/>
                                             </textField>
                                         </subviews>
                                     </stackView>

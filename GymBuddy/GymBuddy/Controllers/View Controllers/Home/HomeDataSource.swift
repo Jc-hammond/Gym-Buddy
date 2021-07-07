@@ -80,10 +80,8 @@ class HomeDataSource: UICollectionViewDiffableDataSource<Section, HomeItem> {
             guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderCollectionReusableView.id, for: indexPath) as? HeaderCollectionReusableView else { fatalError() }
             headerView.headerLabel.text = self.snapshot().sectionIdentifiers[indexPath.section].title
             
-            if headerView.headerLabel.text == "  Friends" {
-                headerView.isButtonHidden = false
-            }
-            
+            headerView.sectionNumber = indexPath.section
+                        
             return headerView
         }
         

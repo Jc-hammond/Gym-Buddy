@@ -123,7 +123,7 @@
                                                     <constraint firstAttribute="width" constant="250" id="aQw-W6-NAU"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="SFProRounded-Regular" family="SF Pro Rounded" pointSize="16"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="name"/>
                                             </textField>
                                         </subviews>
                                     </stackView>
