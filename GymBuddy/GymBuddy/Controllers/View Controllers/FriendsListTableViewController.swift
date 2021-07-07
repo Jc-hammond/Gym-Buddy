@@ -22,19 +22,20 @@ class FriendsListTableViewController: UITableViewController {
         
         navigationController?.navigationBar.tintColor = .customLightGreen
         
-        fetchFriendRequests()
-        fetchAllUsers()
+//        fetchFriendRequests()
+//        fetchAllUsers()
+        fetchAllUsersAndMyFriendReqs()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        fetchFriendRequests()
-        fetchAllUsers()
+//        fetchFriendRequests()
+        //fetchAllUsersAndMyFriendReqs()
     }
     
     //MARK: - Functions
-    func fetchAllUsers() {
+    func fetchAllUsersAndMyFriendReqs() {
         let predicate = NSPredicate(value: true)
         UserController.shared.fetchProfile(predicate: predicate) { result in
             DispatchQueue.main.async {
@@ -44,6 +45,7 @@ class FriendsListTableViewController: UITableViewController {
                     let excludedUsers = users.filter { $0 != UserController.shared.currentUser }
                     let sortedUsers = excludedUsers.sorted{ $0.fullName < $1.fullName }
                     self.allUsers = sortedUsers
+                    self.fetchFriendRequests()
                     self.tableView.reloadData()
                 case .failure(_):
                     print("No user found in publicDB")
@@ -57,12 +59,15 @@ class FriendsListTableViewController: UITableViewController {
               let friendRequestRefs = currentUser.friendRequestRefs else { return }
         
         FriendRequestController.shared.fetchFriendRequests(friendRequestRefs: friendRequestRefs) { result in
-            switch result {
-            case .success(let friendRequests):
-                print("successfully fetched friendRequests")
-                self.friendRequests = friendRequests
-            case .failure(let error):
-                print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let friendRequests):
+                    print("successfully fetched friendRequests")
+                    self.friendRequests = friendRequests
+                    self.tableView.reloadData()
+                case .failure(let error):
+                    print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+                }
             }
         }
     }
@@ -94,14 +99,20 @@ class FriendsListTableViewController: UITableViewController {
                 
                 cell.buttonTitle = "added"
                 
-            } else if friendRequestForUser != nil {
+            } else if let friendRequestRefs = currentUser.friendRequestRefs,
+                      friendRequestRefs.contains(userRef) {
+                
+            }
+            
+            else if friendRequestForUser != nil {
                 if friendRequestForUser!.ownerDidSend == true {
                     cell.buttonTitle = "pending"
                 } else {
                     cell.buttonTitle = "accept"
                 }
-                
-            } else {
+            }
+            
+            else {
                 cell.buttonTitle = "add friend"
             }
         }
