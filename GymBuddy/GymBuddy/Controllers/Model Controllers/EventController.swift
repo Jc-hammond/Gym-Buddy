@@ -23,7 +23,7 @@ class EventController {
         guard let currentUser = UserController.shared.currentUser else {return completion(.failure(.noProfile))}
         let userRef = CKRecord.Reference(recordID: currentUser.recordID, action: .deleteSelf)
         
-        let newEvent = Event(title: title, emoji: emoji, date: date, location: location, type: type, info: info, invitees: nil, attendees: nil, userRef: userRef)
+        let newEvent = Event(title: title, emoji: emoji, date: date, location: location, type: type, info: info, invitees: nil, inviteeRefs: nil, attendees: nil, attendeeRefs: nil, userRef: userRef)
         
         let record = CKRecord(event: newEvent)
         
@@ -45,7 +45,13 @@ class EventController {
         let inviteeID = invitee.recordID
         let inviteeRef = CKRecord.Reference(recordID: inviteeID, action: .deleteSelf)
         
-        event.inviteeRefs.append(inviteeRef)
+        if event.inviteeRefs != nil {
+            event.inviteeRefs?.append(inviteeRef)
+        } else {
+            event.inviteeRefs = [inviteeRef]
+        }
+            
+//        event.inviteeRefs.append(inviteeRef)
         
         let record = CKRecord(event: event)
         
@@ -72,10 +78,14 @@ class EventController {
         let inviteeID = user.recordID
         let inviteeRef = CKRecord.Reference(recordID: inviteeID, action: .deleteSelf)
         
-        guard let index = event.inviteeRefs.firstIndex(of: inviteeRef) else {return}
-        event.inviteeRefs.remove(at: index)
+        guard let index = event.inviteeRefs?.firstIndex(of: inviteeRef) else {return}
+        event.inviteeRefs?.remove(at: index)
         
-        event.attendeeRefs.append(inviteeRef)
+        if event.attendeeRefs != nil {
+            event.attendeeRefs?.append(inviteeRef)
+        } else {
+            event.attendeeRefs = [inviteeRef]
+        }
         
         let record = CKRecord(event: event)
         

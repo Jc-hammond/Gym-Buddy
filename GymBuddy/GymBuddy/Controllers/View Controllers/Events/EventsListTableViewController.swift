@@ -36,7 +36,7 @@ class EventsListTableViewController: UITableViewController {
         allEvents = [[], []]
 
         let ownerPredicate = NSPredicate(format: "%K == %@", EventStrings.userRefKey, currentUserRef)
-//        let inviteesPredicate = NSPredicate(format: "%K == %@", EventStrings.inviteeRefsKey, currentUserRef)
+        let inviteesPredicate = NSPredicate(format: "%K == %@", EventStrings.inviteeRefsKey, currentUserRef)
 //        let allEventPredicate = NSPredicate(value: true)
         
         EventController.shared.fetchEvent(predicate: ownerPredicate) { result in
@@ -55,15 +55,19 @@ class EventsListTableViewController: UITableViewController {
             }
         }
         
-//        EventController.shared.fetchEvent(predicate: inviteesPredicate) { result in
-//            switch result {
-//            case .success(let events):
-//                guard let invitedEvents = events else { return }
-//                self.allEvents.append(invitedEvents)
-//            case .failure(let error):
-//                print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
-//            }
-//        }
+        EventController.shared.fetchEvent(predicate: inviteesPredicate) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let events):
+                    guard let invitedEvents = events else { return }
+                    self.allEvents[1] = invitedEvents
+                    self.tableView.reloadData()
+                case .failure(let error):
+                    print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+                }
+                
+            }
+        }
         
     }//end of func
     

@@ -47,16 +47,20 @@ class EventDetailViewController: UIViewController {
     
     //MARK: - Function
     fileprivate func fetchAttendees() {
-        guard let event = event else {return}
-              let attendeeRefs = event.attendeeRefs
+        guard let event = event,
+              let attendeeRefs = event.attendeeRefs else {return}
+              
         
         EventController.shared.fetchEventAttendees(attendeeRefs: attendeeRefs) { result in
-            switch result {
-            case .success(let attendees):
-                guard let attendees = attendees else { return }
-                self.attendees = attendees
-            case .failure(let error):
-                print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let attendees):
+                    guard let attendees = attendees else { return }
+                    self.attendees = attendees
+                    self.tableView.reloadData()
+                case .failure(let error):
+                    print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+                }
             }
         }
         
