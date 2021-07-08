@@ -156,7 +156,7 @@ class EventsListTableViewController: UITableViewController {
         textLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 24)
         textLabel.textColor = .customLightGreen
         textLabel.underline()
-        headerView.backgroundColor = UIColor.white
+        headerView.backgroundColor = UIColor.clear
         
         return headerView
     }
