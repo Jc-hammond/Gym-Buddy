@@ -383,6 +383,7 @@
                         <outlet property="eventTitleLabel" destination="Z8M-IE-dqV" id="Ab4-Dx-rO0"/>
                         <outlet property="exerciseTypeLabel" destination="RXp-FW-Zhd" id="qe8-bw-igQ"/>
                         <outlet property="infoLabel" destination="dZh-rx-dSO" id="lRt-fu-Dbt"/>
+                        <outlet property="inviteButton" destination="kva-ac-6u7" id="lNQ-UU-yHW"/>
                         <outlet property="inviteesLabel" destination="76r-NE-OfS" id="f6l-IG-RDo"/>
                         <outlet property="locationLabel" destination="jh6-ak-h2G" id="Hgn-Fy-7Gb"/>
                         <outlet property="tableView" destination="ISV-lq-k1e" id="sQb-Uc-6ue"/>

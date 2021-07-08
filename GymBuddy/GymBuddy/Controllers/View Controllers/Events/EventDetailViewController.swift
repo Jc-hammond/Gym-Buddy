@@ -23,6 +23,7 @@ class EventDetailViewController: UIViewController {
     @IBOutlet weak var eventInfoLabel: UILabel!
     @IBOutlet weak var inviteesLabel: UILabel!
     @IBOutlet weak var editButton: UIBarButtonItem!
+    @IBOutlet weak var inviteButton: UIButton!
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -33,11 +34,7 @@ class EventDetailViewController: UIViewController {
             fetchAttendees()
         }
     }
-    var isOwner: Bool? {
-        didSet {
-            hideEditButton()
-        }
-    }
+    var isOwner: Bool?
     var attendees = [User]()
     var invitees = [User]()
     
@@ -53,9 +50,16 @@ class EventDetailViewController: UIViewController {
         updateViews()
     }
     
+    override func loadViewIfNeeded() {
+        super.loadViewIfNeeded()
+        disableButtons()
+    }
+    
     //MARK: - Function
-    func hideEditButton() {
+    func disableButtons() {
+        guard isOwner == false else { return }
         editButton.isEnabled = false
+        inviteButton.isEnabled = false
     }
     
     fileprivate func fetchAttendees() {
