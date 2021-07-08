@@ -73,7 +73,7 @@
                                                                         <nil key="textColor"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
-                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="HWc-ft-PVX">
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="HWc-ft-PVX">
                                                                         <rect key="frame" x="102" y="0.0" width="30" height="48"/>
                                                                         <subviews>
                                                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GEX-2p-gVy">
@@ -99,13 +99,13 @@
                                                                                 </connections>
                                                                             </button>
                                                                         </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="30" id="YXn-ZB-gzX"/>
+                                                                        </constraints>
                                                                     </stackView>
                                                                 </subviews>
                                                             </stackView>
                                                         </subviews>
-                                                        <constraints>
-                                                            <constraint firstItem="Gpi-iV-5OI" firstAttribute="height" secondItem="Bfa-Y1-Rd3" secondAttribute="height" id="dvc-7T-7tA"/>
-                                                        </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="UwL-Uu-CQZ">
                                                         <rect key="frame" x="185" y="0.0" width="166" height="48"/>
@@ -132,6 +132,11 @@
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="Bfa-Y1-Rd3" firstAttribute="height" secondItem="gho-MS-Zn1" secondAttribute="height" id="Ucy-ZS-CUU"/>
+                                                    <constraint firstItem="Gpi-iV-5OI" firstAttribute="height" secondItem="gho-MS-Zn1" secondAttribute="height" id="YWF-9f-3z1"/>
+                                                    <constraint firstAttribute="height" constant="48" id="wmd-XV-C9w"/>
+                                                </constraints>
                                             </stackView>
                                         </subviews>
                                     </stackView>
@@ -203,6 +208,9 @@
                                                                                 </connections>
                                                                             </button>
                                                                         </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="30" id="gIb-xP-M8c"/>
+                                                                        </constraints>
                                                                     </stackView>
                                                                 </subviews>
                                                             </stackView>
@@ -232,6 +240,11 @@
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="48" id="6HC-sS-pIX"/>
+                                                    <constraint firstItem="88h-O3-rCY" firstAttribute="height" secondItem="cOx-0H-SfN" secondAttribute="height" id="Go5-3m-hE8"/>
+                                                    <constraint firstItem="Z4Y-oY-tuw" firstAttribute="height" secondItem="cOx-0H-SfN" secondAttribute="height" id="WSa-bQ-twx"/>
+                                                </constraints>
                                             </stackView>
                                         </subviews>
                                     </stackView>
@@ -303,6 +316,9 @@
                                                                                 </connections>
                                                                             </button>
                                                                         </subviews>
+                                                                        <constraints>
+                                                                            <constraint firstAttribute="width" constant="30" id="UQw-9h-MbS"/>
+                                                                        </constraints>
                                                                     </stackView>
                                                                 </subviews>
                                                             </stackView>
@@ -329,6 +345,11 @@
                                                         </subviews>
                                                     </stackView>
                                                 </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="Yq0-xq-TJS" firstAttribute="height" secondItem="NgB-mH-qdA" secondAttribute="height" id="BWz-Do-Fog"/>
+                                                    <constraint firstItem="eBo-ea-0aI" firstAttribute="height" secondItem="NgB-mH-qdA" secondAttribute="height" id="HEx-lH-zUN"/>
+                                                    <constraint firstAttribute="height" constant="48" id="g1I-40-t9R"/>
+                                                </constraints>
                                             </stackView>
                                         </subviews>
                                     </stackView>

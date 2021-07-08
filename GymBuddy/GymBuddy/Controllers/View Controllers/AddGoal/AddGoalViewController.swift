@@ -343,7 +343,7 @@ class AddGoalViewController: UIViewController {
         case 4:
             if distanceQuantity > 0 {
                 distanceQuantity -= 1
-                durationDetailLabel.text = "\(distanceQuantity)"
+                distanceDetailLabel.text = "\(distanceQuantity)"
             }
         case 5:
             caloriesQuantity += 10
