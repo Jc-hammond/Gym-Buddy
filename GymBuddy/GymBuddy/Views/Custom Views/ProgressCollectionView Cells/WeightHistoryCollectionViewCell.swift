@@ -31,8 +31,6 @@ class WeightHistoryCollectionViewCell: UICollectionViewCell, CellRegisterable {
     var currentWeights: [Int] = []
     var currentDates: [String] = []
     
-    
-    
     //MARK: - Init
     
     override func awakeFromNib() {
@@ -116,6 +114,9 @@ class WeightHistoryCollectionViewCell: UICollectionViewCell, CellRegisterable {
         lineChart.xAxis.labelFont = UIFont(name: FontNames.sfRoundedSemiBold, size: 12)!
         lineChart.xAxis.axisLineColor = .customLightGreen!
         lineChart.xAxis.setLabelCount(currentWeights.count - 1, force: false)
+        lineChart.xAxis.valueFormatter = IndexAxisValueFormatter(values: currentDates)
+        lineChart.xAxis.granularity = 1
+        lineChart.xAxis.labelRotationAngle = 60
         
         lineChart.leftAxis.labelTextColor = .customLightGreen!
         lineChart.leftAxis.labelFont = UIFont(name: FontNames.sfRoundedSemiBold, size: 12)!

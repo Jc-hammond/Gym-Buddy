@@ -376,6 +376,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="dateLabel" destination="I9D-2D-ZtR" id="ZkK-gn-jpi"/>
+                        <outlet property="editButton" destination="RFF-qT-MNV" id="ECs-HD-tVp"/>
                         <outlet property="eventDetailLabel" destination="a8y-vp-bs6" id="wTZ-I2-MAD"/>
                         <outlet property="eventEmojiLabel" destination="Nlt-dT-fWF" id="Fpu-3a-DvP"/>
                         <outlet property="eventInfoLabel" destination="pC7-5W-pLB" id="3Gz-tq-YST"/>

@@ -12,15 +12,16 @@ class WeightCollectionViewCell: UICollectionViewCell, CellRegisterable {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var weightLabel: UILabel!
     @IBOutlet weak var emojiLabel: UILabel!
+    @IBOutlet weak var detailLabelContainer: UIView!
     @IBOutlet weak var detailLabel: UILabel!
     
     //MARK: - Properties
-    var currentUser: User? {
+    var currentUser: User?
+    var itemNumber: Int? {
         didSet {
             updateViews()
         }
     }
-    var itemNumber: Int?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -32,20 +33,25 @@ class WeightCollectionViewCell: UICollectionViewCell, CellRegisterable {
               let currentWeight = currentUser.currentWeights?.last,
               let itemNumber = itemNumber else { return }
         self.addCornerRadius(radius: 16, width: 4)
+        self.backgroundColor = .customLightGreen
         
         if itemNumber == 0 {
             titleLabel.text = "Current Weight"
             weightLabel.text = "\(currentWeight) lbs"
             emojiLabel.isHidden = true
-            let detailText = currentUser.currentDates?.last == Date() ?
+            let detailText = currentUser.currentDates?.last?.formatDate() == Date().formatDate() ?
                 "You added your weight today" :
-                "You haven't added your weight since \(currentUser.currentDates?.last?.formatDate() ?? "")"
+                currentUser.currentDates != nil ?
+                "You haven't added your weight since \(currentUser.currentDates?.last?.formatDate() ?? "")" :
+                "Please add your current weight"
             detailLabel.text = detailText
         } else if itemNumber == 1 {
             titleLabel.text = "Target Weight"
             weightLabel.text = "\(currentUser.targetWeight) lbs"
             emojiLabel.isHidden = false
-            let variance = (abs(currentWeight-currentUser.targetWeight) / ((currentWeight+currentUser.targetWeight) / 2)) * 100
+            let currentWeightD = Double(currentWeight)
+            let targetWeightD = Double(currentUser.targetWeight)
+            let variance: Double = (abs(currentWeightD-targetWeightD) / ((currentWeightD+targetWeightD) / 2)) * 100
             
             if variance < 5 {
                 emojiLabel.text = "👍"
@@ -55,18 +61,19 @@ class WeightCollectionViewCell: UICollectionViewCell, CellRegisterable {
                 emojiLabel.text = "🏋️‍♀️"
             }
             
-            detailLabel.text = "You are within \(variance)% of your target weight"
+            detailLabel.text = "You are within \(round(variance*10)/10)% of your target weight"
         }
         
-        titleLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 24)
+        titleLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 20)
         titleLabel.textColor = .customDarkGreen
         weightLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 36)
-        weightLabel.textColor = .customLightGreen
+        weightLabel.textColor = .white
         let width = emojiLabel.frame.width
-        emojiLabel.addCornerRadius(radius: width/2, width: 1, color: .customDarkGreen)
-        detailLabel.font = UIFont(name: FontNames.sfRoundedReg, size: 12)
-        
-        
+        emojiLabel.clipsToBounds = true
+        emojiLabel.addCornerRadius(radius: width/2, width: 1, color: .customLightGreen)
+        emojiLabel.backgroundColor = .white
+        detailLabel.font = UIFont(name: FontNames.sfRoundedReg, size: 14)
+        detailLabelContainer.addCornerRadius(color: .customDarkGreen)
     }//end of func
 
 }//End of class

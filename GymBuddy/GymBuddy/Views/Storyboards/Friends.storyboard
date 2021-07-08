@@ -7,7 +7,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Friends-->
+        <!--Friends List Table View Controller-->
         <scene sceneID="R2P-P4-XDu">
             <objects>
                 <tableViewController storyboardIdentifier="FriendsListTableViewController" id="JSq-eo-JZj" customClass="FriendsListTableViewController" customModule="GymBuddy" customModuleProvider="target" sceneMemberID="viewController">
@@ -78,7 +78,7 @@
                             <outlet property="delegate" destination="JSq-eo-JZj" id="noq-8f-sT0"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Friends" id="Dt9-7H-BtR"/>
+                    <navigationItem key="navigationItem" id="Dt9-7H-BtR"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iQh-V5-iMs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
