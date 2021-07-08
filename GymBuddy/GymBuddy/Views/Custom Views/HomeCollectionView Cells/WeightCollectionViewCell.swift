@@ -25,7 +25,6 @@ class WeightCollectionViewCell: UICollectionViewCell, CellRegisterable {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
     
     func updateViews() {

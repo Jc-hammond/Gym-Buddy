@@ -13,7 +13,6 @@ struct HomeItem {
     let context: Context
     
     enum Context: Hashable {
-        //case friendList(String)
         case weight
         case personalBest(Workout)
     }
@@ -31,16 +30,6 @@ extension HomeItem : Hashable {
 
 
 class HomeDataSource: UICollectionViewDiffableDataSource<Section, HomeItem> {
-    //MARK: - Temp Mock Data
-    //JCHUN - Mock Data
-//    let mockFriends: [String] = [
-//        "Tyrion Lannister",
-//        "Arya Stark",
-//        "Jon Snow",
-//        "Daenerys Targaryen",
-//        "Tormund Giantsbane"
-//    ]
-        
     var personalBests = [Workout]()
     
     let sections: [Section] = {
@@ -131,13 +120,6 @@ class HomeDataSource: UICollectionViewDiffableDataSource<Section, HomeItem> {
                 personalBests.remove(at: removalIndex[i])
             }
         }
-        
-        // Friends
-//        var friends = [HomeItem]()
-//        for friend in mockFriends {
-//            let item = HomeItem(context: .friendList(friend))
-//            friends.append(item)
-//        }
         
         //Weight Items
         var weightItem = [HomeItem]()

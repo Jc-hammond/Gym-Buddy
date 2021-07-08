@@ -72,7 +72,6 @@ class ProfileViewController: UIViewController {
                 case .failure(let error):
                     print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
                 }
-                //self.navigationController?.popViewController(animated: true)
             }
         }
     }
@@ -135,16 +134,6 @@ class ProfileViewController: UIViewController {
         deleteAccountButton.titleLabel?.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 20)
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension ProfileViewController: UITextFieldDelegate {
