@@ -45,25 +45,6 @@ class FriendsListTableViewController: UITableViewController {
                 switch result {
                 case .success(let users):
                     guard let users = users else { return }
-                    self.fetchBlockedUsers(users: users)
-      
-                case .failure(_):
-                    print("No user found in publicDB")
-                }
-            }
-        }
-    }
-    
-    func fetchBlockedUsers(users: [User]) {
-        guard let user = UserController.shared.currentUser,
-              let blockedRefs = user.blockedUserRefs else {return}
-        
-        EventController.shared.fetchEventAttendees(attendeeRefs: blockedRefs) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let blockedUsers):
-                    guard let blockedUsers = blockedUsers else {return}
-                    self.blockedUsers = blockedUsers
                     
                     let excludedUsers = users.filter { $0 != UserController.shared.currentUser }
                     var sortedUsers = excludedUsers.sorted{ $0.fullName < $1.fullName }
@@ -83,6 +64,30 @@ class FriendsListTableViewController: UITableViewController {
                         }
                     }
                     
+                    self.allUsers = sortedUsers
+                    self.tableView.reloadData()
+
+                    self.fetchBlockedUsers(sortedUsers: sortedUsers)
+      
+                case .failure(_):
+                    print("No user found in publicDB")
+                }
+            }
+        }
+    }
+    
+    func fetchBlockedUsers(sortedUsers: [User]) {
+        guard let user = UserController.shared.currentUser,
+              let blockedRefs = user.blockedUserRefs else {return}
+        
+        EventController.shared.fetchEventAttendees(attendeeRefs: blockedRefs) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let blockedUsers):
+                    guard let blockedUsers = blockedUsers else {return}
+                    self.blockedUsers = blockedUsers
+                    var sortedUsers = sortedUsers
+
                     for user in sortedUsers {
                         guard let blockedUsers = self.blockedUsers else {return}
                         if blockedUsers.contains(user) {
