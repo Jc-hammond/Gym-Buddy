@@ -28,10 +28,12 @@ class EventDetailViewController: UIViewController {
     //MARK: - Properties
     var event: Event? {
         didSet {
+            fetchInvitees()
             fetchAttendees()
         }
     }
     var attendees = [User]()
+    var invitees = [User]()
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -57,6 +59,7 @@ class EventDetailViewController: UIViewController {
                 case .success(let attendees):
                     guard let attendees = attendees else { return }
                     self.attendees = attendees
+//                    self.fetchInvitees()
                     self.tableView.reloadData()
                 case .failure(let error):
                     print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
@@ -66,6 +69,24 @@ class EventDetailViewController: UIViewController {
         
     }//end of func
     
+    func fetchInvitees() {
+        guard let event = event,
+              let inviteeRefs = event.inviteeRefs else {return}
+        
+        EventController.shared.fetchEventAttendees(attendeeRefs: inviteeRefs) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let invitees):
+                    guard let invitees = invitees else {return}
+                    self.invitees = invitees
+                    self.tableView.reloadData()
+                case .failure(let error):
+                    print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+                }
+            }
+        }
+    }
+    
     //MARK: - Actions
     @IBAction func addInviteeButtonTapped(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Friends", bundle: nil)
@@ -74,6 +95,8 @@ class EventDetailViewController: UIViewController {
         //destinationVC.buttonTitles = ["invite", "attending"]
         destinationVC.originVC = "EventDetailVC"
         destinationVC.event = eventToSend
+        destinationVC.attendees = attendees
+        destinationVC.invitees = invitees
         self.navigationController?.pushViewController(destinationVC, animated: true)
     }
     

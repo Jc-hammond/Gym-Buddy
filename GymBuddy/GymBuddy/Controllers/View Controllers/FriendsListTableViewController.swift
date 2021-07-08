@@ -15,6 +15,8 @@ class FriendsListTableViewController: UITableViewController {
     var friendRequests: [FriendRequest]?
     var originVC: String?
     var event: Event?
+    var attendees: [User]?
+    var invitees: [User]?
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -43,9 +45,28 @@ class FriendsListTableViewController: UITableViewController {
                 case .success(let users):
                     guard let users = users else { return }
                     let excludedUsers = users.filter { $0 != UserController.shared.currentUser }
-                    let sortedUsers = excludedUsers.sorted{ $0.fullName < $1.fullName }
+                    var sortedUsers = excludedUsers.sorted{ $0.fullName < $1.fullName }
+//                    guard let event = self.event else {return}
+//                    let containsInviteeIDs = event.
+//                    users.removeAll(where: {$0 == containsInviteeIDs)
+                    for user in sortedUsers {
+                        guard let attendees = self.attendees else {return}
+                        if attendees.contains(user) {
+                            guard let index = sortedUsers.firstIndex(of: user) else {return}
+                            sortedUsers.remove(at: index)
+                        }
+                    }
+                    
+                    for user in sortedUsers {
+                        guard let invitees = self.invitees else {return}
+                        if invitees.contains(user) {
+                            guard let index = sortedUsers.firstIndex(of: user) else {return}
+                            sortedUsers.remove(at: index)
+                        }
+                    }
+                    
                     self.allUsers = sortedUsers
-                    self.fetchFriendRequests()
+//                    self.fetchFriendRequests()
                     self.tableView.reloadData()
                 case .failure(_):
                     print("No user found in publicDB")
@@ -75,7 +96,6 @@ class FriendsListTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         guard let allUsers = allUsers else { return 0 }
         return allUsers.count
     }
