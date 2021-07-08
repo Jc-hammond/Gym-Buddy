@@ -134,11 +134,42 @@
             </objects>
             <point key="canvasLocation" x="129" y="115"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="exB-jw-MkR">
+            <objects>
+                <viewController id="C5H-MM-9U8" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lFq-wg-ppR">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hqx-Si-Y6B">
+                                <rect key="frame" x="103.5" y="453" width="207" height="0.0"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="0.0"/>
+                                <color key="textColor" name="custom green"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="baF-ET-ji9"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Hqx-Si-Y6B" firstAttribute="centerX" secondItem="baF-ET-ji9" secondAttribute="centerX" id="Hbf-6c-ZJA"/>
+                            <constraint firstItem="Hqx-Si-Y6B" firstAttribute="centerY" secondItem="baF-ET-ji9" secondAttribute="centerY" id="pd5-Sb-lEf"/>
+                            <constraint firstItem="Hqx-Si-Y6B" firstAttribute="width" secondItem="lFq-wg-ppR" secondAttribute="width" multiplier="0.5" id="s08-H1-Ts9"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="apY-Fe-jVB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="926" y="115"/>
+        </scene>
     </scenes>
     <resources>
         <image name="GitFit" width="256" height="109.5"/>
         <namedColor name="custom dark green">
             <color red="0.16862745098039217" green="0.17254901960784313" blue="0.15686274509803921" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="custom green">
+            <color red="0.20000000000000001" green="0.59999999999999998" blue="0.53725490196078429" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

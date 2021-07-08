@@ -114,20 +114,22 @@ class HomeDataSource: UICollectionViewDiffableDataSource<Section, HomeItem> {
         personalBests = personalBests.sorted { $0.title < $1.title }
         
         var removalIndex = [Int]()
-        for i in 0..<personalBests.count - 1 {
-            if personalBests[i].title == personalBests[i+1].title {
-                if personalBests[i].goal < personalBests[i+1].goal {
-                    removalIndex.append(i)
-                } else {
-                    removalIndex.append(i+1)
+        if !(personalBests.isEmpty) {
+            for i in 0..<personalBests.count - 1 {
+                if personalBests[i].title == personalBests[i+1].title {
+                    if personalBests[i].goal < personalBests[i+1].goal {
+                        removalIndex.append(i)
+                    } else {
+                        removalIndex.append(i+1)
+                    }
                 }
             }
-        }
-        
-        removalIndex.reverse()
-        
-        for i in 0..<removalIndex.count {
-            personalBests.remove(at: removalIndex[i])
+            
+            removalIndex.reverse()
+            
+            for i in 0..<removalIndex.count {
+                personalBests.remove(at: removalIndex[i])
+            }
         }
         
         // Friends

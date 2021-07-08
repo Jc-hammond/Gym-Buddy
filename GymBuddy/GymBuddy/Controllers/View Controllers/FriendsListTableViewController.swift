@@ -187,7 +187,7 @@ class FriendsListTableViewController: UITableViewController {
             guard let allUsers = allUsers else {return}
             let user = allUsers[indexPath.row]
             guard let currentUser = UserController.shared.currentUser else {return}
-            let blockUserRef = CKRecord.Reference(recordID: user.recordID, action: .deleteSelf)
+            let blockUserRef = CKRecord.Reference(recordID: user.recordID, action: .none)
             if currentUser.blockedUserRefs != nil {
                 currentUser.blockedUserRefs?.append(blockUserRef)
             } else {
