@@ -59,7 +59,6 @@
 		3B727F80268B4ED500395029 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B727F7F268B4ED500395029 /* FriendTableViewCell.swift */; };
 		3BA2462726969B580015056C /* WeightCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA2462526969B580015056C /* WeightCollectionViewCell.swift */; };
 		3BA2462826969B580015056C /* WeightCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BA2462626969B580015056C /* WeightCollectionViewCell.xib */; };
-		3BA2462A2696EA310015056C /* XAxisFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA246292696EA310015056C /* XAxisFormatter.swift */; };
 		6556E5A7CA48B6C32BE04AB4 /* Pods_GymBuddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E3A4F0A7BEC32E25A55B1B9 /* Pods_GymBuddy.framework */; };
 		714A742B26791C3A005F46F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714A742A26791C3A005F46F2 /* AppDelegate.swift */; };
 		714A742D26791C3A005F46F2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714A742C26791C3A005F46F2 /* SceneDelegate.swift */; };
@@ -135,7 +134,6 @@
 		3B727F7F268B4ED500395029 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
 		3BA2462526969B580015056C /* WeightCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightCollectionViewCell.swift; sourceTree = "<group>"; };
 		3BA2462626969B580015056C /* WeightCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeightCollectionViewCell.xib; sourceTree = "<group>"; };
-		3BA246292696EA310015056C /* XAxisFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XAxisFormatter.swift; sourceTree = "<group>"; };
 		4E3A4F0A7BEC32E25A55B1B9 /* Pods_GymBuddy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymBuddy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		714A742726791C3A005F46F2 /* GymBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		714A742A26791C3A005F46F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -284,7 +282,6 @@
 		3B5EFD2A2680FA1200F83E50 /* Helper and Extension */ = {
 			isa = PBXGroup;
 			children = (
-				3BA246292696EA310015056C /* XAxisFormatter.swift */,
 				3B5CBCDB26819F51005036EC /* StringConstants.swift */,
 				3B058A992683EE0B0047FF61 /* CellRegisterable.swift */,
 				3B058A982683EDEC0047FF61 /* Extensions */,
@@ -640,7 +637,6 @@
 				3B5CBCD2268174D9005036EC /* AddGoalViewController.swift in Sources */,
 				3B727F7C268B3FC400395029 /* ProfileViewController.swift in Sources */,
 				3B5EFD2F26811B5800F83E50 /* HomeViewController.swift in Sources */,
-				3BA2462A2696EA310015056C /* XAxisFormatter.swift in Sources */,
 				714A742D26791C3A005F46F2 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
