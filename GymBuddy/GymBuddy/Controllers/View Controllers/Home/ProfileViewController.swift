@@ -68,15 +68,35 @@ class ProfileViewController: UIViewController {
                 switch result {
                 case .success(_):
                     print("successfully deleted current user")
+                    self.presentAlertController()
                 case .failure(let error):
                     print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
                 }
-                self.navigationController?.popViewController(animated: true)
+                //self.navigationController?.popViewController(animated: true)
             }
         }
     }
     
     //MARK: - Functions
+    func presentAlertController() {
+        let alert = UIAlertController(title: "Successfully Deleted your account", message: "We are sad to see you leave...", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Bye", style: .default) { _ in
+            self.presentInitialProfileVC()
+        }
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func presentInitialProfileVC() {
+        DispatchQueue.main.async {
+            let storyboard = UIStoryboard(name: "InitialProfile", bundle: nil)
+            guard let rootVC = storyboard.instantiateInitialViewController() else { return }
+            rootVC.modalPresentationStyle = .fullScreen
+            
+            self.present(rootVC, animated: true, completion: nil)
+        }
+    }
+    
     fileprivate func updateViews() {
         
         guard let currentUser = UserController.shared.currentUser else { return }
