@@ -103,18 +103,24 @@
                                                                 </subviews>
                                                             </stackView>
                                                         </subviews>
+                                                        <constraints>
+                                                            <constraint firstItem="Gpi-iV-5OI" firstAttribute="height" secondItem="Bfa-Y1-Rd3" secondAttribute="height" id="dvc-7T-7tA"/>
+                                                        </constraints>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="UwL-Uu-CQZ">
                                                         <rect key="frame" x="185" y="0.0" width="166" height="48"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unit:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="03O-CD-FV4">
-                                                                <rect key="frame" x="0.0" y="0.0" width="36" height="48"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="48"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="40" id="Ww2-IL-O0B"/>
+                                                                </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ASS-D3-atF">
-                                                                <rect key="frame" x="44" y="0.0" width="122" height="48"/>
+                                                                <rect key="frame" x="48" y="0.0" width="118" height="48"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                 <state key="normal" title="hour" image="icons8-chevron_down_filled-40">
                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -206,13 +212,16 @@
                                                         <rect key="frame" x="185" y="0.0" width="166" height="48"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unit:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gCC-xA-ntx">
-                                                                <rect key="frame" x="0.0" y="0.0" width="36" height="48"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="48"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="40" id="O9u-tO-i9O"/>
+                                                                </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PLH-v8-uuv">
-                                                                <rect key="frame" x="44" y="0.0" width="122" height="48"/>
+                                                                <rect key="frame" x="48" y="0.0" width="118" height="48"/>
                                                                 <state key="normal" title="mi" image="icons8-chevron_down_filled-40">
                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
@@ -303,13 +312,16 @@
                                                         <rect key="frame" x="185" y="0.0" width="166" height="48"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Unit:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YAp-Y3-rDe">
-                                                                <rect key="frame" x="0.0" y="0.0" width="36" height="48"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="40" height="48"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="40" id="36W-I6-rKe"/>
+                                                                </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UgF-Sn-vey">
-                                                                <rect key="frame" x="44" y="0.0" width="122" height="48"/>
+                                                                <rect key="frame" x="48" y="0.0" width="118" height="48"/>
                                                                 <state key="normal" title="calories">
                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
