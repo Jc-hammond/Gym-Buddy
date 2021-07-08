@@ -33,7 +33,7 @@ class FriendsListTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
 //        fetchFriendRequests()
-        //fetchAllUsersAndMyFriendReqs()
+//        fetchAllUsersAndMyFriendReqs()
     }
     
     //MARK: - Functions

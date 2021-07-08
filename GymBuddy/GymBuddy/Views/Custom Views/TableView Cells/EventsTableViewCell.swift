@@ -81,7 +81,7 @@ class EventsTableViewCell: UITableViewCell {
         changeableButton.tintColor = .customLightGreen
         changeableButton.setTitleColor(.white, for: .normal)
         
-        if sectionNumber == 0 {
+        if sectionNumber == 0 || changeableButton.titleLabel?.text == "attending" {
             if event.userRef.recordID == UserController.shared.currentUser?.recordID {
                 ownerLabel.isHidden = false
                 changeableButton.setImage(#imageLiteral(resourceName: "icons8-chevron_right-40"), for: .normal)

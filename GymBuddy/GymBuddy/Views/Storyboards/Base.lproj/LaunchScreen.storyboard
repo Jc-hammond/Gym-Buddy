@@ -38,7 +38,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="GitFitWithFriends" width="93.5" height="9.5"/>
+        <image name="GitFitWithFriends" width="2519.5" height="256"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

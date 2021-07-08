@@ -28,7 +28,6 @@ class EventsListTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         fetchAllEvents()
-
     }
         
     //MARK: - Function
@@ -201,6 +200,11 @@ class EventsListTableViewController: UITableViewController {
         if segue.identifier == "toEventDetailVC" {
             guard let indexPath = tableView.indexPathForSelectedRow,
                   let destinationVC = segue.destination as? EventDetailViewController else { return }
+            
+            guard let cell = tableView.cellForRow(at: indexPath) as? EventsTableViewCell else { return }
+            if cell.ownerLabel.isHidden == true {
+                destinationVC.isOwner = false
+            }
             
             let eventToSend = allEvents[indexPath.section][indexPath.row]
             
