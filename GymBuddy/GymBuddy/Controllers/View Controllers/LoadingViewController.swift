@@ -55,12 +55,13 @@ class LoadingViewController: UIViewController {
     func presentHomeTab() {
         DispatchQueue.main.async {
             if UserController.shared.currentUser != nil {
-                let storyboard = UIStoryboard(name: "Home", bundle: nil)
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 guard let rootVC = storyboard.instantiateInitialViewController() else { return }
                 rootVC.modalPresentationStyle = .fullScreen
 //                self.show(rootVC, sender: nil)
                 
                 self.present(rootVC, animated: true, completion: nil)
+//                rootVC.tabBarController?.selectedIndex = 0
             }
         }
     }
