@@ -93,15 +93,16 @@ extension UIView {
 }//End of extension
 
 extension UIView {
-    func blink(duration: Double = 1.5) {
+    func blink(duration: Double = 0.75) {
         let blinkAnimation = CABasicAnimation(keyPath: "opacity")
-        blinkAnimation.fromValue = 0.5
-        blinkAnimation.toValue = 1.0
-        blinkAnimation.isCumulative = true
+        blinkAnimation.isRemovedOnCompletion = false
+        blinkAnimation.fromValue = 1.0
+        blinkAnimation.toValue = 0.0
+        blinkAnimation.autoreverses = true
         blinkAnimation.duration = duration
         blinkAnimation.repeatCount = Float.infinity
         
-        layer.add(blinkAnimation, forKey: nil)
+        self.layer.add(blinkAnimation, forKey: nil)
     }
 
 }

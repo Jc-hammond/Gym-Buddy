@@ -20,8 +20,8 @@ class LoadingViewController: UIViewController {
         presentHomeTab()
     }
     
-    override func loadViewIfNeeded() {
-        super.loadViewIfNeeded()
+    override func loadView() {
+        super.loadView()
         loadingLabel.blink()
     }
     

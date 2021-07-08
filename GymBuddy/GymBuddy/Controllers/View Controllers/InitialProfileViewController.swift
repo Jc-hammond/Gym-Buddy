@@ -38,7 +38,7 @@ class InitialProfileViewController: UIViewController {
               let targetWeight = targetWeightTextField.text,
               let targetWeightInt = Int(targetWeight),
               let fullName = fullNameTextField.text else { return }
-                
+
         UserController.shared.createUser(fullName: fullName, currentWeight: currentWeightInt, targetWeight: targetWeightInt) { result in
             DispatchQueue.main.async {
                 switch result {
