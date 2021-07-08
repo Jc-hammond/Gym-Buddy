@@ -97,7 +97,7 @@ extension UIView {
         let blinkAnimation = CABasicAnimation(keyPath: "opacity")
         blinkAnimation.fromValue = 0.5
         blinkAnimation.toValue = 1.0
-        //blinkAnimation.isCumulative = true
+        blinkAnimation.isCumulative = true
         blinkAnimation.duration = duration
         blinkAnimation.repeatCount = Float.infinity
         

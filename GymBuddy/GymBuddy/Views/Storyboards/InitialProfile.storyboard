@@ -134,17 +134,17 @@
             </objects>
             <point key="canvasLocation" x="129" y="115"/>
         </scene>
-        <!--View Controller-->
+        <!--Loading View Controller-->
         <scene sceneID="exB-jw-MkR">
             <objects>
-                <viewController id="C5H-MM-9U8" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoadingViewController" modalPresentationStyle="fullScreen" id="C5H-MM-9U8" customClass="LoadingViewController" customModule="GymBuddy" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="lFq-wg-ppR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hqx-Si-Y6B">
-                                <rect key="frame" x="103.5" y="453" width="207" height="0.0"/>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="0.0"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lo7-jZ-rnC">
+                                <rect key="frame" x="83" y="429.5" width="248" height="47"/>
+                                <fontDescription key="fontDescription" name="SFProRounded-Semibold" family="SF Pro Rounded" pointSize="40"/>
                                 <color key="textColor" name="custom green"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -152,15 +152,19 @@
                         <viewLayoutGuide key="safeArea" id="baF-ET-ji9"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Hqx-Si-Y6B" firstAttribute="centerX" secondItem="baF-ET-ji9" secondAttribute="centerX" id="Hbf-6c-ZJA"/>
-                            <constraint firstItem="Hqx-Si-Y6B" firstAttribute="centerY" secondItem="baF-ET-ji9" secondAttribute="centerY" id="pd5-Sb-lEf"/>
-                            <constraint firstItem="Hqx-Si-Y6B" firstAttribute="width" secondItem="lFq-wg-ppR" secondAttribute="width" multiplier="0.5" id="s08-H1-Ts9"/>
+                            <constraint firstItem="lo7-jZ-rnC" firstAttribute="centerY" secondItem="baF-ET-ji9" secondAttribute="centerY" id="Ei5-ze-vIy"/>
+                            <constraint firstItem="lo7-jZ-rnC" firstAttribute="centerX" secondItem="baF-ET-ji9" secondAttribute="centerX" id="LUW-4a-AaC"/>
+                            <constraint firstItem="lo7-jZ-rnC" firstAttribute="width" secondItem="lFq-wg-ppR" secondAttribute="width" multiplier="0.6" id="p9s-9S-khZ"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="fyq-rR-Bfc"/>
+                    <connections>
+                        <outlet property="loadingLabel" destination="lo7-jZ-rnC" id="w8t-qk-OQp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="apY-Fe-jVB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="926" y="115"/>
+            <point key="canvasLocation" x="887" y="115"/>
         </scene>
     </scenes>
     <resources>

@@ -25,7 +25,11 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        fetchUser()
+        if UserController.shared.currentUser == nil {
+            fetchUser()
+        } else {
+            fetchData()
+        }
         
         homeCollectionView.delegate = self
         homeCollectionView.dataSource = homeDataSource
@@ -39,7 +43,11 @@ class HomeViewController: UIViewController {
 //        fetchData()
 //        updateViews()
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-            self.fetchUser()
+            if UserController.shared.currentUser == nil {
+                self.fetchUser()
+            } else {
+                self.fetchData()
+            }
         }
         
     }

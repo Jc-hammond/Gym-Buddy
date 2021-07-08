@@ -44,7 +44,9 @@ class InitialProfileViewController: UIViewController {
                 switch result {
                 case .success(let user):
                     UserController.shared.currentUser = user
-                    self.dismiss(animated: true, completion: nil)
+                    guard let loadingVC = self.storyboard?.instantiateViewController(identifier: "LoadingViewController") as? LoadingViewController else { return }
+                    self.show(loadingVC, sender: nil)
+                    //self.dismiss(animated: true, completion: nil)
                 case .failure(let error):
                     print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
                 }
