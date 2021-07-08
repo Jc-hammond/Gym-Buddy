@@ -28,6 +28,7 @@ class EventsListTableViewController: UITableViewController {
         super.viewWillAppear(animated)
         
         fetchAllEvents()
+
     }
         
     //MARK: - Function
@@ -165,17 +166,33 @@ class EventsListTableViewController: UITableViewController {
         return 60
     }
         
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            let eventToDelete = allEvents[indexPath.section][indexPath.row]
+            EventController.shared.deleteEvent(event: eventToDelete) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(_):
+                        print("Successfully deleted event")
+                        if self.allEvents[0].contains(eventToDelete) {
+                            guard let index = self.allEvents[0].firstIndex(of: eventToDelete) else {return}
+                            self.allEvents[0].remove(at: index)
+                        } else {
+                            guard let index = self.allEvents[1].firstIndex(of: eventToDelete) else {return}
+                            self.allEvents[1].remove(at: index)
+                        }
+                        tableView.deleteRows(at: [indexPath], with: .fade)
+                    case .failure(let error):
+                        print("Failed to delete event. Error \n----\n \(error.localizedDescription)")
+                        
+                    }
+                }
+            }
+        }
     }
-    */
+
 
     // MARK: - Navigation
 
