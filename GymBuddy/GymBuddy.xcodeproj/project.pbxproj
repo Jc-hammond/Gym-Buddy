@@ -57,6 +57,8 @@
 		3B727F7C268B3FC400395029 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B727F7B268B3FC400395029 /* ProfileViewController.swift */; };
 		3B727F7E268B4CB300395029 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B727F7D268B4CB300395029 /* ConversationViewController.swift */; };
 		3B727F80268B4ED500395029 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B727F7F268B4ED500395029 /* FriendTableViewCell.swift */; };
+		3BA2462726969B580015056C /* WeightCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA2462526969B580015056C /* WeightCollectionViewCell.swift */; };
+		3BA2462826969B580015056C /* WeightCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BA2462626969B580015056C /* WeightCollectionViewCell.xib */; };
 		6556E5A7CA48B6C32BE04AB4 /* Pods_GymBuddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E3A4F0A7BEC32E25A55B1B9 /* Pods_GymBuddy.framework */; };
 		714A742B26791C3A005F46F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714A742A26791C3A005F46F2 /* AppDelegate.swift */; };
 		714A742D26791C3A005F46F2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714A742C26791C3A005F46F2 /* SceneDelegate.swift */; };
@@ -130,6 +132,8 @@
 		3B727F7B268B3FC400395029 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		3B727F7D268B4CB300395029 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		3B727F7F268B4ED500395029 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
+		3BA2462526969B580015056C /* WeightCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightCollectionViewCell.swift; sourceTree = "<group>"; };
+		3BA2462626969B580015056C /* WeightCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeightCollectionViewCell.xib; sourceTree = "<group>"; };
 		4E3A4F0A7BEC32E25A55B1B9 /* Pods_GymBuddy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymBuddy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		714A742726791C3A005F46F2 /* GymBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		714A742A26791C3A005F46F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -297,6 +301,8 @@
 		3B727F70268B1A6800395029 /* HomeCollectionView Cells */ = {
 			isa = PBXGroup;
 			children = (
+				3BA2462526969B580015056C /* WeightCollectionViewCell.swift */,
+				3BA2462626969B580015056C /* WeightCollectionViewCell.xib */,
 				3B727F73268B1B3300395029 /* FriendCollectionViewCell.swift */,
 				3B727F74268B1B3300395029 /* FriendCollectionViewCell.xib */,
 				3B727F77268B1B4500395029 /* PersonalBestCollectionViewCell.swift */,
@@ -521,6 +527,7 @@
 				3B5EFD3B26811E4E00F83E50 /* InitialProfile.storyboard in Resources */,
 				3B058AA22683EF470047FF61 /* HeaderCollectionReusableView.xib in Resources */,
 				3B727F6B268A357600395029 /* WeightHistoryCollectionViewCell.xib in Resources */,
+				3BA2462826969B580015056C /* WeightCollectionViewCell.xib in Resources */,
 				3B727F76268B1B3300395029 /* FriendCollectionViewCell.xib in Resources */,
 				3B5EFD3926811D9E00F83E50 /* Messages.storyboard in Resources */,
 				3B5EFD3D26811E7000F83E50 /* Friends.storyboard in Resources */,
@@ -625,6 +632,7 @@
 				3B058AAA2684F9580047FF61 /* UIImage Extension.swift in Sources */,
 				71E8A4C1268BBEAA00478729 /* EventError.swift in Sources */,
 				714A742B26791C3A005F46F2 /* AppDelegate.swift in Sources */,
+				3BA2462726969B580015056C /* WeightCollectionViewCell.swift in Sources */,
 				3B5CBCCE26817424005036EC /* FriendsListTableViewController.swift in Sources */,
 				3B5CBCD2268174D9005036EC /* AddGoalViewController.swift in Sources */,
 				3B727F7C268B3FC400395029 /* ProfileViewController.swift in Sources */,

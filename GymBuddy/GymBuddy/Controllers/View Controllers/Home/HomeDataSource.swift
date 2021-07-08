@@ -27,26 +27,13 @@ class HomeDataSource: UICollectionViewDiffableDataSource<Section, HomeItem> {
         "Daenerys Targaryen",
         "Tormund Giantsbane"
     ]
-    
-//    let mockCompletedWorkoutData: [Workout] = {
-//        var mockData = [Workout]()
-//
-//        let running = Workout(title: "Running", goal: 3, completionDate: "6/25/21", current: 3, unit: "mi", userRef: nil)
-//        let strengthTraining = Workout(title: "Strength Training", goal: 5, completionDate: "6/25/21", current: 5, unit: "hour", userRef: nil)
-//        let basketball = Workout(title: "Basketball", goal: 5, completionDate: "6/25/21", current: 5, unit: "hour", userRef: nil)
-//        let soccer = Workout(title: "Soccer", goal: 5, completionDate: "6/25/21", current: 5, unit: "hour", userRef: nil)
-//
-//        mockData = [running, strengthTraining, basketball, soccer]
-//
-//        return mockData
-//    }()
-    
+        
     var personalBests = [Workout]()
     
     let sections: [Section] = {
         var sections = [Section]()
         
-        let firendList = Section(title: "  Friends")
+        let firendList = Section(title: "  Weight Summary")
         let personalBest = Section(title: "  Personal Best")
         
         sections = [firendList, personalBest]
