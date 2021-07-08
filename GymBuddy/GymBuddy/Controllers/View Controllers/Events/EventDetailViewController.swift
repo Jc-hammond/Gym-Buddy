@@ -157,10 +157,10 @@ class EventDetailViewController: UIViewController {
 
 //MARK: - Extensions
 extension EventDetailViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return attendees.count
     }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "inviteeCell") as? InviteeTableViewCell else { return UITableViewCell() }

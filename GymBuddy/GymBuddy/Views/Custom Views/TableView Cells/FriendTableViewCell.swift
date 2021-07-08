@@ -15,7 +15,6 @@ class FriendTableViewCell: UITableViewCell {
     
     //MARK: - Properties
     var buttonTitle: String?
-    var friendRequest: FriendRequest?
     
     var event: Event?
     
@@ -27,58 +26,7 @@ class FriendTableViewCell: UITableViewCell {
     
     //MARK: - Actions
     @IBAction func cellButtonTapped(_ sender: UIButton) {
-        guard let user = user,
-              let currentUser = UserController.shared.currentUser else { return }
-        
-        if sender.titleLabel?.text == "accept" {
-            guard let friendRequest = friendRequest else { return }
-            FriendRequestController.shared.toggleFriendAcceptance(response: true, request: friendRequest) { result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success(_):
-                        
-                        self.updateButtons(buttonTitle: "added")
-                        print("Successfully accepted friend request")
-                    case .failure(let error):
-                        print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
-                    }
-                }
-            }
-        }
-        
-        if sender.titleLabel?.text == "add friend" {
-            FriendRequestController.shared.createFriendRequest(friendUser: user) { result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success(let friendRequests):
-                        guard let friendRequests = friendRequests,
-                              let senderRequestRef = friendRequests[0].siblingRef,
-                              let receiverRequestRef = friendRequests[1].siblingRef else { return }
-                        
-                        if user.friendRequestRefs != nil {
-                            user.friendRequestRefs?.append(senderRequestRef)
-                        } else {
-                            user.friendRequestRefs = [senderRequestRef]
-                        }
-                        
-                        if currentUser.friendRequestRefs != nil {
-                            currentUser.friendRequestRefs?.append(receiverRequestRef)
-                        } else {
-                            currentUser.friendRequestRefs = [receiverRequestRef]
-                        }
-                        
-                        self.saveUser(user: user)
-                        self.saveUser(user: currentUser)
-
-                        self.updateButtons(buttonTitle: "pending")
-                        print("Successfully sent friend request")
-                        
-                    case .failure(let error):
-                        print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
-                    }
-                }
-            }
-        }
+        guard let user = user else { return }
         
         if sender.titleLabel?.text == "invite", let event = event {
             EventController.shared.inviteTo(event: event, invitee: user) { result in
@@ -136,16 +84,6 @@ class FriendTableViewCell: UITableViewCell {
         cellButton.addCornerRadius(color: .clear)
         cellButton.setTitleColor(.white, for: .normal)
         
-
-        
-//        if let randomInt = [0,1].shuffled().first {
-//            cellButton.setTitle(buttonTitles[randomInt], for: .normal)
-//            if randomInt == 0 {
-//                cellButton.setBackgroundColor(.customLightGreen!)
-//            } else {
-//                cellButton.setBackgroundColor(.gray)
-//            }
-//        }
         updateButtons(buttonTitle: buttonTitle)
     }
     

@@ -123,8 +123,6 @@ class ProgressDetailViewController: UIViewController {
                 }
             }
         }
-        
-        // maybe change text to "you've completed" when goal == current
     }
     
     
@@ -201,22 +199,4 @@ class ProgressDetailViewController: UIViewController {
         }
     }
     
-//    fileprivate func setProgressView() {
-//        guard let gradientImage = UIImage.gradientImage(with: progressView.frame),
-//              let workout = workout else { return }
-//
-//        let progress = Float(workout.current) / Float(workout.goal)
-//
-//        // progressView
-//        progressView.transform = progressView.transform.scaledBy(x: 1, y: 8)
-//        progressView.addCornerRadius(radius: 4, width: 1, color: .customLightGreen)
-//
-//        Timer.scheduledTimer(withTimeInterval: 0.0, repeats: false) { timer in
-//
-//            self.progressView.progressImage = gradientImage
-//            self.progressView.setProgress(progress, animated: true)
-//        }
-//    }
-    
-        
 }//End of class

@@ -40,10 +40,7 @@ class WorkoutController {
     func fetchWorkout(for user: User, completion: @escaping (Result<[Workout]?, WorkoutError>) -> Void) {
         let userRef = user.recordID
         let predicate = NSPredicate(format: "%K == %@", WorkoutStrings.userRefKey, userRef)
-        let workoutIDs = user.workouts.compactMap({$0.recordID})
-        //let predicate2 = NSPredicate(format: "NOT(recordID IN %@)", workoutIDs)
-        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, /*predicate2*/])
-        let query = CKQuery(recordType: "Workout", predicate: compoundPredicate)
+        let query = CKQuery(recordType: "Workout", predicate: predicate)
         publicDB.perform(query, inZoneWith: nil) { records, error in
             if let error = error {
                 return completion(.failure(.ckError(error)))

@@ -33,7 +33,6 @@ class ProgressViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
         fetchData()
     }
     
@@ -42,7 +41,6 @@ class ProgressViewController: UIViewController {
         guard let currentUser = UserController.shared.currentUser else { return }
         WorkoutController.shared.fetchWorkout(for: currentUser) { result in
             DispatchQueue.main.async {
-//                self.activeFetchGroup.enter()
                 switch result {
                 case .success(_):
                     print("successfully fetched workouts")
@@ -52,10 +50,6 @@ class ProgressViewController: UIViewController {
                 case .failure(let error):
                     print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
                 }
-//                self.activeFetchGroup.leave()
-//                self.activeFetchGroup.notify(queue: .main) {
-//                    self.progressDataSource.applyData()
-//                }
             }
         }
     }

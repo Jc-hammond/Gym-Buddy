@@ -24,7 +24,6 @@ class InviteeTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-//        updateViews()
     }
     
     //MARK: - Functions

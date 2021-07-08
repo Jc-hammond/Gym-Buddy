@@ -31,7 +31,6 @@ class EventsTableViewCell: UITableViewCell {
     //MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        //updateViews()
     }
     
     //MARK: - Actions

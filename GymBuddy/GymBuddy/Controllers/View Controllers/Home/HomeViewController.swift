@@ -39,9 +39,6 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-//        guard UserController.shared.currentUser != nil else { return }
-//        fetchData()
-//        updateViews()
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             if UserController.shared.currentUser == nil {
                 self.fetchUser()
@@ -54,7 +51,6 @@ class HomeViewController: UIViewController {
     
     //MARK: - Actions
     @IBAction func profileButtonsTapped(_ sender: UIButton) {
-        //JCHUN - Segue to profileDetailVC
         guard let destinationVC = storyboard?.instantiateViewController(identifier: "ProfileViewController") as? ProfileViewController else { return }
         
         navigationController?.pushViewController(destinationVC, animated: true)
@@ -183,18 +179,9 @@ class HomeViewController: UIViewController {
         profileImageButton.addCornerRadius()
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }//End of class
 
+//MARK: - Extensions
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 0 {

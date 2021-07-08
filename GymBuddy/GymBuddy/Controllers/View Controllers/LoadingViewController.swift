@@ -10,8 +10,8 @@ import UIKit
 class LoadingViewController: UIViewController {
     //MARK: - Outlets
     @IBOutlet weak var loadingLabel: UILabel!
-    
 
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         repeat {
@@ -25,7 +25,7 @@ class LoadingViewController: UIViewController {
         loadingLabel.blink()
     }
     
-    
+    //MARK: - Functions
     func fetchUser() {
         UserController.shared.fetchAppleUserReference { result in
             DispatchQueue.main.async {
@@ -58,10 +58,8 @@ class LoadingViewController: UIViewController {
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 guard let rootVC = storyboard.instantiateInitialViewController() else { return }
                 rootVC.modalPresentationStyle = .fullScreen
-//                self.show(rootVC, sender: nil)
                 
                 self.present(rootVC, animated: true, completion: nil)
-//                rootVC.tabBarController?.selectedIndex = 0
             }
         }
     }

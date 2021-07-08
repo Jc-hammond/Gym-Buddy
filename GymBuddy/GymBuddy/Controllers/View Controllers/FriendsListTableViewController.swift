@@ -12,7 +12,6 @@ class FriendsListTableViewController: UITableViewController {
     //MARK: - Properties
     //var buttonTitles: [String]?
     var allUsers: [User]?
-    var friendRequests: [FriendRequest]?
     var originVC: String?
     var event: Event?
     var attendees: [User]?
@@ -25,16 +24,7 @@ class FriendsListTableViewController: UITableViewController {
         
         navigationController?.navigationBar.tintColor = .customLightGreen
         
-//        fetchFriendRequests()
-//        fetchAllUsers()
         fetchAllUsersAndMyFriendReqs()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-//        fetchFriendRequests()
-//        fetchAllUsersAndMyFriendReqs()
     }
     
     //MARK: - Functions
@@ -104,24 +94,6 @@ class FriendsListTableViewController: UITableViewController {
         }
     }
     
-    func fetchFriendRequests() {
-        guard let currentUser = UserController.shared.currentUser,
-              let friendRequestRefs = currentUser.friendRequestRefs else { return }
-        
-        FriendRequestController.shared.fetchFriendRequests(friendRequestRefs: friendRequestRefs) { result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let friendRequests):
-                    print("successfully fetched friendRequests")
-                    self.friendRequests = friendRequests
-                    self.tableView.reloadData()
-                case .failure(let error):
-                    print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
-                }
-            }
-        }
-    }
-    
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -132,46 +104,18 @@ class FriendsListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as? FriendTableViewCell else { return UITableViewCell() }
         
-        guard let allUsers = allUsers,
-              let currentUser = UserController.shared.currentUser else { return UITableViewCell() }
+        guard let allUsers = allUsers else { return UITableViewCell() }
         
         let user = allUsers[indexPath.row]
-        let userRef = CKRecord.Reference(recordID: user.recordID, action: .none)
-        let friendRequestForUser = friendRequests?.filter{ $0.friendUserRef == userRef }.first
         
         if originVC == "EventDetailVC" {
             cell.buttonTitle = "invite"
-            
-        } else {
-            if let friendRefs = currentUser.friendRefs,
-               friendRefs.contains(userRef) {
-                
-                cell.buttonTitle = "added"
-                
-            } else if let friendRequestRefs = currentUser.friendRequestRefs,
-                      friendRequestRefs.contains(userRef) {
-                
-            }
-            
-            else if friendRequestForUser != nil {
-                if friendRequestForUser!.ownerDidSend == true {
-                    cell.buttonTitle = "pending"
-                } else {
-                    cell.buttonTitle = "accept"
-                }
-            }
-            
-            else {
-                cell.buttonTitle = "add friend"
-            }
         }
         
         if let event = event {
             cell.event = event
         }
         
-        
-        cell.friendRequest = friendRequestForUser
         cell.user = user
         
         return cell
