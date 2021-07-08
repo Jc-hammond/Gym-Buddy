@@ -12,7 +12,7 @@ class EventsListTableViewController: UITableViewController {
 
     //MARK: - Properties
     let sections: [String] = ["My Events", "Invited"]
-    var allEvents = [[Event]]()
+    var allEvents: [[Event]] = [[], []]
     
     var refresh: UIRefreshControl = UIRefreshControl()
     
@@ -29,40 +29,70 @@ class EventsListTableViewController: UITableViewController {
         
         fetchAllEvents()
     }
-    
+        
     //MARK: - Function
     fileprivate func fetchAllEvents() {
         guard let currentUserRef = UserController.shared.currentUserRef else { return }
-        allEvents = []
+        allEvents = [[], []]
 
         let ownerPredicate = NSPredicate(format: "%K == %@", EventStrings.userRefKey, currentUserRef)
-//        let inviteesPredicate = NSPredicate(format: "%K == %@", EventStrings.inviteeRefsKey, currentUserRef)
-//        let allEventPredicate = NSPredicate(value: true)
         
         EventController.shared.fetchEvent(predicate: ownerPredicate) { result in
             DispatchQueue.main.async {
                 switch result {
-                case .success(let events):
-                    guard let attendingEvents = events else { return }
-                    self.allEvents.append(attendingEvents)
-                    self.tableView.reloadData()
-                    self.refresh.endRefreshing()
+                case .success(let myEents):
+                    guard let myEvents = myEents else { return }
+                    self.allEvents[0] = myEvents
+                    self.fetchAttendingEvents()
+                    
                 case .failure(let error):
                     print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+                    self.fetchAttendingEvents()
                 }
             }
         }
+    }//end of func
+    
+    func fetchAttendingEvents() {
+        guard let currentUserRef = UserController.shared.currentUserRef else { return }
+        let attendeesPredicate = NSPredicate(format: "%K CONTAINS %@", EventStrings.attendeeRefsKey, currentUserRef)
         
-//        EventController.shared.fetchEvent(predicate: inviteesPredicate) { result in
-//            switch result {
-//            case .success(let events):
-//                guard let invitedEvents = events else { return }
-//                self.allEvents.append(invitedEvents)
-//            case .failure(let error):
-//                print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
-//            }
-//        }
+        EventController.shared.fetchEvent(predicate: attendeesPredicate) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let attendingEvents):
+                    guard let attendingEvents = attendingEvents else { return }
+                    attendingEvents.forEach { self.allEvents[0].append($0) }
+                    self.fetchInvitedEvents()
+                    
+                case .failure(let error):
+                    print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+                    self.fetchInvitedEvents()
+                }
+            }
+        }
+    }//end of func
+    
+    func fetchInvitedEvents() {
+        guard let currentUserRef = UserController.shared.currentUserRef else { return }
+        let inviteesPredicate = NSPredicate(format: "%K CONTAINS %@", EventStrings.inviteeRefsKey, currentUserRef)
         
+        EventController.shared.fetchEvent(predicate: inviteesPredicate) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let invitedEvents):
+                    guard let invitedEvents = invitedEvents else { return }
+                    self.allEvents[1] = invitedEvents
+                    self.tableView.reloadData()
+                    self.refresh.endRefreshing()
+
+                case .failure(let error):
+                    print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+                    self.tableView.reloadData()
+                    self.refresh.endRefreshing()
+                }
+            }
+        }
     }//end of func
     
     func setupViews() {
@@ -72,18 +102,18 @@ class EventsListTableViewController: UITableViewController {
     }
     
     @objc func loadEvents() {
+        allEvents = [[], []]
+        self.tableView.reloadData()
         fetchAllEvents()
     }
     
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return allEvents.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return allEvents[section].count
     }
 
@@ -97,20 +127,7 @@ class EventsListTableViewController: UITableViewController {
 
         return cell
     }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return view.frame.height / 10
-    }
-
-//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        if section == 0 {
-//            return "My Event"
-//        } else {
-//            return "Invitations"
-//        }
-//
-//    }
-    
+        
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 60))
@@ -124,7 +141,7 @@ class EventsListTableViewController: UITableViewController {
         textLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 24)
         textLabel.textColor = .customLightGreen
         textLabel.underline()
-        headerView.backgroundColor = UIColor.white
+        headerView.backgroundColor = UIColor.clear
         
         return headerView
     }
@@ -133,17 +150,33 @@ class EventsListTableViewController: UITableViewController {
         return 60
     }
         
-    /*
+    
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+            let eventToDelete = allEvents[indexPath.section][indexPath.row]
+            EventController.shared.deleteEvent(event: eventToDelete) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(_):
+                        print("Successfully deleted event")
+                        if self.allEvents[0].contains(eventToDelete) {
+                            guard let index = self.allEvents[0].firstIndex(of: eventToDelete) else {return}
+                            self.allEvents[0].remove(at: index)
+                        } else {
+                            guard let index = self.allEvents[1].firstIndex(of: eventToDelete) else {return}
+                            self.allEvents[1].remove(at: index)
+                        }
+                        tableView.deleteRows(at: [indexPath], with: .fade)
+                    case .failure(let error):
+                        print("Failed to delete event. Error \n----\n \(error.localizedDescription)")
+                        
+                    }
+                }
+            }
+        }
     }
-    */
+
 
     // MARK: - Navigation
 
@@ -153,9 +186,19 @@ class EventsListTableViewController: UITableViewController {
             guard let indexPath = tableView.indexPathForSelectedRow,
                   let destinationVC = segue.destination as? EventDetailViewController else { return }
             
+            guard let cell = tableView.cellForRow(at: indexPath) as? EventsTableViewCell else { return }
+            if cell.ownerLabel.isHidden == true {
+                destinationVC.isOwner = false
+            }
+            
             let eventToSend = allEvents[indexPath.section][indexPath.row]
             
             destinationVC.event = eventToSend
+        }
+        
+        if segue.identifier == "toEventCreateVC" {
+            guard let destinationVC = segue.destination as? EventCreateViewController else { return }
+            destinationVC.event = nil
         }
     }
 

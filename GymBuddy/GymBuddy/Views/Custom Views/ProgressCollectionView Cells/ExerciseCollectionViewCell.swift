@@ -16,8 +16,6 @@ class ExerciseCollectionViewCell: UICollectionViewCell, CellRegisterable {
     @IBOutlet weak var containerView: UIView!
     
     //MARK: - Properties
-    //JCHUN - Need to update landing pad to the actual model
-    
     var workout: Workout? {
         didSet {
             updateViews()
@@ -29,7 +27,6 @@ class ExerciseCollectionViewCell: UICollectionViewCell, CellRegisterable {
         super.awakeFromNib()
         
         progressView.transform = progressView.transform.scaledBy(x: 1, y: 3)
-        //updateViews()
     }
     
     fileprivate func updateViews() {
@@ -44,7 +41,15 @@ class ExerciseCollectionViewCell: UICollectionViewCell, CellRegisterable {
         completionDatelabel.text = workout.completionDate == nil ? "" : "completed \(workout.completionDate!)"
         goalUnitLabel.font = UIFont(name: FontNames.sfRoundedReg, size: 16)
         goalUnitLabel.textColor = .gray
-        goalUnitLabel.text = "\(workout.goal) \(workout.unit)"
+        
+        var goalUnitText: String {
+            if workout.goal > 1 && (workout.unit == "hour" || workout.unit == "minute") {
+                return "\(workout.goal) \(workout.unit)s"
+            } else {
+                return "\(workout.goal) \(workout.unit)"
+            }
+        }
+        goalUnitLabel.text = goalUnitText
         
         let progress = Float(workout.current) / Float(workout.goal)
         setProgress(with: progress)

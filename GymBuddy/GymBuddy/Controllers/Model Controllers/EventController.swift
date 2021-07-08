@@ -40,6 +40,73 @@ class EventController {
         completion(.success(newEvent))
     }
     
+    func inviteTo(event: Event, invitee: User, completion: @escaping (Result<Event?, EventError>) -> Void ) {
+        
+        let inviteeID = invitee.recordID
+        let inviteeRef = CKRecord.Reference(recordID: inviteeID, action: .deleteSelf)
+        
+        if event.inviteeRefs != nil {
+            event.inviteeRefs?.append(inviteeRef)
+        } else {
+            event.inviteeRefs = [inviteeRef]
+        }
+            
+//        event.inviteeRefs.append(inviteeRef)
+        
+        let record = CKRecord(event: event)
+        
+        let operation = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
+        operation.savePolicy = .changedKeys
+        operation.qualityOfService = .userInteractive
+        operation.modifyRecordsCompletionBlock = { records, _ , error in
+            if let error = error {
+                return completion(.failure(.ckError(error)))
+            }
+            
+            guard let record = records?.first else {return completion(.failure(.nilRecord))}
+            
+            guard let eventToUpdate = Event(ckRecord: record) else {return completion(.failure(.nilRecord))}
+            
+            completion(.success(eventToUpdate))
+        }
+        publicDB.add(operation)
+        
+    }
+    
+    func acceptInvite(event: Event, user: User, completion: @escaping (Result<Event?, EventError>) -> Void) {
+        
+        let inviteeID = user.recordID
+        let inviteeRef = CKRecord.Reference(recordID: inviteeID, action: .deleteSelf)
+        
+        guard let index = event.inviteeRefs?.firstIndex(of: inviteeRef) else {return}
+        event.inviteeRefs?.remove(at: index)
+        
+        if event.attendeeRefs != nil {
+            event.attendeeRefs?.append(inviteeRef)
+        } else {
+            event.attendeeRefs = [inviteeRef]
+        }
+        
+        let record = CKRecord(event: event)
+        
+        let operation = CKModifyRecordsOperation(recordsToSave: [record], recordIDsToDelete: nil)
+        operation.savePolicy = .changedKeys
+        operation.qualityOfService = .userInteractive
+        operation.modifyRecordsCompletionBlock = { records, _ , error in
+            if let error = error {
+                return completion(.failure(.ckError(error)))
+            }
+            
+            guard let record = records?.first else {return completion(.failure(.nilRecord))}
+            
+            guard let eventToUpdate = Event(ckRecord: record) else {return completion(.failure(.nilRecord))}
+            
+            completion(.success(eventToUpdate))
+        }
+        publicDB.add(operation)
+    }
+    
+    
     func updateEvent(for event: Event, completion: @escaping (Result<Event?, EventError>) -> Void) {
         
         let record = CKRecord(event: event)

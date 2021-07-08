@@ -40,17 +40,14 @@ class WorkoutController {
     func fetchWorkout(for user: User, completion: @escaping (Result<[Workout]?, WorkoutError>) -> Void) {
         let userRef = user.recordID
         let predicate = NSPredicate(format: "%K == %@", WorkoutStrings.userRefKey, userRef)
-        let workoutIDs = user.workouts.compactMap({$0.recordID})
-        let predicate2 = NSPredicate(format: "NOT(recordID IN %@)", workoutIDs)
-        let compoundPredicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicate, predicate2])
-        let query = CKQuery(recordType: "Workout", predicate: compoundPredicate)
+        let query = CKQuery(recordType: "Workout", predicate: predicate)
         publicDB.perform(query, inZoneWith: nil) { records, error in
             if let error = error {
                 return completion(.failure(.ckError(error)))
             }
             guard let records = records else {return completion(.failure(.noRecord))}
             let workoutPoints = records.compactMap{ Workout(ckRecord: $0)}
-            user.workouts.append(contentsOf: workoutPoints)
+            user.workouts = workoutPoints //.append(contentsOf: workoutPoints)
             completion(.success(workoutPoints))
         }
     }
@@ -75,8 +72,6 @@ class WorkoutController {
         }
         publicDB.add(operation)
     }
-    
-    
     
     func deleteWorkout(for workout: Workout, completion: @escaping (Result<Bool, WorkoutError>) -> Void) {
         let deleteOP = CKModifyRecordsOperation(recordsToSave: nil, recordIDsToDelete: [workout.recordID])

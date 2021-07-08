@@ -12,7 +12,11 @@ class FriendsListTableViewController: UITableViewController {
     //MARK: - Properties
     //var buttonTitles: [String]?
     var allUsers: [User]?
-    var friendRequests: [FriendRequest]?
+    var originVC: String?
+    var event: Event?
+    var attendees: [User]?
+    var invitees: [User]?
+    var blockedUsers: [User]?
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -20,29 +24,41 @@ class FriendsListTableViewController: UITableViewController {
         
         navigationController?.navigationBar.tintColor = .customLightGreen
         
-        fetchFriendRequests()
-        fetchAllUsers()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        fetchFriendRequests()
-        fetchAllUsers()
+        fetchAllUsersAndMyFriendReqs()
     }
     
     //MARK: - Functions
-    func fetchAllUsers() {
+    func fetchAllUsersAndMyFriendReqs() {
         let predicate = NSPredicate(value: true)
         UserController.shared.fetchProfile(predicate: predicate) { result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let users):
                     guard let users = users else { return }
+                    
                     let excludedUsers = users.filter { $0 != UserController.shared.currentUser }
-                    let sortedUsers = excludedUsers.sorted{ $0.fullName < $1.fullName }
+                    var sortedUsers = excludedUsers.sorted{ $0.fullName < $1.fullName }
+                    for user in sortedUsers {
+                        guard let attendees = self.attendees else {return}
+                        if attendees.contains(user) {
+                            guard let index = sortedUsers.firstIndex(of: user) else {return}
+                            sortedUsers.remove(at: index)
+                        }
+                    }
+                    
+                    for user in sortedUsers {
+                        guard let invitees = self.invitees else {return}
+                        if invitees.contains(user) {
+                            guard let index = sortedUsers.firstIndex(of: user) else {return}
+                            sortedUsers.remove(at: index)
+                        }
+                    }
+                    
                     self.allUsers = sortedUsers
                     self.tableView.reloadData()
+
+                    self.fetchBlockedUsers(sortedUsers: sortedUsers)
+      
                 case .failure(_):
                     print("No user found in publicDB")
                 }
@@ -50,17 +66,30 @@ class FriendsListTableViewController: UITableViewController {
         }
     }
     
-    func fetchFriendRequests() {
-        guard let currentUser = UserController.shared.currentUser,
-              let friendRequestRefs = currentUser.friendRequestRefs else { return }
+    func fetchBlockedUsers(sortedUsers: [User]) {
+        guard let user = UserController.shared.currentUser,
+              let blockedRefs = user.blockedUserRefs else {return}
         
-        FriendRequestController.shared.fetchFriendRequests(friendRequestRefs: friendRequestRefs) { result in
-            switch result {
-            case .success(let friendRequests):
-                print("successfully fetched friendRequests")
-                self.friendRequests = friendRequests
-            case .failure(let error):
-                print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+        EventController.shared.fetchEventAttendees(attendeeRefs: blockedRefs) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let blockedUsers):
+                    guard let blockedUsers = blockedUsers else {return}
+                    self.blockedUsers = blockedUsers
+                    var sortedUsers = sortedUsers
+
+                    for user in sortedUsers {
+                        guard let blockedUsers = self.blockedUsers else {return}
+                        if blockedUsers.contains(user) {
+                            guard let index = sortedUsers.firstIndex(of: user) else {return}
+                            sortedUsers.remove(at: index)
+                        }
+                    }
+                    self.allUsers = sortedUsers
+                    self.tableView.reloadData()
+                case .failure(let error):
+                    print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+                }
             }
         }
     }
@@ -68,7 +97,6 @@ class FriendsListTableViewController: UITableViewController {
     // MARK: - Table view data source
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         guard let allUsers = allUsers else { return 0 }
         return allUsers.count
     }
@@ -76,31 +104,18 @@ class FriendsListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "friendCell", for: indexPath) as? FriendTableViewCell else { return UITableViewCell() }
         
-        guard let allUsers = allUsers,
-              let currentUser = UserController.shared.currentUser else { return UITableViewCell() }
+        guard let allUsers = allUsers else { return UITableViewCell() }
         
         let user = allUsers[indexPath.row]
-        let userRef = CKRecord.Reference(recordID: user.recordID, action: .none)
-        let friendRequestForUser = friendRequests?.filter{ $0.friendUserRef == userRef }.first
         
-        if let friendRefs = currentUser.friendRefs,
-           friendRefs.contains(userRef) {
-            
-            cell.buttonTitle = "added"
-            
-        } else if friendRequestForUser != nil {
-            
-            if friendRequestForUser!.ownerDidSend == true {
-                cell.buttonTitle = "pending"
-            } else {
-                cell.buttonTitle = "accept"
-            }
-            
-        } else {
-            cell.buttonTitle = "add friend"
+        if originVC == "EventDetailVC" {
+            cell.buttonTitle = "invite"
         }
         
-        cell.friendRequest = friendRequestForUser
+        if let event = event {
+            cell.event = event
+        }
+        
         cell.user = user
         
         return cell
@@ -109,17 +124,42 @@ class FriendsListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return view.frame.height/16
     }
-    /*
-     // Override to support editing the table view.
-     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-     if editingStyle == .delete {
-     // Delete the row from the data source
-     tableView.deleteRows(at: [indexPath], with: .fade)
-     } else if editingStyle == .insert {
-     // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-     }
-     }
-     */
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        func handleBlockUser () {
+            guard let allUsers = allUsers else {return}
+            let user = allUsers[indexPath.row]
+            guard let currentUser = UserController.shared.currentUser else {return}
+            let blockUserRef = CKRecord.Reference(recordID: user.recordID, action: .none)
+            if currentUser.blockedUserRefs != nil {
+                currentUser.blockedUserRefs?.append(blockUserRef)
+            } else {
+                currentUser.blockedUserRefs = [blockUserRef]
+            }
+            UserController.shared.saveUserUpdates(currentUser: currentUser) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(_):
+                        guard let index = self.allUsers?.firstIndex(of: user) else {return}
+                        self.allUsers?.remove(at: index)
+                        self.tableView.deleteRows(at: [indexPath], with: .fade)
+                        self.tableView.reloadData()
+                    case .failure(let error):
+                        print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+                    }
+                }
+            }
+            print("user blocked")
+        }
+        let action = UIContextualAction(style: .destructive, title: "Block") { action, view, completion in
+            handleBlockUser()
+            completion(true)
+        }
+        action.backgroundColor = .systemRed
+        
+        return UISwipeActionsConfiguration(actions: [action])
+    }
     
 }//End of class
 

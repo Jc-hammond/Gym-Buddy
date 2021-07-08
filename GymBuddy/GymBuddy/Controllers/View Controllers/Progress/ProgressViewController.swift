@@ -13,21 +13,56 @@ class ProgressViewController: UIViewController {
     
     //MARK: - Properties
     private lazy var progressDataSource = {
-       ProgressDataSource(collectionView: progressCollectionView)
+        ProgressDataSource(collectionView: progressCollectionView)
     }()
+    
+    static let shared = ProgressViewController()
+    var activeFetchGroup = DispatchGroup()
+    var refresh: UIRefreshControl = UIRefreshControl()
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupViews()
         progressCollectionView.delegate = self
         progressCollectionView.dataSource = progressDataSource
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        progressDataSource.applyData()
+        fetchData()
+    }
+    
+    //MARK: - Fetching
+    func fetchData() {
+        guard let currentUser = UserController.shared.currentUser else { return }
+        WorkoutController.shared.fetchWorkout(for: currentUser) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(_):
+                    print("successfully fetched workouts")
+                    self.refresh.endRefreshing()
+                    self.progressDataSource.applyData()
+                    self.progressCollectionView.reloadData()
+                case .failure(let error):
+                    print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+                }
+            }
+        }
+    }
+    
+    //MARK: - Refresh
+    func setupViews() {
+        refresh.attributedTitle = NSAttributedString(string: "Updating data")
+        refresh.addTarget(self, action: #selector(loadData), for: .valueChanged)
+        progressCollectionView.addSubview(refresh)
+    }
+    
+    @objc func loadData() {
+        fetchData()
     }
     
 }//End of class
@@ -40,11 +75,13 @@ extension ProgressViewController: UICollectionViewDelegate {
               (indexPath.section == 1 || indexPath.section == 3) else { return }
         
         if indexPath.section == 1 {
-            let itemToSend = progressDataSource.mockWorkoutData[indexPath.row]
+            let itemToSend = progressDataSource.inProgress[indexPath.row]
             destinationVC.workout = itemToSend
+            destinationVC.section = indexPath.section
         } else if indexPath.section == 3 {
-            let itemToSend = progressDataSource.mockCompletedWorkoutData[indexPath.row]
+            let itemToSend = progressDataSource.completed[indexPath.row]
             destinationVC.workout = itemToSend
+            destinationVC.section = indexPath.section
         }
         
         navigationController?.pushViewController(destinationVC, animated: true)

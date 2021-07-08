@@ -15,52 +15,23 @@ class WeightHistoryCollectionViewCell: UICollectionViewCell, CellRegisterable {
     
     //MARK: - Properties
     let lineChart = LineChartView()
-
-    ///Mock Data
-    var currentWeights: [Int] = [
-        180,
-        185,
-        187,
-        190,
-        192,
-        190,
-        194,
-        189,
-        190,
-        188
-    ] {
-        didSet{
+    var currentUser: User? {
+        didSet {
+            guard let weights = currentUser?.currentWeights,
+                  let dates = currentUser?.currentDates else { return }
+            
+            currentWeights = weights
+            currentDates = []
+            dates.forEach { currentDates.append($0.formatDate()) }
+            
             weightHistoryLineGraph()
         }
     }
-    
-    var currentDates: [String] = [
-        "6/1/21",
-        "6/2/21",
-        "6/3/21",
-        "6/4/21",
-        "6/5/21",
-        "6/6/21",
-        "6/7/21",
-        "6/8/21",
-        "6/9/21",
-        "6/10/21"
-    ]
-    
-    
+
+    var currentWeights: [Int] = []
+    var currentDates: [String] = []
     
     //MARK: - Init
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//        
-////        updateViews()
-////        weightHistoryLineGraph()
-//    }
-//    
-//    required init?(coder: NSCoder) {
-//        super.init(coder: coder)
-//        //fatalError("init(coder:) has not been implemented")
-//    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -71,7 +42,6 @@ class WeightHistoryCollectionViewCell: UICollectionViewCell, CellRegisterable {
     //MARK: - Actions
     @IBAction func addWeightButtonTapped(_ sender: Any) {
         
-        //JCHUN - add alertcontroller and add weight
         let alert = UIAlertController(title: "Add Weight", message: "Add today's weight below", preferredStyle: .alert)
         
         alert.addTextField { textfield in
@@ -86,21 +56,45 @@ class WeightHistoryCollectionViewCell: UICollectionViewCell, CellRegisterable {
             
             self.lineChart.data = nil
             self.currentWeights.append(weight)
+            let date = Date().formatDate()
+            self.currentDates.append(date)
+            
+            UserController.shared.currentUser?.currentWeights?.append(weight)
+            UserController.shared.currentUser?.currentDates?.append(Date())
+            
+            UserController.shared.saveUserUpdates(currentUser: UserController.shared.currentUser!) { result in
+                switch result {
+                case .success(_):
+                    print("Successfully updated currentUser's weight")
+                case .failure(let error):
+                    print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+                }
+            }
+            
+            DispatchQueue.main.async {
+                self.weightHistoryLineGraph()
+            }
         }
         
         alert.addAction(cancelAction)
         alert.addAction(addAction)
         
-        parentViewContoller?.present(alert, animated: true, completion: nil)
-    }
+        let tomorrowAlert = UIAlertController(title: "Come back tomorrow", message: "Today's weight was already added..", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+        
+        tomorrowAlert.addAction(okAction)
+        
+        if self.currentDates.contains(Date().formatDate()) {
+            parentViewContoller?.present(tomorrowAlert, animated: true, completion: nil)
+        } else {
+            parentViewContoller?.present(alert, animated: true, completion: nil)
+        }
+    }//end of func
     
     
     //MARK: - Functions
     
     fileprivate func updateViews() {
-//        contentView.backgroundColor = .gray
-//        graphView.backgroundColor = .blue
-        
         addWeightButton.addCornerRadius()
         addWeightButton.setBackgroundColor((.customLightGreen ?? .green))
         addWeightButton.titleLabel?.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 14)
@@ -110,7 +104,7 @@ class WeightHistoryCollectionViewCell: UICollectionViewCell, CellRegisterable {
     }//end of func
     
     func weightHistoryLineGraph() {
-        
+
         //set frame
         lineChart.frame = CGRect(x: 0, y: 0, width: graphView.frame.width, height: graphView.frame.width)
         lineChart.center = self.graphView.center
@@ -120,6 +114,9 @@ class WeightHistoryCollectionViewCell: UICollectionViewCell, CellRegisterable {
         lineChart.xAxis.labelFont = UIFont(name: FontNames.sfRoundedSemiBold, size: 12)!
         lineChart.xAxis.axisLineColor = .customLightGreen!
         lineChart.xAxis.setLabelCount(currentWeights.count - 1, force: false)
+        lineChart.xAxis.valueFormatter = IndexAxisValueFormatter(values: currentDates)
+        lineChart.xAxis.granularity = 1
+        lineChart.xAxis.labelRotationAngle = 60
         
         lineChart.leftAxis.labelTextColor = .customLightGreen!
         lineChart.leftAxis.labelFont = UIFont(name: FontNames.sfRoundedSemiBold, size: 12)!
@@ -147,7 +144,6 @@ class WeightHistoryCollectionViewCell: UICollectionViewCell, CellRegisterable {
             height: graphView.frame.height
         )
         
-        //add data
         //JCHUN - need actual data
         var entries = [ChartDataEntry]()
         

@@ -70,13 +70,13 @@ extension Event {
               let date = ckRecord[EventStrings.dateKey] as? Date,
               let location = ckRecord[EventStrings.locationKey] as? String,
               let type = ckRecord[EventStrings.typeKey] as? String,
-//              let ownerDidSend = ckRecord[EventStrings.ownerDidSendKey] as? Bool,
+              //              let ownerDidSend = ckRecord[EventStrings.ownerDidSendKey] as? Bool,
               let userRef = ckRecord[EventStrings.userRefKey] as? CKRecord.Reference
-              else {return nil}
+        else {return nil}
         
-            let info = ckRecord[EventStrings.infoKey] as? String
-            let inviteeRefs = ckRecord[EventStrings.inviteeRefsKey] as? [CKRecord.Reference]
-            let attendeeRefs = ckRecord[EventStrings.attendeeRefsKey] as? [CKRecord.Reference]
+        let info = ckRecord[EventStrings.infoKey] as? String
+        let inviteeRefs = ckRecord[EventStrings.inviteeRefsKey] as? [CKRecord.Reference]
+        let attendeeRefs = ckRecord[EventStrings.attendeeRefsKey] as? [CKRecord.Reference]
         
         self.init(title: title, emoji: emoji, date: date, location: location, type: type, info: info, invitees: nil, inviteeRefs: inviteeRefs, attendees: nil, attendeeRefs: attendeeRefs, recordID: ckRecord.recordID, userRef: userRef)
     }
@@ -98,12 +98,11 @@ extension CKRecord {
             EventStrings.userRefKey : event.userRef
         ])
         
-        if let inviteeRefs = event.inviteeRefs {
-            self.setValue(inviteeRefs, forKey: EventStrings.inviteeRefsKey)
-        }
-        
         if let info = event.info {
             self.setValue(info, forKey: EventStrings.infoKey)
+        }
+        if let inviteeRefs = event.inviteeRefs {
+            self.setValue(inviteeRefs, forKey: EventStrings.inviteeRefsKey)
         }
         if let attendeeRefs = event.attendeeRefs {
             self.setValue(attendeeRefs, forKey: EventStrings.attendeeRefsKey)

@@ -7,47 +7,38 @@
 
 import UIKit
 
-struct HomeItem: Hashable {
+struct HomeItem {
+    let uuid = UUID()
     
     let context: Context
     
     enum Context: Hashable {
-        case friendList(String)
+        case weight
         case personalBest(Workout)
     }
 }
 
+extension HomeItem : Hashable {
+    static func == (lhs: HomeItem, rhs: HomeItem) -> Bool {
+        return lhs.uuid == rhs.uuid
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(uuid)
+    }
+}
+
+
 class HomeDataSource: UICollectionViewDiffableDataSource<Section, HomeItem> {
-    //MARK: - Temp Mock Data
-    //JCHUN - Mock Data
-    let mockFriends: [String] = [
-        "Ben Tincher",
-        "Connor Hammond",
-        "Semisi Taufa",
-        "Carson Ward",
-        "James Chun"
-    ]
+    var personalBests = [Workout]()
     
-    let mockCompletedWorkoutData: [Workout] = {
-        var mockData = [Workout]()
-        
-        let running = Workout(title: "Running", goal: 3, completionDate: "6/25/21", current: 3, unit: "mi", userRef: nil)
-        let strengthTraining = Workout(title: "Strength Training", goal: 5, completionDate: "6/25/21", current: 5, unit: "hour", userRef: nil)
-        let basketball = Workout(title: "Basketball", goal: 5, completionDate: "6/25/21", current: 5, unit: "hour", userRef: nil)
-        let soccer = Workout(title: "Soccer", goal: 5, completionDate: "6/25/21", current: 5, unit: "hour", userRef: nil)
-        
-        mockData = [running, strengthTraining, basketball, soccer]
-        
-        return mockData
-    }()
-    
-    let mockSections: [Section] = {
+    let sections: [Section] = {
         var sections = [Section]()
         
-        let firendList = Section(title: "  Friends")
+        let weightList = Section(title: "  Weight Summary")
         let personalBest = Section(title: "  Personal Best")
         
-        sections = [firendList, personalBest]
+        sections = [weightList, personalBest]
         
         return sections
     }()
@@ -57,14 +48,17 @@ class HomeDataSource: UICollectionViewDiffableDataSource<Section, HomeItem> {
         super.init(collectionView: collectionView) { (collectionView, indexPath, homeItem) -> UICollectionViewCell? in
             
             switch homeItem.context {
-            case .friendList(let name):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FriendCollectionViewCell.id, for: indexPath) as? FriendCollectionViewCell
-                cell?.friendName = name
+            case .weight:
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeightCollectionViewCell.id, for: indexPath) as? WeightCollectionViewCell
+                
+                cell?.currentUser = UserController.shared.currentUser
+                cell?.itemNumber = indexPath.row
                 
                 return cell
                 
             case .personalBest(let workout):
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PersonalBestCollectionViewCell.id, for: indexPath) as? PersonalBestCollectionViewCell
+                
                 cell?.workout = workout
                 
                 return cell
@@ -78,10 +72,8 @@ class HomeDataSource: UICollectionViewDiffableDataSource<Section, HomeItem> {
             guard let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HeaderCollectionReusableView.id, for: indexPath) as? HeaderCollectionReusableView else { fatalError() }
             headerView.headerLabel.text = self.snapshot().sectionIdentifiers[indexPath.section].title
             
-            if headerView.headerLabel.text == "  Friends" {
-                headerView.isButtonHidden = false
-            }
-            
+            headerView.sectionNumber = indexPath.section
+                        
             return headerView
         }
         
@@ -90,7 +82,8 @@ class HomeDataSource: UICollectionViewDiffableDataSource<Section, HomeItem> {
     }//end of func
     
     fileprivate func registerCells(for collectionView: UICollectionView) {
-        collectionView.register(FriendCollectionViewCell.nib, forCellWithReuseIdentifier: FriendCollectionViewCell.id)
+        //collectionView.register(FriendCollectionViewCell.nib, forCellWithReuseIdentifier: FriendCollectionViewCell.id)
+        collectionView.register(WeightCollectionViewCell.nib, forCellWithReuseIdentifier: WeightCollectionViewCell.id)
         collectionView.register(PersonalBestCollectionViewCell.nib, forCellWithReuseIdentifier: PersonalBestCollectionViewCell.id)
         collectionView.register(HeaderCollectionReusableView.nib, forSupplementaryViewOfKind: "header", withReuseIdentifier: HeaderCollectionReusableView.id)
     }
@@ -98,24 +91,54 @@ class HomeDataSource: UICollectionViewDiffableDataSource<Section, HomeItem> {
     func applyData() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, HomeItem>()
         
-        // Friends
-        var friends = [HomeItem]()
-        for friend in mockFriends {
-            let item = HomeItem(context: .friendList(friend))
-            friends.append(item)
+        guard let currentUser = UserController.shared.currentUser else { return }
+        
+        personalBests = []
+        currentUser.workouts.forEach { workout in
+            if workout.goal <= workout.current {
+                personalBests.append(workout)
+            }
+        }
+        
+        personalBests = personalBests.sorted { $0.title < $1.title }
+        
+        var removalIndex = [Int]()
+        if !(personalBests.isEmpty) {
+            for i in 0..<personalBests.count - 1 {
+                if personalBests[i].title == personalBests[i+1].title {
+                    if personalBests[i].goal < personalBests[i+1].goal {
+                        removalIndex.append(i)
+                    } else {
+                        removalIndex.append(i+1)
+                    }
+                }
+            }
+            
+            removalIndex.reverse()
+            
+            for i in 0..<removalIndex.count {
+                personalBests.remove(at: removalIndex[i])
+            }
+        }
+        
+        //Weight Items
+        var weightItem = [HomeItem]()
+        for _ in 0...1 {
+            let item = HomeItem(context: .weight)
+            weightItem.append(item)
         }
         
         // Personal Best
         var personalBestData = [HomeItem]()
-        for workout in mockCompletedWorkoutData {
-            let item = HomeItem(context: .personalBest(workout))
+        for best in personalBests {
+            let item = HomeItem(context: .personalBest(best))
             personalBestData.append(item)
         }
         
-        snapshot.appendSections(mockSections)
+        snapshot.appendSections(sections)
         
-        snapshot.appendItems(friends, toSection: mockSections[0])
-        snapshot.appendItems(personalBestData, toSection: mockSections[1])
+        snapshot.appendItems(weightItem, toSection: sections[0])
+        snapshot.appendItems(personalBestData, toSection: sections[1])
         
         apply(snapshot)
     }
@@ -132,13 +155,16 @@ class HomeDataSource: UICollectionViewDiffableDataSource<Section, HomeItem> {
             case 0:
                 let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalHeight(1))
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
-                item.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 0, bottom: 2, trailing: 0)
+                item.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 4, bottom: 2, trailing: 4)
                 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(0.5))
-                let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: self.mockFriends.count)
+                
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(0.75))
+                let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 2)
+                group.contentInsets = NSDirectionalEdgeInsets.init(top: 4, leading: 4, bottom: 0, trailing: 4)
                 
                 let section = NSCollectionLayoutSection(group: group)
                 section.boundarySupplementaryItems = [headerItem]
+                section.orthogonalScrollingBehavior = .none
                 
                 section.interGroupSpacing = 5
                 section.contentInsets = .init(top: 4, leading: 10, bottom: 10, trailing: 10)

@@ -24,8 +24,6 @@
 		3B5CBCD426817508005036EC /* EventsListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCD326817508005036EC /* EventsListTableViewController.swift */; };
 		3B5CBCD8268186E2005036EC /* UIView Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCD7268186E1005036EC /* UIView Extension.swift */; };
 		3B5CBCDA26819ED7005036EC /* MessagesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCD926819ED7005036EC /* MessagesTableViewCell.swift */; };
-		3B5CBCDC26819F51005036EC /* StringConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCDB26819F51005036EC /* StringConstants.swift */; };
-		3B5CBCDE2681A530005036EC /* MessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCDD2681A530005036EC /* MessagesViewController.swift */; };
 		3B5CBCE02681A86B005036EC /* UILabel Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCDF2681A86B005036EC /* UILabel Extension.swift */; };
 		3B5CBCE22681AD6D005036EC /* UIButton Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCE12681AD6D005036EC /* UIButton Extension.swift */; };
 		3B5CBCE5268319A7005036EC /* EventsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5CBCE4268319A6005036EC /* EventsTableViewCell.swift */; };
@@ -43,20 +41,19 @@
 		3B5EFD3326811D7C00F83E50 /* Progress.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B5EFD3226811D7C00F83E50 /* Progress.storyboard */; };
 		3B5EFD3526811D8600F83E50 /* AddGoal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B5EFD3426811D8600F83E50 /* AddGoal.storyboard */; };
 		3B5EFD3726811D9400F83E50 /* Events.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B5EFD3626811D9400F83E50 /* Events.storyboard */; };
-		3B5EFD3926811D9E00F83E50 /* Messages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B5EFD3826811D9E00F83E50 /* Messages.storyboard */; };
 		3B5EFD3B26811E4E00F83E50 /* InitialProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B5EFD3A26811E4E00F83E50 /* InitialProfile.storyboard */; };
 		3B5EFD3D26811E7000F83E50 /* Friends.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B5EFD3C26811E7000F83E50 /* Friends.storyboard */; };
 		3B727F6A268A357600395029 /* WeightHistoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B727F68268A357600395029 /* WeightHistoryCollectionViewCell.swift */; };
 		3B727F6B268A357600395029 /* WeightHistoryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B727F69268A357600395029 /* WeightHistoryCollectionViewCell.xib */; };
 		3B727F6D268AF93E00395029 /* ProgressDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B727F6C268AF93E00395029 /* ProgressDetailViewController.swift */; };
 		3B727F6F268B189500395029 /* HomeDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B727F6E268B189500395029 /* HomeDataSource.swift */; };
-		3B727F75268B1B3300395029 /* FriendCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B727F73268B1B3300395029 /* FriendCollectionViewCell.swift */; };
-		3B727F76268B1B3300395029 /* FriendCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B727F74268B1B3300395029 /* FriendCollectionViewCell.xib */; };
 		3B727F79268B1B4500395029 /* PersonalBestCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B727F77268B1B4500395029 /* PersonalBestCollectionViewCell.swift */; };
 		3B727F7A268B1B4500395029 /* PersonalBestCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B727F78268B1B4500395029 /* PersonalBestCollectionViewCell.xib */; };
 		3B727F7C268B3FC400395029 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B727F7B268B3FC400395029 /* ProfileViewController.swift */; };
-		3B727F7E268B4CB300395029 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B727F7D268B4CB300395029 /* ConversationViewController.swift */; };
 		3B727F80268B4ED500395029 /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B727F7F268B4ED500395029 /* FriendTableViewCell.swift */; };
+		3BA2462726969B580015056C /* WeightCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BA2462526969B580015056C /* WeightCollectionViewCell.swift */; };
+		3BA2462826969B580015056C /* WeightCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BA2462626969B580015056C /* WeightCollectionViewCell.xib */; };
+		3BB19709269778AD00BDB8BD /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB19708269778AD00BDB8BD /* LoadingViewController.swift */; };
 		6556E5A7CA48B6C32BE04AB4 /* Pods_GymBuddy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4E3A4F0A7BEC32E25A55B1B9 /* Pods_GymBuddy.framework */; };
 		714A742B26791C3A005F46F2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714A742A26791C3A005F46F2 /* AppDelegate.swift */; };
 		714A742D26791C3A005F46F2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 714A742C26791C3A005F46F2 /* SceneDelegate.swift */; };
@@ -65,17 +62,14 @@
 		714A743726791C3D005F46F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 714A743526791C3D005F46F2 /* LaunchScreen.storyboard */; };
 		714A744126791C4E005F46F2 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 714A744026791C4E005F46F2 /* CloudKit.framework */; };
 		71E8A4AB268B790D00478729 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4AA268B790D00478729 /* User.swift */; };
-		71E8A4AD268B7BFC00478729 /* FriendRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4AC268B7BFC00478729 /* FriendRequest.swift */; };
 		71E8A4AF268B7C0E00478729 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4AE268B7C0E00478729 /* Event.swift */; };
 		71E8A4B3268B7C8200478729 /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4B2268B7C8200478729 /* Workout.swift */; };
 		71E8A4B5268BAEA400478729 /* UserController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4B4268BAEA400478729 /* UserController.swift */; };
-		71E8A4B7268BAEAE00478729 /* FriendRequestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4B6268BAEAE00478729 /* FriendRequestController.swift */; };
 		71E8A4B9268BAEC000478729 /* EventController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4B8268BAEC000478729 /* EventController.swift */; };
 		71E8A4BB268BAECA00478729 /* WorkoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4BA268BAECA00478729 /* WorkoutController.swift */; };
 		71E8A4BD268BB23500478729 /* UIDate Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4BC268BB23500478729 /* UIDate Extension.swift */; };
 		71E8A4BF268BB4BB00478729 /* UserError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4BE268BB4BB00478729 /* UserError.swift */; };
 		71E8A4C1268BBEAA00478729 /* EventError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4C0268BBEAA00478729 /* EventError.swift */; };
-		71E8A4C3268CCDE100478729 /* FriendError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4C2268CCDE100478729 /* FriendError.swift */; };
 		71E8A4C5268D1C1700478729 /* WorkoutError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71E8A4C4268D1C1700478729 /* WorkoutError.swift */; };
 /* End PBXBuildFile section */
 
@@ -97,8 +91,6 @@
 		3B5CBCD326817508005036EC /* EventsListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsListTableViewController.swift; sourceTree = "<group>"; };
 		3B5CBCD7268186E1005036EC /* UIView Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView Extension.swift"; sourceTree = "<group>"; };
 		3B5CBCD926819ED7005036EC /* MessagesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesTableViewCell.swift; sourceTree = "<group>"; };
-		3B5CBCDB26819F51005036EC /* StringConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringConstants.swift; sourceTree = "<group>"; };
-		3B5CBCDD2681A530005036EC /* MessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesViewController.swift; sourceTree = "<group>"; };
 		3B5CBCDF2681A86B005036EC /* UILabel Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel Extension.swift"; sourceTree = "<group>"; };
 		3B5CBCE12681AD6D005036EC /* UIButton Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton Extension.swift"; sourceTree = "<group>"; };
 		3B5CBCE4268319A6005036EC /* EventsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsTableViewCell.swift; sourceTree = "<group>"; };
@@ -116,20 +108,19 @@
 		3B5EFD3226811D7C00F83E50 /* Progress.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Progress.storyboard; sourceTree = "<group>"; };
 		3B5EFD3426811D8600F83E50 /* AddGoal.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = AddGoal.storyboard; sourceTree = "<group>"; };
 		3B5EFD3626811D9400F83E50 /* Events.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Events.storyboard; sourceTree = "<group>"; };
-		3B5EFD3826811D9E00F83E50 /* Messages.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Messages.storyboard; sourceTree = "<group>"; };
 		3B5EFD3A26811E4E00F83E50 /* InitialProfile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = InitialProfile.storyboard; sourceTree = "<group>"; };
 		3B5EFD3C26811E7000F83E50 /* Friends.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Friends.storyboard; sourceTree = "<group>"; };
 		3B727F68268A357600395029 /* WeightHistoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightHistoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		3B727F69268A357600395029 /* WeightHistoryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeightHistoryCollectionViewCell.xib; sourceTree = "<group>"; };
 		3B727F6C268AF93E00395029 /* ProgressDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressDetailViewController.swift; sourceTree = "<group>"; };
 		3B727F6E268B189500395029 /* HomeDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeDataSource.swift; sourceTree = "<group>"; };
-		3B727F73268B1B3300395029 /* FriendCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCollectionViewCell.swift; sourceTree = "<group>"; };
-		3B727F74268B1B3300395029 /* FriendCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendCollectionViewCell.xib; sourceTree = "<group>"; };
 		3B727F77268B1B4500395029 /* PersonalBestCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalBestCollectionViewCell.swift; sourceTree = "<group>"; };
 		3B727F78268B1B4500395029 /* PersonalBestCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PersonalBestCollectionViewCell.xib; sourceTree = "<group>"; };
 		3B727F7B268B3FC400395029 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		3B727F7D268B4CB300395029 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		3B727F7F268B4ED500395029 /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
+		3BA2462526969B580015056C /* WeightCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeightCollectionViewCell.swift; sourceTree = "<group>"; };
+		3BA2462626969B580015056C /* WeightCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeightCollectionViewCell.xib; sourceTree = "<group>"; };
+		3BB19708269778AD00BDB8BD /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		4E3A4F0A7BEC32E25A55B1B9 /* Pods_GymBuddy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GymBuddy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		714A742726791C3A005F46F2 /* GymBuddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GymBuddy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		714A742A26791C3A005F46F2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -141,17 +132,14 @@
 		714A743E26791C4A005F46F2 /* GymBuddy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = GymBuddy.entitlements; sourceTree = "<group>"; };
 		714A744026791C4E005F46F2 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		71E8A4AA268B790D00478729 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		71E8A4AC268B7BFC00478729 /* FriendRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequest.swift; sourceTree = "<group>"; };
 		71E8A4AE268B7C0E00478729 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		71E8A4B2268B7C8200478729 /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
 		71E8A4B4268BAEA400478729 /* UserController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserController.swift; sourceTree = "<group>"; };
-		71E8A4B6268BAEAE00478729 /* FriendRequestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendRequestController.swift; sourceTree = "<group>"; };
 		71E8A4B8268BAEC000478729 /* EventController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventController.swift; sourceTree = "<group>"; };
 		71E8A4BA268BAECA00478729 /* WorkoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutController.swift; sourceTree = "<group>"; };
 		71E8A4BC268BB23500478729 /* UIDate Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDate Extension.swift"; sourceTree = "<group>"; };
 		71E8A4BE268BB4BB00478729 /* UserError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserError.swift; sourceTree = "<group>"; };
 		71E8A4C0268BBEAA00478729 /* EventError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventError.swift; sourceTree = "<group>"; };
-		71E8A4C2268CCDE100478729 /* FriendError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendError.swift; sourceTree = "<group>"; };
 		71E8A4C4268D1C1700478729 /* WorkoutError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutError.swift; sourceTree = "<group>"; };
 		9F94FE8403AEE91FA1E68F9B /* Pods-GymBuddy.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddy.release.xcconfig"; path = "Target Support Files/Pods-GymBuddy/Pods-GymBuddy.release.xcconfig"; sourceTree = "<group>"; };
 		A15BC835BD15ED1FB9CB9341 /* Pods-GymBuddy.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GymBuddy.debug.xcconfig"; path = "Target Support Files/Pods-GymBuddy/Pods-GymBuddy.debug.xcconfig"; sourceTree = "<group>"; };
@@ -256,15 +244,6 @@
 			path = Events;
 			sourceTree = "<group>";
 		};
-		3B5CBCC826817337005036EC /* Messages */ = {
-			isa = PBXGroup;
-			children = (
-				3B5CBCDD2681A530005036EC /* MessagesViewController.swift */,
-				3B727F7D268B4CB300395029 /* ConversationViewController.swift */,
-			);
-			path = Messages;
-			sourceTree = "<group>";
-		};
 		3B5EFD232680F8D500F83E50 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
@@ -278,7 +257,6 @@
 		3B5EFD2A2680FA1200F83E50 /* Helper and Extension */ = {
 			isa = PBXGroup;
 			children = (
-				3B5CBCDB26819F51005036EC /* StringConstants.swift */,
 				3B058A992683EE0B0047FF61 /* CellRegisterable.swift */,
 				3B058A982683EDEC0047FF61 /* Extensions */,
 				3B5EFD2B2680FA1E00F83E50 /* StyleGuide */,
@@ -297,8 +275,8 @@
 		3B727F70268B1A6800395029 /* HomeCollectionView Cells */ = {
 			isa = PBXGroup;
 			children = (
-				3B727F73268B1B3300395029 /* FriendCollectionViewCell.swift */,
-				3B727F74268B1B3300395029 /* FriendCollectionViewCell.xib */,
+				3BA2462526969B580015056C /* WeightCollectionViewCell.swift */,
+				3BA2462626969B580015056C /* WeightCollectionViewCell.xib */,
 				3B727F77268B1B4500395029 /* PersonalBestCollectionViewCell.swift */,
 				3B727F78268B1B4500395029 /* PersonalBestCollectionViewCell.xib */,
 			);
@@ -358,12 +336,10 @@
 			isa = PBXGroup;
 			children = (
 				71E8A4AA268B790D00478729 /* User.swift */,
-				71E8A4AC268B7BFC00478729 /* FriendRequest.swift */,
 				71E8A4AE268B7C0E00478729 /* Event.swift */,
 				71E8A4B2268B7C8200478729 /* Workout.swift */,
 				71E8A4BE268BB4BB00478729 /* UserError.swift */,
 				71E8A4C0268BBEAA00478729 /* EventError.swift */,
-				71E8A4C2268CCDE100478729 /* FriendError.swift */,
 				71E8A4C4268D1C1700478729 /* WorkoutError.swift */,
 			);
 			path = Model;
@@ -391,7 +367,6 @@
 			isa = PBXGroup;
 			children = (
 				71E8A4B4268BAEA400478729 /* UserController.swift */,
-				71E8A4B6268BAEAE00478729 /* FriendRequestController.swift */,
 				71E8A4B8268BAEC000478729 /* EventController.swift */,
 				71E8A4BA268BAECA00478729 /* WorkoutController.swift */,
 			);
@@ -403,12 +378,12 @@
 			children = (
 				3B5CBCC9268173B2005036EC /* TabBarController.swift */,
 				3B5CBCCB268173F3005036EC /* InitialProfileViewController.swift */,
+				3BB19708269778AD00BDB8BD /* LoadingViewController.swift */,
 				3B5CBCCD26817424005036EC /* FriendsListTableViewController.swift */,
 				3B5CBCC42681730D005036EC /* Home */,
 				3B5CBCC526817315005036EC /* Progress */,
 				3B5CBCC62681732F005036EC /* AddGoal */,
 				3B5CBCC726817334005036EC /* Events */,
-				3B5CBCC826817337005036EC /* Messages */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -421,7 +396,6 @@
 				3B5EFD3226811D7C00F83E50 /* Progress.storyboard */,
 				3B5EFD3426811D8600F83E50 /* AddGoal.storyboard */,
 				3B5EFD3626811D9400F83E50 /* Events.storyboard */,
-				3B5EFD3826811D9E00F83E50 /* Messages.storyboard */,
 				3B5EFD3A26811E4E00F83E50 /* InitialProfile.storyboard */,
 				3B5EFD3C26811E7000F83E50 /* Friends.storyboard */,
 				714A743526791C3D005F46F2 /* LaunchScreen.storyboard */,
@@ -521,8 +495,7 @@
 				3B5EFD3B26811E4E00F83E50 /* InitialProfile.storyboard in Resources */,
 				3B058AA22683EF470047FF61 /* HeaderCollectionReusableView.xib in Resources */,
 				3B727F6B268A357600395029 /* WeightHistoryCollectionViewCell.xib in Resources */,
-				3B727F76268B1B3300395029 /* FriendCollectionViewCell.xib in Resources */,
-				3B5EFD3926811D9E00F83E50 /* Messages.storyboard in Resources */,
+				3BA2462826969B580015056C /* WeightCollectionViewCell.xib in Resources */,
 				3B5EFD3D26811E7000F83E50 /* Friends.storyboard in Resources */,
 				3B5EFD3526811D8600F83E50 /* AddGoal.storyboard in Resources */,
 				3B5EFD292680F98200F83E50 /* SF-Pro-Rounded-Ultralight.otf in Resources */,
@@ -585,15 +558,12 @@
 				3B5CBCCA268173B2005036EC /* TabBarController.swift in Sources */,
 				3B5CBCD426817508005036EC /* EventsListTableViewController.swift in Sources */,
 				71E8A4B3268B7C8200478729 /* Workout.swift in Sources */,
-				3B727F7E268B4CB300395029 /* ConversationViewController.swift in Sources */,
-				71E8A4B7268BAEAE00478729 /* FriendRequestController.swift in Sources */,
 				3B5EFD2D2680FA5600F83E50 /* StyleGuide.swift in Sources */,
 				3B727F6F268B189500395029 /* HomeDataSource.swift in Sources */,
+				3BB19709269778AD00BDB8BD /* LoadingViewController.swift in Sources */,
 				3B5CBCED26835DE7005036EC /* EventCreateViewController.swift in Sources */,
-				3B5CBCDE2681A530005036EC /* MessagesViewController.swift in Sources */,
 				3B058A9D2683EE580047FF61 /* ProgressCollectionViewCell.swift in Sources */,
 				3B727F79268B1B4500395029 /* PersonalBestCollectionViewCell.swift in Sources */,
-				3B5CBCDC26819F51005036EC /* StringConstants.swift in Sources */,
 				3B5CBCE22681AD6D005036EC /* UIButton Extension.swift in Sources */,
 				3B5CBCD0268174AF005036EC /* ProgressViewController.swift in Sources */,
 				3B5CBCF3268369C1005036EC /* InviteeTableViewCell.swift in Sources */,
@@ -604,7 +574,6 @@
 				71E8A4B5268BAEA400478729 /* UserController.swift in Sources */,
 				3B5CBCDA26819ED7005036EC /* MessagesTableViewCell.swift in Sources */,
 				71E8A4AB268B790D00478729 /* User.swift in Sources */,
-				71E8A4C3268CCDE100478729 /* FriendError.swift in Sources */,
 				3B727F80268B4ED500395029 /* FriendTableViewCell.swift in Sources */,
 				71E8A4BF268BB4BB00478729 /* UserError.swift in Sources */,
 				3B058AA42683EFA40047FF61 /* ProgressDataSource.swift in Sources */,
@@ -612,12 +581,10 @@
 				3B5CBCF126835FF4005036EC /* UITextField Extension.swift in Sources */,
 				3B058AA72683FA060047FF61 /* ExerciseCollectionViewCell.swift in Sources */,
 				71E8A4AF268B7C0E00478729 /* Event.swift in Sources */,
-				71E8A4AD268B7BFC00478729 /* FriendRequest.swift in Sources */,
 				3B5CBCEF26835DF2005036EC /* EventDetailViewController.swift in Sources */,
 				3B5CBCCC268173F3005036EC /* InitialProfileViewController.swift in Sources */,
 				3B058AA12683EF470047FF61 /* HeaderCollectionReusableView.swift in Sources */,
 				71E8A4C5268D1C1700478729 /* WorkoutError.swift in Sources */,
-				3B727F75268B1B3300395029 /* FriendCollectionViewCell.swift in Sources */,
 				71E8A4B9268BAEC000478729 /* EventController.swift in Sources */,
 				71E8A4BD268BB23500478729 /* UIDate Extension.swift in Sources */,
 				3B5CBCE5268319A7005036EC /* EventsTableViewCell.swift in Sources */,
@@ -625,6 +592,7 @@
 				3B058AAA2684F9580047FF61 /* UIImage Extension.swift in Sources */,
 				71E8A4C1268BBEAA00478729 /* EventError.swift in Sources */,
 				714A742B26791C3A005F46F2 /* AppDelegate.swift in Sources */,
+				3BA2462726969B580015056C /* WeightCollectionViewCell.swift in Sources */,
 				3B5CBCCE26817424005036EC /* FriendsListTableViewController.swift in Sources */,
 				3B5CBCD2268174D9005036EC /* AddGoalViewController.swift in Sources */,
 				3B727F7C268B3FC400395029 /* ProfileViewController.swift in Sources */,
@@ -779,7 +747,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = GymBuddy/GymBuddy.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QEN666WPC7;
+				DEVELOPMENT_TEAM = UF94N945G8;
 				INFOPLIST_FILE = GymBuddy/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -800,7 +768,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = GymBuddy/GymBuddy.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = QEN666WPC7;
+				DEVELOPMENT_TEAM = UF94N945G8;
 				INFOPLIST_FILE = GymBuddy/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

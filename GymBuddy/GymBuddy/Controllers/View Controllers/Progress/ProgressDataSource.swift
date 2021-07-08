@@ -14,7 +14,8 @@ struct Section: Hashable {
 
 
 struct Item: Hashable {
-
+    let uuid = UUID().uuidString
+    
     let context: Context
     
     enum Context: Hashable {
@@ -24,41 +25,25 @@ struct Item: Hashable {
     }
 }
 
-//struct Workout: Hashable {
-//    let title: String
-//    let goal: Int
-//    let completionDate: String?
-//    let current: Int
-//    let unit: String
-//}
+extension Item {
+    static func ==(lhs: Item, rhs: Item) -> Bool {
+        return lhs.uuid == rhs.uuid
+    }
+
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(uuid)
+    }
+}
+
 
 //MARK: - Class
 class ProgressDataSource: UICollectionViewDiffableDataSource<Section, Item> {
-    //MARK: - Temp Mock Data
-    //JCHUN - Mock Data
-    let mockWorkoutData: [Workout] = {
-        var mockData = [Workout]()
-        
-        let running = Workout(title: "Running", goal: 3, completionDate: nil, current: 2, unit: "mi", userRef: nil)
-        let strengthTraining = Workout(title: "Strength Training", goal: 5, completionDate: nil, current: 4, unit: "hour", userRef: nil)
-        
-        mockData = [running, strengthTraining]
-        
-        return mockData
-    }()
     
-    let mockCompletedWorkoutData: [Workout] = {
-        var mockData = [Workout]()
-        
-        let running = Workout(title: "Running", goal: 3, completionDate: "6/25/21", current: 3, unit: "mi", userRef: nil)
-        let strengthTraining = Workout(title: "Strength Training", goal: 5, completionDate: "6/25/21", current: 5, unit: "hour", userRef: nil)
-        
-        mockData = [running, strengthTraining]
-        
-        return mockData
-    }()
+    //MARK: - Properties
+    var inProgress = [Workout]()
+    var completed = [Workout]()
     
-    let mockSections: [Section] = {
+    let sections: [Section] = {
         var sections = [Section]()
         
         let progressRing = Section(title: "  Overall Progress")
@@ -70,25 +55,7 @@ class ProgressDataSource: UICollectionViewDiffableDataSource<Section, Item> {
         
         return sections
     }()
-    
-    //MARK: - Class Properties
-//    private static var listHeaderCellConfiguration: UICollectionView.CellRegistration<UICollectionViewListCell, String> {
-//        UICollectionView.CellRegistration { cell, indexPath, item in
-//            var config = cell.defaultContentConfiguration()
-//            config.text = item.capitalized //where does this string come from?
-//            cell.contentConfiguration = config
-//        }
-//    }
-//
-//
-//    private static var listItemCellConfiguration: UICollectionView.CellRegistration<UICollectionViewListCell, String> {
-//        UICollectionView.CellRegistration { cell, indexPath, item in
-//            var config = cell.defaultContentConfiguration()
-//            config.text = item.capitalized
-//            cell.contentConfiguration = config
-//        }
-//    }
-    
+        
     //MARK: - Init
     init(collectionView: UICollectionView) {
         super.init(collectionView: collectionView) { (collectionView, indexPath, item) -> UICollectionViewCell? in
@@ -104,7 +71,8 @@ class ProgressDataSource: UICollectionViewDiffableDataSource<Section, Item> {
             case .weightHistory:
                 let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeightHistoryCollectionViewCell.id, for: indexPath) as? WeightHistoryCollectionViewCell
                 
-                //do I need cell.weightData = weightData ?
+                let currentUser = UserController.shared.currentUser
+                cell?.currentUser = currentUser
                 
                 return cell
                 
@@ -144,34 +112,55 @@ class ProgressDataSource: UICollectionViewDiffableDataSource<Section, Item> {
     func applyData() {
         var snapshot = NSDiffableDataSourceSnapshot<Section, Item>()
         
+        guard let currentUser = UserController.shared.currentUser else { return }
+
+        inProgress = []
+        completed = []
+        
+        currentUser.workouts.forEach { workout in
+            if workout.goal <= workout.current {
+                completed.append(workout)
+            } else {
+                inProgress.append(workout)
+            }
+        }
+        
+        var totalGoal: CGFloat = 0
+        var totalCurrent: CGFloat = 0
+        
+        // In Progress
+        var inProgressItems = [Item]()
+        for workout in inProgress {
+            let item = Item(context: .list(workout))
+            let caloriesBuffer: CGFloat = workout.unit == "calories" ? 0.1 : 1
+            totalGoal += (CGFloat(workout.goal) * caloriesBuffer)
+            totalCurrent += (CGFloat(workout.current) * caloriesBuffer)
+            inProgressItems.append(item)
+        }
+        
         // progress ring
-        let progressRingItem = Item(context: .progressRing(0.9))
+        let progress = totalCurrent == 0 ? 0 : totalCurrent/totalGoal
+        let progressRingItem = Item(context: .progressRing(progress))
         
         // weight histroy graph
         let weightHistroyItem = Item(context: .weightHistory)
         
-        // In Progress
-        var workoutItems = [Item]()
-        for workout in mockWorkoutData {
-            let item = Item(context: .list(workout))
-            workoutItems.append(item)
-        }
         
         // Complted
         var completedItems = [Item]()
-        for workout in mockCompletedWorkoutData {
+        for workout in completed {
             let item = Item(context: .list(workout))
             completedItems.append(item)
         }
         
-        snapshot.appendSections(mockSections)
+        snapshot.appendSections(self.sections)
         
-        snapshot.appendItems([progressRingItem], toSection: mockSections[0])
-        snapshot.appendItems(workoutItems, toSection: mockSections[1])
-        snapshot.appendItems([weightHistroyItem], toSection: mockSections[2])
-        snapshot.appendItems(completedItems, toSection: mockSections[3])
+        snapshot.appendItems([progressRingItem], toSection: self.sections[0])
+        snapshot.appendItems(inProgressItems, toSection: self.sections[1])
+        snapshot.appendItems([weightHistroyItem], toSection: self.sections[2])
+        snapshot.appendItems(completedItems, toSection: self.sections[3])
         
-        apply(snapshot)
+        self.apply(snapshot, animatingDifferences: false)
         
     }//end of func
     
@@ -205,8 +194,9 @@ class ProgressDataSource: UICollectionViewDiffableDataSource<Section, Item> {
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 item.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 0, bottom: 8, trailing: 0)
                 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(0.375))
-                let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: self.mockWorkoutData.count)
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(0.2))
+                //let count = self.inProgress.count == 0 ? 1 : self.inProgress.count
+                let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
                 
                 let section = NSCollectionLayoutSection(group: group)
                 section.boundarySupplementaryItems = [headerItem]
@@ -237,9 +227,10 @@ class ProgressDataSource: UICollectionViewDiffableDataSource<Section, Item> {
                 let item = NSCollectionLayoutItem(layoutSize: itemSize)
                 item.contentInsets = NSDirectionalEdgeInsets.init(top: 0, leading: 0, bottom: 8, trailing: 0)
                 
-                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(0.375))
-                let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: self.mockWorkoutData.count)
-                
+                let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(0.2))
+                //let count = self.completed.count == 0 ? 1 : self.completed.count
+                let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+
                 let section = NSCollectionLayoutSection(group: group)
                 section.boundarySupplementaryItems = [headerItem]
                 
@@ -247,7 +238,7 @@ class ProgressDataSource: UICollectionViewDiffableDataSource<Section, Item> {
                 section.contentInsets = NSDirectionalEdgeInsets.init(top: 10, leading: 10, bottom: 10, trailing: 10)
                 
                 configuredSection = section
-
+                
             default:
                 fatalError("unexpected section found")
             }

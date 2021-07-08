@@ -22,16 +22,21 @@ class EventDetailViewController: UIViewController {
     @IBOutlet weak var exerciseTypeLabel: UILabel!
     @IBOutlet weak var eventInfoLabel: UILabel!
     @IBOutlet weak var inviteesLabel: UILabel!
+    @IBOutlet weak var editButton: UIBarButtonItem!
+    @IBOutlet weak var inviteButton: UIButton!
     
     @IBOutlet weak var tableView: UITableView!
     
     //MARK: - Properties
     var event: Event? {
         didSet {
+            fetchInvitees()
             fetchAttendees()
         }
     }
+    var isOwner: Bool?
     var attendees = [User]()
+    var invitees = [User]()
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -45,32 +50,69 @@ class EventDetailViewController: UIViewController {
         updateViews()
     }
     
+    override func loadViewIfNeeded() {
+        super.loadViewIfNeeded()
+        disableButtons()
+    }
+    
     //MARK: - Function
+    func disableButtons() {
+        guard isOwner == false else { return }
+        editButton.isEnabled = false
+        inviteButton.isEnabled = false
+    }
+    
     fileprivate func fetchAttendees() {
         guard let event = event,
-              let attendeeRefs = event.attendeeRefs else { return }
+              let attendeeRefs = event.attendeeRefs else {return}
+              
         
         EventController.shared.fetchEventAttendees(attendeeRefs: attendeeRefs) { result in
-            switch result {
-            case .success(let attendees):
-                guard let attendees = attendees else { return }
-                self.attendees = attendees
-            case .failure(let error):
-                print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let attendees):
+                    guard let attendees = attendees else { return }
+                    self.attendees = attendees
+//                    self.fetchInvitees()
+                    self.tableView.reloadData()
+                case .failure(let error):
+                    print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+                }
             }
         }
         
-        
     }//end of func
+    
+    func fetchInvitees() {
+        guard let event = event,
+              let inviteeRefs = event.inviteeRefs else {return}
+        
+        EventController.shared.fetchEventAttendees(attendeeRefs: inviteeRefs) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let invitees):
+                    guard let invitees = invitees else {return}
+                    self.invitees = invitees
+                    self.tableView.reloadData()
+                case .failure(let error):
+                    print("Error in \(#function) : \(error.localizedDescription) \n---\n \(error)")
+                }
+            }
+        }
+    }
     
     //MARK: - Actions
     @IBAction func addInviteeButtonTapped(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Friends", bundle: nil)
+        let eventToSend = event
         guard let destinationVC = storyboard.instantiateViewController(identifier: "FriendsListTableViewController") as? FriendsListTableViewController else { return }
         //destinationVC.buttonTitles = ["invite", "attending"]
+        destinationVC.originVC = "EventDetailVC"
+        destinationVC.event = eventToSend
+        destinationVC.attendees = attendees
+        destinationVC.invitees = invitees
         self.navigationController?.pushViewController(destinationVC, animated: true)
     }
-    
     
     //MARK: - Functions
     fileprivate func updateViews() {
@@ -100,24 +142,25 @@ class EventDetailViewController: UIViewController {
     }
     
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "toEventEditVC" {
+            guard let destinationVC = segue.destination as? EventCreateViewController else { return }
+            
+            destinationVC.event = event
+        }
+        
     }
-    */
 
 }//End of class
 
 //MARK: - Extensions
 extension EventDetailViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return attendees.count
     }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "inviteeCell") as? InviteeTableViewCell else { return UITableViewCell() }

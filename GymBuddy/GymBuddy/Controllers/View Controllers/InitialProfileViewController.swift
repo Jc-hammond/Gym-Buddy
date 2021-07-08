@@ -19,6 +19,9 @@ class InitialProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        currentWeightTextField.delegate = self
+        targetWeightTextField.delegate = self
+        
         currentWeightTextField.addCornerRadius()
         targetWeightTextField.addCornerRadius()
         fullNameTextField.addCornerRadius()
@@ -35,28 +38,35 @@ class InitialProfileViewController: UIViewController {
               let targetWeight = targetWeightTextField.text,
               let targetWeightInt = Int(targetWeight),
               let fullName = fullNameTextField.text else { return }
-                
+
         UserController.shared.createUser(fullName: fullName, currentWeight: currentWeightInt, targetWeight: targetWeightInt) { result in
-            switch result {
-            case .success(let user):
-                UserController.shared.currentUser = user
-            case .failure(let error):
-                print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let user):
+                    UserController.shared.currentUser = user
+                    guard let loadingVC = self.storyboard?.instantiateViewController(identifier: "LoadingViewController") as? LoadingViewController else { return }
+                    self.show(loadingVC, sender: nil)
+                    //self.dismiss(animated: true, completion: nil)
+                case .failure(let error):
+                    print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+                }
             }
         }
-              
-        self.dismiss(animated: true, completion: nil)
     }
     
-    
-    /*
-    // MARK: - Navigation
+}//End of class
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+//MARK: - Extension
+extension InitialProfileViewController: UITextFieldDelegate {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
-    */
-
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == fullNameTextField {
+            textField.resignFirstResponder()
+        }
+        return true
+    }
+    
 }//End of class

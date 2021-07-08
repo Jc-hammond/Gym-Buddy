@@ -47,6 +47,7 @@ class EventCreateViewController: UIViewController {
     
     var emojiButtons: [UIButton] = []
     var workoutButtons: [UIButton] = []
+    var event: Event?
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -54,9 +55,18 @@ class EventCreateViewController: UIViewController {
 
         navigationController?.navigationBar.tintColor = .customLightGreen
         
-        updateViews()
+        eventTitleTextField.delegate = self
+        whereTextField.delegate = self
+        infoTextView.delegate = self
+        
         setupEmojiButtons()
         setupWorkoutTypeButtons()
+    }
+    
+    override func loadViewIfNeeded() {
+        super.loadViewIfNeeded()
+        
+        updateViews()
     }
     
     //MARK: - Actions
@@ -78,13 +88,24 @@ class EventCreateViewController: UIViewController {
         let info = infoTextView.text
         let date = datePicker.date
         
-        EventController.shared.createEvent(with: title, emoji: emoji, date: date, location: location, type: type, info: info, user: currentUser) { result in
-            switch result {
-            case .success(let event):
-                guard let event = event else { return }
-                print("\(event.title) is successfully saved")
-            case .failure(let error):
-                print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+        if let event = event {
+            EventController.shared.updateEvent(for: event) { result in
+                switch result {
+                case .success(_):
+                    print("Event: \(event.title) successfully saved")
+                case .failure(let error):
+                    print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+                }
+            }
+        } else {
+            EventController.shared.createEvent(with: title, emoji: emoji, date: date, location: location, type: type, info: info, user: currentUser) { result in
+                switch result {
+                case .success(let event):
+                    guard let event = event else { return }
+                    print("\(event.title) is successfully saved")
+                case .failure(let error):
+                    print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+                }
             }
         }
         
@@ -94,6 +115,17 @@ class EventCreateViewController: UIViewController {
     
     //MARK: - Functions
     fileprivate func updateViews() {
+        if let event = event {
+            eventTitleTextField.text = event.title
+            eventEmojiButton.setImage(nil, for: .normal)
+            eventEmojiButton.setTitle(event.emoji, for: .normal)
+            datePicker.date = event.date
+            whereTextField.text = event.location
+            typeButton.setTitle(event.type, for: .normal)
+            infoTextView.text = event.info
+            createEventButton.setTitle("Save Event", for: .normal)
+        }
+        
         eventTitleTextField.addCornerRadius()
         eventTitleTextField.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 22)
         eventTitleTextField.updatePlaceHolder(fontName: FontNames.sfRoundedSemiBold, size: 22)
@@ -186,15 +218,25 @@ class EventCreateViewController: UIViewController {
         workoutButtons.forEach{ $0.isHidden = true }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }//End of class
+
+extension EventCreateViewController: UITextFieldDelegate, UITextViewDelegate {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            textView.resignFirstResponder()
+            return false
+        }
+        
+        return true
+    }
+
+}

@@ -23,7 +23,6 @@ class PersonalBestCollectionViewCell: UICollectionViewCell, CellRegisterable {
     //MARK: - Lifecycle
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
         
     //MARK: - Functions

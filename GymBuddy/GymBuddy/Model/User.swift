@@ -22,6 +22,7 @@ struct UserStrings {
     fileprivate static let goalDataKey = "goalData"
     fileprivate static let eventsKey = "events"
     static let appleUserRefKey = "appleUserRef"
+    static let blockedUserRefsKey = "blockedUserRefs"
     
 }
 
@@ -32,24 +33,18 @@ class User {
     var currentWeights: [Int]?
     var currentDates: [Date]?
     var targetWeight: Int
-    var friends: [User]
-    var friendRefs: [CKRecord.Reference]?
-    var friendRequests: [FriendRequest]?
-    var friendRequestRefs: [CKRecord.Reference]?
+    var blockedUserRefs: [CKRecord.Reference]?
     var workouts: [Workout]
     var recordID: CKRecord.ID
     var appleUserRef: CKRecord.Reference
     
-    init(fullName: String, currentWeights: [Int]?, currentDates: [Date]?, targetWeight: Int, friends: [User] = [], friendRefs: [CKRecord.Reference]?, friendRequests: [FriendRequest]?, friendRequestRefs: [CKRecord.Reference]?, workouts: [Workout] = [], recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString), appleUserRef: CKRecord.Reference) {
+    init(fullName: String, currentWeights: [Int]?, currentDates: [Date]?, targetWeight: Int, blockedUserRefs: [CKRecord.Reference]?, workouts: [Workout] = [], recordID: CKRecord.ID = CKRecord.ID(recordName: UUID().uuidString), appleUserRef: CKRecord.Reference) {
         
         self.fullName = fullName
         self.currentWeights = currentWeights
         self.currentDates = currentDates
         self.targetWeight = targetWeight
-        self.friends = friends
-        self.friendRefs = friendRefs
-        self.friendRequests = friendRequests
-        self.friendRequestRefs = friendRequestRefs
+        self.blockedUserRefs = blockedUserRefs
         self.workouts = workouts
         self.recordID = recordID
         self.appleUserRef = appleUserRef
@@ -67,10 +62,9 @@ extension User {
               let appleUserRef = ckRecord[UserStrings.appleUserRefKey] as? CKRecord.Reference
         else {return nil}
         
-        let friendRefs = ckRecord[UserStrings.friendRefsKey] as? [CKRecord.Reference]
-        let friendRequestRefs = ckRecord[UserStrings.friendRequestRefsKey] as? [CKRecord.Reference]
+        let blockedUserRefs = ckRecord[UserStrings.blockedUserRefsKey] as? [CKRecord.Reference]
         
-        self.init(fullName: fullName, currentWeights: currentWeights, currentDates: currentDates, targetWeight: targetWeight, friends: [], friendRefs: friendRefs, friendRequests: nil, friendRequestRefs: friendRequestRefs, workouts: [], recordID: ckRecord.recordID, appleUserRef: appleUserRef)
+        self.init(fullName: fullName, currentWeights: currentWeights, currentDates: currentDates, targetWeight: targetWeight, blockedUserRefs: blockedUserRefs, workouts: [], recordID: ckRecord.recordID, appleUserRef: appleUserRef)
     }
 }
 
@@ -86,17 +80,14 @@ extension CKRecord {
             UserStrings.appleUserRefKey : user.appleUserRef
         ])
         
-        if let friendRefs = user.friendRefs {
-            self.setValue(friendRefs, forKey: UserStrings.friendRefsKey)
-        }
-        if let friendRequestRefs = user.friendRequestRefs {
-            self.setValue(friendRequestRefs, forKey: UserStrings.friendRequestRefsKey)
-        }
         if let currentWeights = user.currentWeights {
             self.setValue(currentWeights, forKey: UserStrings.currentWeightsKey)
         }
         if let currentDates = user.currentDates {
             self.setValue(currentDates, forKey: UserStrings.currentDatesKey)
+        }
+        if let blockedUserRefs = user.blockedUserRefs {
+            self.setValue(blockedUserRefs, forKey: UserStrings.blockedUserRefsKey)
         }
     }
 }
