@@ -61,7 +61,6 @@ class WeightCollectionViewCell: UICollectionViewCell, CellRegisterable {
             }
             
             detailLabel.text = "Click here to change your target weight"
-            detailLabel.textColor = .white
         }
         
         titleLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 20)
@@ -73,6 +72,7 @@ class WeightCollectionViewCell: UICollectionViewCell, CellRegisterable {
         emojiLabel.addCornerRadius(radius: width/2, width: 1, color: .customLightGreen)
         emojiLabel.backgroundColor = .white
         detailLabel.font = UIFont(name: FontNames.sfRoundedReg, size: 14)
+        detailLabel.textColor = .customDarkGreen
         detailLabelContainer.addCornerRadius(color: .customDarkGreen)
     }//end of func
 
