@@ -545,7 +545,14 @@
                             <constraint firstItem="ccc-uS-npk" firstAttribute="width" secondItem="Q3P-ss-OVL" secondAttribute="width" multiplier="0.9" id="twX-20-GPo"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Create New Event" id="uJa-Mv-FEE"/>
+                    <navigationItem key="navigationItem" title="Create New Event" id="uJa-Mv-FEE">
+                        <barButtonItem key="rightBarButtonItem" title="disclaimer" id="llN-8Y-zSg">
+                            <color key="tintColor" name="custom light green"/>
+                            <connections>
+                                <action selector="disclaimerButtonTapped:" destination="pIv-p4-4lv" id="NEF-pz-oFn"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="createEventButton" destination="ccc-uS-npk" id="RgD-Eo-sYZ"/>
                         <outlet property="datePicker" destination="Mm8-vS-vTD" id="z15-5A-EBz"/>
