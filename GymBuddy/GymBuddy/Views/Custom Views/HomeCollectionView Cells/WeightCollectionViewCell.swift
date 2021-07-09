@@ -47,7 +47,7 @@ class WeightCollectionViewCell: UICollectionViewCell, CellRegisterable {
         } else if itemNumber == 1 {
             titleLabel.text = "Target Weight"
             weightLabel.text = "\(currentUser.targetWeight) lbs"
-            emojiLabel.isHidden = false
+            emojiLabel.isHidden = true
             let currentWeightD = Double(currentWeight)
             let targetWeightD = Double(currentUser.targetWeight)
             let variance: Double = (abs(currentWeightD-targetWeightD) / ((currentWeightD+targetWeightD) / 2)) * 100
@@ -60,7 +60,8 @@ class WeightCollectionViewCell: UICollectionViewCell, CellRegisterable {
                 emojiLabel.text = "🏋️‍♀️"
             }
             
-            detailLabel.text = "You are within \(round(variance*10)/10)% of your target weight"
+            detailLabel.text = "Click here to change your target weight"
+            detailLabel.textColor = .white
         }
         
         titleLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 20)

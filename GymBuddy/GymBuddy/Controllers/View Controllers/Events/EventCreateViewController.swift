@@ -70,6 +70,13 @@ class EventCreateViewController: UIViewController {
     }
     
     //MARK: - Actions
+    @IBAction func disclaimerButtonTapped(_ sender: Any) {
+        let alert = UIAlertController(title: "DISCLAIMER", message: "These features are not health or medical advice or suggestions. If none of the presented Types are suitable for you please select \"Other\"; please consult a doctor or medical professional before engaging in any type of workout and/or exercise, and before using this app.  See app description for more details.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func eventEmojiButtonTapped(_ sender: UIButton) {
         emojiButtons.forEach{ $0.isHidden.toggle() }
     }

@@ -3,6 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -73,9 +74,17 @@
                             <constraint firstItem="vhg-u4-0qT" firstAttribute="centerX" secondItem="5EZ-qb-Rvc" secondAttribute="centerXWithinMargins" id="qwR-9g-f2x"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Home" id="vbh-ya-6oL"/>
+                    <navigationItem key="navigationItem" title="Home" id="vbh-ya-6oL">
+                        <barButtonItem key="rightBarButtonItem" title="disclaimer" id="qDu-Zf-RAV">
+                            <color key="tintColor" name="custom light green"/>
+                            <connections>
+                                <action selector="disclaimerButtonTapped:" destination="Y6W-OH-hqX" id="H4l-8p-RMR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="disclaimerButton" destination="qDu-Zf-RAV" id="rgg-Tp-sXW"/>
                         <outlet property="homeCollectionView" destination="2Pb-xl-LZ0" id="oJT-NU-GmH"/>
                         <outlet property="profileImageButton" destination="tKx-50-uMM" id="n2C-zH-5nr"/>
                         <outlet property="profileNameButton" destination="zUs-c2-vGq" id="mVP-d2-h8W"/>
@@ -246,6 +255,9 @@
         <image name="icons8-home_page-40" width="40" height="40"/>
         <image name="icons8-home_page_filled-40" width="40" height="40"/>
         <image name="icons8-person_male-40" width="40" height="40"/>
+        <namedColor name="custom light green">
+            <color red="0.49019607843137253" green="0.88627450980392153" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

@@ -38,7 +38,14 @@
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="trailing" secondItem="5VV-Qf-xA4" secondAttribute="trailing" id="yPw-cN-O9J"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Progress Tracker" id="184-zV-Tnc"/>
+                    <navigationItem key="navigationItem" title="Progress Tracker" id="184-zV-Tnc">
+                        <barButtonItem key="rightBarButtonItem" title="disclaimer" id="WmN-r5-WDB">
+                            <color key="tintColor" name="custom light green"/>
+                            <connections>
+                                <action selector="disclaimerButtonTapped:" destination="Y6W-OH-hqX" id="OjB-ek-Pqj"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="progressCollectionView" destination="5VV-Qf-xA4" id="goo-Tq-A6F"/>
