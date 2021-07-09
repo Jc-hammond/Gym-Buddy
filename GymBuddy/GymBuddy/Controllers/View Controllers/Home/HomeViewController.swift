@@ -14,6 +14,7 @@ class HomeViewController: UIViewController {
     @IBOutlet weak var profileNameButton: UIButton!
     @IBOutlet weak var profileImageButton: UIButton!
     @IBOutlet weak var homeCollectionView: UICollectionView!
+    @IBOutlet weak var disclaimerButton: UIBarButtonItem!
     
     //MARK: - Properties
     private lazy var homeDataSource = {
@@ -56,6 +57,12 @@ class HomeViewController: UIViewController {
         navigationController?.pushViewController(destinationVC, animated: true)
     }
     
+    @IBAction func disclaimerButtonTapped(_ sender: Any) {
+        let alert = UIAlertController(title: "DISCLAIMER", message: "This is not medical or health advice. Weight data is only visible to you and not to any other users. The features on this page are not medical or health suggestions. Please consult a doctor or medical professional before engaging in any type of workout and/or exercise, and before using this app. See app description for more details.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
     
     //MARK: - Functions
     func fetchUser() {

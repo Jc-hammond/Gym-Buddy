@@ -3,10 +3,16 @@
     <device id="retina6_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="SF-Pro-Rounded-Semibold.otf">
+            <string>SFProRounded-Semibold</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Add Goal-->
         <scene sceneID="s0d-6b-0kx">
@@ -389,6 +395,16 @@
                                     </button>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="erg-fa-nRu">
+                                <rect key="frame" x="297.66666666666669" y="54.666666666666657" width="73" height="31"/>
+                                <fontDescription key="fontDescription" name="SFProRounded-Semibold" family="SF Pro Rounded" pointSize="16"/>
+                                <state key="normal" title="disclaimer">
+                                    <color key="titleColor" name="custom light green"/>
+                                </state>
+                                <connections>
+                                    <action selector="disclaimerButtonTapped:" destination="Y6W-OH-hqX" eventType="touchUpInside" id="XeU-kT-4kT"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="vDu-zF-Fre"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -397,10 +413,12 @@
                             <constraint firstItem="8l1-Eh-Vsn" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="0vk-0c-ZmH"/>
                             <constraint firstItem="QNc-th-g1r" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.9" id="56C-Hn-UP9"/>
                             <constraint firstItem="l3D-tf-BZp" firstAttribute="top" secondItem="5EZ-qb-Rvc" secondAttribute="top" constant="60" id="CMa-vd-ay9"/>
+                            <constraint firstItem="erg-fa-nRu" firstAttribute="trailing" secondItem="Evx-lt-i4g" secondAttribute="trailing" id="Gyy-V3-3pR"/>
                             <constraint firstItem="vDu-zF-Fre" firstAttribute="bottom" secondItem="QNc-th-g1r" secondAttribute="bottom" constant="12" id="VU6-0O-rIG"/>
                             <constraint firstItem="AvJ-FM-1OQ" firstAttribute="top" secondItem="yCE-PS-ERU" secondAttribute="bottom" constant="20" id="eDo-jJ-YKT"/>
                             <constraint firstItem="AvJ-FM-1OQ" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="eVJ-2H-43C"/>
                             <constraint firstItem="yCE-PS-ERU" firstAttribute="width" secondItem="5EZ-qb-Rvc" secondAttribute="width" multiplier="0.9" id="fpY-7D-9UL"/>
+                            <constraint firstItem="erg-fa-nRu" firstAttribute="centerY" secondItem="l3D-tf-BZp" secondAttribute="centerY" id="j27-hW-wD3"/>
                             <constraint firstItem="yCE-PS-ERU" firstAttribute="top" secondItem="l3D-tf-BZp" secondAttribute="bottom" constant="20" id="jDE-cZ-1Mk"/>
                             <constraint firstItem="zwT-Bo-4RW" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="jal-iL-U1T"/>
                             <constraint firstItem="QNc-th-g1r" firstAttribute="centerX" secondItem="vDu-zF-Fre" secondAttribute="centerX" id="ou9-5y-EES"/>
@@ -454,6 +472,9 @@
         <image name="icons8-chevron_up_filled-40" width="40" height="40"/>
         <image name="icons8-ingredients_list-40" width="40" height="40"/>
         <image name="icons8-ingredients_list_filled-40" width="40" height="40"/>
+        <namedColor name="custom light green">
+            <color red="0.49019607843137253" green="0.88627450980392153" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

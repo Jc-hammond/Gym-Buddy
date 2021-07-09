@@ -36,6 +36,14 @@ class ProgressViewController: UIViewController {
         fetchData()
     }
     
+    //MARK: - Actions
+    @IBAction func disclaimerButtonTapped(_ sender: Any) {
+        let alert = UIAlertController(title: "DISCLAIMER", message: "The features on this page are for tracking purposes only. These features are not health or medical advice or suggestions. Please consult a doctor or medical professional before engaging in any type of workout and/or exercise, and before using this app. See app description for more details.", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
     //MARK: - Fetching
     func fetchData() {
         guard let currentUser = UserController.shared.currentUser else { return }
