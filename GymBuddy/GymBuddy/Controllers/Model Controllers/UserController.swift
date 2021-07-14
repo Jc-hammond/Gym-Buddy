@@ -25,13 +25,12 @@ class UserController {
     
     
     //MARK: - Functions
-    func createUser(fullName: String, currentWeight: Int, targetWeight: Int, completion: @escaping (Result<User?, UserError>) -> Void) {
+    func createUser(fullName: String, targetHours: Int, completion: @escaping (Result<User?, UserError>) -> Void) {
         fetchAppleUserReference { result in
             switch result {
             case .success(let reference):
                 guard let reference = reference else {return completion(.failure(.noAppleUser))}
-                let date = Date()
-                let user = User(fullName: fullName, currentWeights: [currentWeight], currentDates: [date], targetWeight: targetWeight, blockedUserRefs: nil, workouts: [], appleUserRef: reference)
+                let user = User(fullName: fullName, hoursWorkedOut: [0], currentDates: [Date()], targetHours: targetHours, blockedUserRefs: nil, workouts: [], appleUserRef: reference)
                 let record = CKRecord(user: user)
                 
                 self.publicDB.save(record) { record, error in
