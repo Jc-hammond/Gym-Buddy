@@ -48,7 +48,7 @@ class ProgressDataSource: UICollectionViewDiffableDataSource<Section, Item> {
         
         let progressRing = Section(title: "  Overall Progress")
         let inProgress = Section(title: "  In Progress")
-        let weightHistroy = Section(title: "  Weight History")
+        let weightHistroy = Section(title: "  Exercise Hours")
         let completed = Section(title: "  Completed")
         
         sections = [progressRing, inProgress, weightHistroy, completed]
@@ -69,7 +69,7 @@ class ProgressDataSource: UICollectionViewDiffableDataSource<Section, Item> {
                 return cell
                 
             case .weightHistory:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeightHistoryCollectionViewCell.id, for: indexPath) as? WeightHistoryCollectionViewCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WorkOutHistoryCollectionViewCell.id, for: indexPath) as? WorkOutHistoryCollectionViewCell
                 
                 let currentUser = UserController.shared.currentUser
                 cell?.currentUser = currentUser
@@ -104,7 +104,7 @@ class ProgressDataSource: UICollectionViewDiffableDataSource<Section, Item> {
     //MARK: - Functions
     fileprivate func registerCells(for collectionView: UICollectionView) {
         collectionView.register(ProgressCollectionViewCell.nib, forCellWithReuseIdentifier: ProgressCollectionViewCell.id)
-        collectionView.register(WeightHistoryCollectionViewCell.nib, forCellWithReuseIdentifier: WeightHistoryCollectionViewCell.id)
+        collectionView.register(WorkOutHistoryCollectionViewCell.nib, forCellWithReuseIdentifier: WorkOutHistoryCollectionViewCell.id)
         collectionView.register(ExerciseCollectionViewCell.nib, forCellWithReuseIdentifier: ExerciseCollectionViewCell.id)
         collectionView.register(HeaderCollectionReusableView.nib, forSupplementaryViewOfKind: "header", withReuseIdentifier: HeaderCollectionReusableView.id)
     }

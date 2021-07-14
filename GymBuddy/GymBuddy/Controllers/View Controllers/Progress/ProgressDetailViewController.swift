@@ -105,8 +105,10 @@ class ProgressDetailViewController: UIViewController {
             workout.completionDate = date.formatDate()
         }
         
+        let initialHours = workout.current
         workout.current = current
         workout.goal = goal
+        let hoursWorkedOut = current - initialHours
         
         WorkoutController.shared.updateWorkout(workout: workout) { result in
             DispatchQueue.main.async {
@@ -114,6 +116,7 @@ class ProgressDetailViewController: UIViewController {
                 switch result {
                 case .success(let workout):
                     print("successfully saved workout: \(String(describing: workout?.title))")
+                    self.saveUser(hoursWorkedOut: hoursWorkedOut)
                 case .failure(let error):
                     print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
                 }
@@ -127,6 +130,43 @@ class ProgressDetailViewController: UIViewController {
     
     
     //MARK: - Functions
+    ///Saving hoursWorkedOut and currentDates to the current user
+    func saveUser(hoursWorkedOut: Int) {
+        guard let currentUser = UserController.shared.currentUser,
+              let workout = workout,
+              workout.unit == "hour" else { return }
+        
+        let currentDate = Date()
+
+        if currentUser.currentDates != nil && currentUser.hoursWorkedOut != nil {
+            guard var currentHours = currentUser.hoursWorkedOut?.last else { return }
+            
+            if currentUser.currentDates?.last?.formatDate() == currentDate.formatDate() {
+                currentHours += hoursWorkedOut
+                
+                currentUser.hoursWorkedOut?.removeLast()
+                currentUser.hoursWorkedOut?.append(currentHours)
+            } else {
+                
+                currentUser.currentDates?.append(currentDate)
+                currentUser.hoursWorkedOut?.append(hoursWorkedOut)
+            }
+            
+        } else {
+            currentUser.currentDates = [currentDate]
+            currentUser.hoursWorkedOut = [hoursWorkedOut]
+        }
+        
+        UserController.shared.saveUserUpdates(currentUser: currentUser) { result in
+            switch result {
+            case .success(_):
+                print("successfully updated user with hoursWorkedOut and currentDate")
+            case .failure(let error):
+                print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+            }
+        }
+    }//end of func
+    
     fileprivate func updateViews() {
         guard let workout = workout,
               let section = section else { return }

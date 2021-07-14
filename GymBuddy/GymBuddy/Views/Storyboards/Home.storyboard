@@ -109,25 +109,25 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="qLI-MZ-c69">
-                                <rect key="frame" x="22.5" y="345.5" width="369" height="124.5"/>
+                                <rect key="frame" x="30.5" y="345.5" width="353" height="124.5"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Info" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Gz-PM-Dgs">
-                                        <rect key="frame" x="0.0" y="0.0" width="369" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="353" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yvM-rs-qbU">
-                                        <rect key="frame" x="0.0" y="38.5" width="369" height="34"/>
+                                        <rect key="frame" x="0.0" y="38.5" width="353" height="34"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="swx-fe-qxS">
-                                                <rect key="frame" x="0.0" y="0.0" width="119" height="34"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="103" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter full name here.." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="URW-3a-0Et">
-                                                <rect key="frame" x="119" y="0.0" width="250" height="34"/>
+                                                <rect key="frame" x="103" y="0.0" width="250" height="34"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="250" id="aQw-W6-NAU"/>
                                                 </constraints>
@@ -136,17 +136,17 @@
                                             </textField>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="JyQ-EX-sre">
-                                        <rect key="frame" x="0.0" y="90.5" width="369" height="34"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JyQ-EX-sre">
+                                        <rect key="frame" x="0.0" y="90.5" width="353" height="34"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target Weight:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="owb-Kt-16H">
-                                                <rect key="frame" x="0.0" y="0.0" width="111" height="34"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Target Hours:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="owb-Kt-16H">
+                                                <rect key="frame" x="0.0" y="0.0" width="103" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter target weight here..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U0g-X2-127">
-                                                <rect key="frame" x="119" y="0.0" width="250" height="34"/>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter weekly target hours.." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="U0g-X2-127">
+                                                <rect key="frame" x="103" y="0.0" width="250" height="34"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="250" id="aQh-TP-qfD"/>
                                                 </constraints>
@@ -220,8 +220,8 @@
                         <outlet property="nameLabel" destination="f4a-C9-YQt" id="pQB-6Y-ujF"/>
                         <outlet property="profileImageButton" destination="xok-pi-Gfl" id="yTj-hT-TcK"/>
                         <outlet property="saveButton" destination="UrZ-ag-utC" id="nse-EW-2MD"/>
-                        <outlet property="targetWeightLabel" destination="owb-Kt-16H" id="VZ9-uA-InG"/>
-                        <outlet property="targetWeightTextField" destination="U0g-X2-127" id="fgD-y9-Ddk"/>
+                        <outlet property="targetHoursLabel" destination="owb-Kt-16H" id="VZ9-uA-InG"/>
+                        <outlet property="targetHoursTextField" destination="U0g-X2-127" id="fgD-y9-Ddk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wS0-Tf-m0F" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

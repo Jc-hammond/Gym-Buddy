@@ -35,7 +35,7 @@ class HomeDataSource: UICollectionViewDiffableDataSource<Section, HomeItem> {
     let sections: [Section] = {
         var sections = [Section]()
         
-        let weightList = Section(title: "  Weight Summary")
+        let weightList = Section(title: "  Weekly Summary")
         let personalBest = Section(title: "  Personal Best")
         
         sections = [weightList, personalBest]
@@ -49,7 +49,7 @@ class HomeDataSource: UICollectionViewDiffableDataSource<Section, HomeItem> {
             
             switch homeItem.context {
             case .weight:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeightCollectionViewCell.id, for: indexPath) as? WeightCollectionViewCell
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: HoursCollectionViewCell.id, for: indexPath) as? HoursCollectionViewCell
                 
                 cell?.currentUser = UserController.shared.currentUser
                 cell?.itemNumber = indexPath.row
@@ -83,7 +83,7 @@ class HomeDataSource: UICollectionViewDiffableDataSource<Section, HomeItem> {
     
     fileprivate func registerCells(for collectionView: UICollectionView) {
         //collectionView.register(FriendCollectionViewCell.nib, forCellWithReuseIdentifier: FriendCollectionViewCell.id)
-        collectionView.register(WeightCollectionViewCell.nib, forCellWithReuseIdentifier: WeightCollectionViewCell.id)
+        collectionView.register(HoursCollectionViewCell.nib, forCellWithReuseIdentifier: HoursCollectionViewCell.id)
         collectionView.register(PersonalBestCollectionViewCell.nib, forCellWithReuseIdentifier: PersonalBestCollectionViewCell.id)
         collectionView.register(HeaderCollectionReusableView.nib, forSupplementaryViewOfKind: "header", withReuseIdentifier: HeaderCollectionReusableView.id)
     }
