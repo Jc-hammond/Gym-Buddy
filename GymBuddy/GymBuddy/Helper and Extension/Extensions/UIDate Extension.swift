@@ -24,4 +24,12 @@ extension Date {
         return formatter.string(from: self)
     }
     
+    func getMonday() -> Date {
+        let cal = Calendar.current
+        var comps = cal.dateComponents([.weekOfYear, .yearForWeekOfYear], from: self)
+        comps.weekday = 2 // Monday
+        let mondayInWeek = cal.date(from: comps)!
+        return mondayInWeek
+    }
+    
 }//End of extension

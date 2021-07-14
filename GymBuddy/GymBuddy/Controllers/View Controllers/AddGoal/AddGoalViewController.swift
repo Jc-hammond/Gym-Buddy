@@ -49,7 +49,7 @@ class AddGoalViewController: UIViewController {
     //MARK: - Properties
     let exerciseTypes: [String] = ["Strength Training", "Run", "Walk", "Basketball", "Soccer", "Cycling", "HIIT", "Hiking", "Yoga", "Dance", "Swimming", "Other"]
     
-    let durationMetrics: [String] = ["hour", "minute"]
+    let durationMetrics: [String] = ["hour"/*, "minute"*/]
     let distanceMetrics: [String] = ["mi", "km"]
     var durationQuantity: Int = 0
     var distanceQuantity: Int = 0
@@ -366,7 +366,6 @@ class AddGoalViewController: UIViewController {
     }
     
     @IBAction func createButtonTapped(_ sender: Any) {
-        //JCHUN - guard let to make sure only create goal when all information is valid
         guard let currentUser = UserController.shared.currentUser,
               let title = exerciseButton.titleLabel?.text,
               title != "Select Exercise Type" else { return }

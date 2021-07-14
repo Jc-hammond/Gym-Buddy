@@ -193,7 +193,7 @@ extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 0 {
             if indexPath.row == 0 {
-                self.tabBarController?.selectedIndex = 1
+                self.tabBarController?.selectedIndex = 2
             } else if indexPath.row == 1 {
                 guard let destinationVC = storyboard?.instantiateViewController(identifier: "ProfileViewController") as? ProfileViewController else { return }
                 navigationController?.pushViewController(destinationVC, animated: true)

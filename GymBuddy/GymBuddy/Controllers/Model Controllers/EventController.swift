@@ -151,7 +151,6 @@ class EventController {
     }
     
     
-    //JCHUN - Does this work?
     func fetchEventAttendees(attendeeRefs: [CKRecord.Reference], completion: @escaping (Result<[User]?, EventError>) -> Void) {
         
         var recordIDs = [CKRecord.ID]()

@@ -13,9 +13,9 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var fullNameLabel: UILabel!
-    @IBOutlet weak var targetWeightLabel: UILabel!
+    @IBOutlet weak var targetHoursLabel: UILabel!
     @IBOutlet weak var fullNameTextField: UITextField!
-    @IBOutlet weak var targetWeightTextField: UITextField!
+    @IBOutlet weak var targetHoursTextField: UITextField!
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var cancelButton: UIButton!
     @IBOutlet weak var deleteAccountButton: UIButton!
@@ -28,7 +28,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         fullNameTextField.delegate = self
-        targetWeightTextField.delegate = self
+        targetHoursTextField.delegate = self
 
         navigationController?.navigationBar.tintColor = .customLightGreen
         updateViews()
@@ -38,11 +38,11 @@ class ProfileViewController: UIViewController {
     @IBAction func saveButtonTapped(_ sender: Any) {
         guard let currentUser = UserController.shared.currentUser,
               let newName = fullNameTextField.text, !newName.isEmpty,
-              let newWeight = targetWeightTextField.text, !newWeight.isEmpty,
-              let newTargetWeight = Int(newWeight) else { return }
+              let newHours = targetHoursTextField.text, !newHours.isEmpty,
+              let newTargetHours = Int(newHours) else { return }
         
         currentUser.fullName = newName
-        currentUser.targetWeight = newTargetWeight
+        currentUser.targetHours = newTargetHours
         
         UserController.shared.saveUserUpdates(currentUser: currentUser) { result in
             DispatchQueue.main.async {
@@ -109,13 +109,13 @@ class ProfileViewController: UIViewController {
         infoLabel.textColor = .darkGray
         fullNameLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 16)
         fullNameLabel.textColor = .customGreen
-        targetWeightLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 16)
-        targetWeightLabel.textColor = .customGreen
+        targetHoursLabel.font = UIFont(name: FontNames.sfRoundedSemiBold, size: 16)
+        targetHoursLabel.textColor = .customGreen
         
         fullNameTextField.addCornerRadius()
         fullNameTextField.text = currentUser.fullName
-        targetWeightTextField.addCornerRadius()
-        targetWeightTextField.text = "\(currentUser.targetWeight)"
+        targetHoursTextField.addCornerRadius()
+        targetHoursTextField.text = "\(currentUser.targetHours)"
         
         saveButton.addCornerRadius()
         saveButton.tintColor = .customLightGreen
@@ -143,7 +143,7 @@ extension ProfileViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == fullNameTextField {
-            targetWeightTextField.becomeFirstResponder()
+            targetHoursTextField.becomeFirstResponder()
         }
         return true
     }
