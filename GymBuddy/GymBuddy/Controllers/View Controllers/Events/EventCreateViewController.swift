@@ -71,7 +71,7 @@ class EventCreateViewController: UIViewController {
     
     //MARK: - Actions
     @IBAction func disclaimerButtonTapped(_ sender: Any) {
-        let alert = UIAlertController(title: "DISCLAIMER", message: "These features are not health or medical advice or suggestions. If none of the presented Types are suitable for you please select \"Other\"; please consult a doctor or medical professional before engaging in any type of workout and/or exercise, and before using this app.  See app description for more details.", preferredStyle: .alert)
+        let alert = UIAlertController(title: "DISCLAIMER", message: "These features are not health or medical advice or suggestions. If none of the presented Types are suitable for you please select \"Other\"; please consult a doctor or medical professional before engaging in any type of workout and/or exercise, and before using this app.  See app description for more details.\n Provided workout names and types are intended to align with those suggested by Apple on the Fitness app. https://support.apple.com/en-us/HT207934", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "OK", style: .default, handler: nil)
         alert.addAction(okAction)
         present(alert, animated: true, completion: nil)
