@@ -33,7 +33,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2pU-rD-xdZ">
-                                <rect key="frame" x="107" y="372.5" width="200" height="50"/>
+                                <rect key="frame" x="107" y="374" width="200" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="GuJ-br-QgP"/>
                                     <constraint firstAttribute="height" constant="50" id="ymI-hw-aj0"/>
@@ -47,39 +47,39 @@
                                 </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="ikV-wl-IFY">
-                                <rect key="frame" x="41.5" y="138" width="331" height="194.5"/>
+                                <rect key="frame" x="41.5" y="138" width="331" height="196"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="DmP-I2-KaB">
-                                        <rect key="frame" x="0.0" y="0.0" width="331" height="99"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="331" height="100"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What is your weekly target workout hours?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X55-YA-NiW">
-                                                <rect key="frame" x="45" y="0.0" width="241.5" height="47"/>
+                                                <rect key="frame" x="47.5" y="0.0" width="236.5" height="48"/>
                                                 <fontDescription key="fontDescription" name="SFProRounded-Semibold" family="SF Pro Rounded" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="target hours" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="F3T-lg-na9">
-                                                <rect key="frame" x="65.5" y="59" width="200" height="40"/>
+                                                <rect key="frame" x="65.5" y="60" width="200" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="vWL-Kx-HZA"/>
                                                     <constraint firstAttribute="width" constant="200" id="xWh-o5-Jtw"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" name="SFProRounded-Regular" family="SF Pro Rounded" pointSize="20"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                             </textField>
                                         </subviews>
                                     </stackView>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="m5M-It-mG6">
-                                        <rect key="frame" x="0.0" y="119" width="331" height="75.5"/>
+                                        <rect key="frame" x="0.0" y="120" width="331" height="76"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter nickname" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qRF-LR-npn">
-                                                <rect key="frame" x="96" y="0.0" width="139" height="23.5"/>
+                                                <rect key="frame" x="97" y="0.0" width="137" height="24"/>
                                                 <fontDescription key="fontDescription" name="SFProRounded-Semibold" family="SF Pro Rounded" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="nickname" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="n2N-fa-oyt">
-                                                <rect key="frame" x="65.5" y="35.5" width="200" height="40"/>
+                                                <rect key="frame" x="65.5" y="36" width="200" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="200" id="4HZ-Os-GKk"/>
                                                     <constraint firstAttribute="height" constant="40" id="mNR-Jr-v5i"/>
@@ -123,7 +123,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lo7-jZ-rnC">
-                                <rect key="frame" x="83" y="429.5" width="248" height="47"/>
+                                <rect key="frame" x="83" y="429" width="248" height="48"/>
                                 <fontDescription key="fontDescription" name="SFProRounded-Semibold" family="SF Pro Rounded" pointSize="40"/>
                                 <color key="textColor" name="custom green"/>
                                 <nil key="highlightedColor"/>
