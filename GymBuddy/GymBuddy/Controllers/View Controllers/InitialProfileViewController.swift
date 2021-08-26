@@ -128,7 +128,7 @@ class InitialProfileViewController: UIViewController {
     func presentAlertController(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Settings", style: .default) { _ in
-            guard let settingsURL = URL(string: "App-prefs:Settings"/*UIApplication.openSettingsURLString*/) else {return}
+            guard let settingsURL = URL(string: /*"App-prefs:Settings"*/UIApplication.openSettingsURLString) else {return}
             if UIApplication.shared.canOpenURL(settingsURL) {
                 UIApplication.shared.open(settingsURL) { success in
                     print("Settings opened: \(success)")
