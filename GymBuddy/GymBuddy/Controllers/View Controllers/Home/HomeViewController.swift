@@ -40,13 +40,13 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             if UserController.shared.currentUser == nil {
                 self.fetchUser()
             } else {
                 self.fetchData()
             }
-        }
+//        }
         
     }
     
@@ -80,44 +80,45 @@ class HomeViewController: UIViewController {
                                 self.fetchData()
                             case .failure(_):
                                 print("No user found in publicDB")
-                                self.presentInitialProfileVC()
+                                self.presentInitialProfileVC(checkiCloud: nil)
                             }
                         }
                     }
                     
                 case .failure(let error):
                     print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
-                    self.checkAccountStatus()
+                    DispatchQueue.main.async {
+                        self.presentInitialProfileVC(checkiCloud: false)
+                    }
                 }
                 
             }
         }
-        
     }//end of func
     
-    func checkAccountStatus() {
-        CKContainer.default().accountStatus { status, error in
-            if let error = error {
-                print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
-                //Alertcontroller?
-            } else {
-                DispatchQueue.main.async {
-                    switch status {
-                    case .available:
-                        print("successfully fetched apple user ref")
-                    case .noAccount:
-                        self.presentAlertController(title: "No Account", message: "Please make sure your device is logged into iCloud")
-                    case .couldNotDetermine:
-                        self.presentAlertController(title: "Could not determine", message: "Please check your iCloud account")
-                    case .restricted:
-                        self.presentAlertController(title: "Restricted", message: "Your iCloud account is restricted")
-                    @unknown default:
-                        self.presentAlertController(title: "Unknown Error", message: "Unknown error found while launching the app")
-                    }
-                }
-            }
-        }
-    }
+//    func checkAccountStatus() {
+//        CKContainer.default().accountStatus { status, error in
+//            if let error = error {
+//                print("Error in \(#function) : On Line \(#line) : \(error.localizedDescription) \n---\n \(error)")
+//                //Alertcontroller?
+//            } else {
+//                DispatchQueue.main.async {
+//                    switch status {
+//                    case .available:
+//                        print("successfully fetched apple user ref")
+//                    case .noAccount:
+//                        self.presentAlertController(title: "No Account", message: "Please make sure your device is logged into iCloud")
+//                    case .couldNotDetermine:
+//                        self.presentAlertController(title: "Could not determine", message: "Please check your iCloud account")
+//                    case .restricted:
+//                        self.presentAlertController(title: "Restricted", message: "Your iCloud account is restricted")
+//                    @unknown default:
+//                        self.presentAlertController(title: "Unknown Error", message: "Unknown error found while launching the app")
+//                    }
+//                }
+//            }
+//        }
+//    }
     
     func fetchData() {
         guard let currentUser = UserController.shared.currentUser else { return }
@@ -144,36 +145,37 @@ class HomeViewController: UIViewController {
         }
     }//end of func
     
-    func presentInitialProfileVC() {
+    func presentInitialProfileVC(checkiCloud: Bool?) {
         DispatchQueue.main.async {
             if UserController.shared.currentUser == nil {
                 let storyboard = UIStoryboard(name: "InitialProfile", bundle: nil)
-                guard let rootVC = storyboard.instantiateInitialViewController() else { return }
+                guard let rootVC = storyboard.instantiateInitialViewController() as? InitialProfileViewController else { return }
                 rootVC.modalPresentationStyle = .fullScreen
+                rootVC.isLoggedIntoiCloud = checkiCloud
                 
                 self.present(rootVC, animated: true, completion: nil)
             }
         }
     }
     
-    func presentAlertController(title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Settings", style: .default) { _ in
-            guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {return}
-            if UIApplication.shared.canOpenURL(settingsURL) {
-                UIApplication.shared.open(settingsURL) { success in
-                    print("Settings opened: \(success)")
-                }
-            }
-            
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        alertController.addAction(okAction)
-        alertController.addAction(cancelAction)
-        
-        self.present(alertController, animated: true, completion: nil)
-    }
+//    func presentAlertController(title: String, message: String) {
+//        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+//        let okAction = UIAlertAction(title: "Settings", style: .default) { _ in
+//            guard let settingsURL = URL(string: UIApplication.openSettingsURLString) else {return}
+//            if UIApplication.shared.canOpenURL(settingsURL) {
+//                UIApplication.shared.open(settingsURL) { success in
+//                    print("Settings opened: \(success)")
+//                }
+//            }
+//
+//        }
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+//
+//        alertController.addAction(okAction)
+//        alertController.addAction(cancelAction)
+//
+//        self.present(alertController, animated: true, completion: nil)
+//    }
     
     
     func updateViews() {
